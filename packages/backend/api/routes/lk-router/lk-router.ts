@@ -18,12 +18,15 @@ import {
     changeRoleController,
     changeRoleValidator,
     createTaskValidator,
-    approveTaskValidator
+    approveTaskValidator,
+    updateTaskController,
+    updateTaskValidator,
+    uploadTaskSourceController,
+    uploadTaskSourceValidator
 } from '../../controllers';
 
 import { controllerErrorBounding } from '../../../domain/errors';
 import { apiRouter } from '../api-router';
-import { updateTaskController, updateTaskValidator } from '../../controllers/lk/update-task';
 
 const lkRouter = Router();
 
@@ -90,6 +93,13 @@ apiRouter.post(
     validationMiddleware([check('taskId').isString()], approveTaskValidator),
 
     controllerErrorBounding(approveTaskController)
+);
+
+apiRouter.post(
+    QUERY_KEYS.UPLOAD_TASK_SOURCE,
+
+    validationMiddleware([], uploadTaskSourceValidator),
+    controllerErrorBounding(uploadTaskSourceController)
 );
 
 export { lkRouter };

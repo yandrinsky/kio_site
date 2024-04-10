@@ -7,3 +7,4 @@ export * from './set-display-name';
 export * from './set-full-name';
 export * from './create-task';
 export * from './update-task';
+export * from './upload-task-source';

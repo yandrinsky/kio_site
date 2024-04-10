@@ -1,7 +1,6 @@
 import { ISuccessResponse } from '../../../../domain/types';
 
 export interface IUploadTaskSourceDTO {
-    id: string;
-    taskSource: Buffer;
+    taskId: string;
 }
 export interface IUploadTaskSourceResponse extends ISuccessResponse {}

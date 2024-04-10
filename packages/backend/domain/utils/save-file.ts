@@ -3,6 +3,7 @@ import { UploadedFile } from 'express-fileupload';
 import { randomUUID } from 'crypto';
 import path from 'path';
 
+export const toSaveFileDir = (process.env.STATIC_DIR ?? 'public') + '/' + 'files/';
 export const saveFile = async ({
     objectId,
     file
