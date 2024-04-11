@@ -1,0 +1,23 @@
+.social-media-cell__container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding-left: 15px;
+    width: 144px;
+    height: 40px;
+
+    background-color: var(--border-light-color);
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.social-media-cell__image {
+    height: 20px;
+    width: 20px;
+
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
+}

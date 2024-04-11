@@ -1,0 +1,11 @@
+.user-input-field__container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    height: 70px;
+}
+
+.user-input-field__error-message {
+    color: var(--error-color);
+}
