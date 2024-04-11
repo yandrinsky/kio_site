@@ -1,0 +1,13 @@
+.user-info-field__info-text {
+    display: flex;
+    align-items: center;
+    width: 512px;
+    height: 40px;
+    padding: 0 15px;
+
+    font-size: 1.1rem;
+
+    border: solid 1px var(--border-light-color);
+    background-color: var(--accent-light-color);
+    border-radius: 3px;
+}

@@ -1,0 +1,19 @@
+.social-media-information-board__icon {
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.social-media-information-board__icon:hover {
+    background-color: var(--primary-light-color);
+
+    transition: 250ms ease-in;
+}
+
+.social-media-information-board__user-name {
+    color: var(--info-color);
+}

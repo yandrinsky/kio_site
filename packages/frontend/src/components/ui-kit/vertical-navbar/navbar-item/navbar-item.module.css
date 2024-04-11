@@ -1,0 +1,18 @@
+.navbar__item {
+    margin-bottom: 34px;
+
+    cursor: pointer;
+}
+
+.navbar__item-link__active {
+    font-weight: 700;
+    color: black;
+}
+
+.navbar__item-link__default {
+    color: var(--blur-text-color);
+}
+
+.navbar__item-link {
+    text-decoration: none;
+}

@@ -34,5 +34,9 @@ export const routesData: TRoutesData = {
   [ROUTES.SIGN_UP_ROUTE]: {
     icon: '/sign-in-icon.svg',
     title: 'Регистрация'
+  },
+  [ROUTES.PROFILE_ROUTE]: {
+    icon: '/default-avatar.svg',
+    title: 'Michael'
   }
 } as const;
