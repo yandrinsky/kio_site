@@ -7,6 +7,11 @@ export const UserOfferField: FC<IUserOfferField> = ({ title, subtitle, footerTex
   const UserOfferButton = <Button theme="accent">Добавить</Button>;
 
   return (
-    <UserInitialField title={title} subtitle={subtitle} footerText={footerText} Button={UserOfferButton} />
+    <UserInitialField
+      title={title}
+      subtitle={subtitle}
+      footerText={footerText}
+      PropButton={UserOfferButton}
+    />
   );
 };

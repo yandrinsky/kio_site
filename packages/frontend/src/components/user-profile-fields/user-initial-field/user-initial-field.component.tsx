@@ -1,4 +1,4 @@
-import { PropsWithChildren, FC } from 'react';
+import { PropsWithChildren, FC, useState } from 'react';
 import css from './user-initial-field.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { clx } from '@utils/clx';
@@ -8,10 +8,14 @@ export const UserInitialField: FC<PropsWithChildren<IUserInitialField>> = ({
   title,
   subtitle,
   footerText,
-  Button,
+  PropButton,
   children,
+  isChangeableInfo,
+  setIsChangeableInfo,
   theme = 'default'
 }) => {
+  const isChangeButton = isChangeableInfo === undefined ? false : isChangeableInfo;
+
   return (
     <div
       className={clx(css[`user-initial-field__container`], css[`user-initial-field__container--${theme}`])}
@@ -23,13 +27,22 @@ export const UserInitialField: FC<PropsWithChildren<IUserInitialField>> = ({
 
       <div className={css['user-initial-field__main']}>{children}</div>
 
-      {(footerText || Button) && (
+      {(footerText || PropButton) && (
         <div className={css['user-initial-field__footer']}>
-          <div>
-            {footerText && <span className={css['user-initial-field__footer-text']}>{footerText}</span>}
-          </div>
-
-          {Button}
+          {isChangeButton ? (
+            <div className={css['user-initial-field__button-container']}>
+              <Button onClick={() => setIsChangeableInfo?.(state => !state)} theme="accent">
+                Изменить
+              </Button>
+            </div>
+          ) : (
+            <>
+              <div>
+                {footerText && <span className={css['user-initial-field__footer-text']}>{footerText}</span>}
+              </div>
+              {PropButton}
+            </>
+          )}
         </div>
       )}
     </div>

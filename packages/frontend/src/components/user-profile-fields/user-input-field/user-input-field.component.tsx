@@ -10,10 +10,12 @@ export const UserInputField: FC<IUserInputField> = ({
   subtitle,
   footerText,
   value,
+  isChangeableInfo,
   validate,
   onSave
 }) => {
   const [state, setState] = useState(value);
+  const [isChanging, setIsChanging] = useState(!!isChangeableInfo);
   const [isError, setIsError] = useState(false);
 
   const validationResult = validate?.(state);
@@ -28,15 +30,33 @@ export const UserInputField: FC<IUserInputField> = ({
   };
 
   const UserInputButton = (
-    <Button onClick={() => !isError && onSave.call(this, state)} theme="accent">
+    <Button
+      onClick={() => {
+        setIsChanging(state => !state);
+        !isError && onSave.call(this, state);
+      }}
+      theme="accent"
+    >
       Сохранить
     </Button>
   );
 
   return (
-    <UserInitialField title={title} subtitle={subtitle} footerText={footerText} Button={UserInputButton}>
+    <UserInitialField
+      title={title}
+      subtitle={subtitle}
+      footerText={footerText}
+      PropButton={UserInputButton}
+      isChangeableInfo={isChanging}
+      setIsChangeableInfo={setIsChanging}
+    >
       <div className={css['user-input-field__container']}>
-        <Input value={state} onChange={e => changeState(e.target.value)} isError={isError} />
+        <Input
+          disabled={isChanging}
+          value={state}
+          onChange={e => changeState(e.target.value)}
+          isError={isError}
+        />
         <span className={css['user-input-field__error-message']}>
           {isError && typeof validationResult === 'string' && validationResult}
         </span>

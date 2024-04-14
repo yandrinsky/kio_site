@@ -57,6 +57,12 @@
     border-top: 1px solid var(--border-light-color);
 }
 
+.user-initial-field__button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%
+}
+
 .user-initial-field__footer-text {
     font-size: 0.9rem;
     color: var(--blur-text-color);
