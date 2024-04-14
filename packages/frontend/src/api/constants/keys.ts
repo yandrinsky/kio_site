@@ -1,5 +1,7 @@
 export const QUERY_KEYS = {
   SIGN_UP: 'sign-up',
   SIGN_IN: 'sign-in',
-  ME: 'me'
+  LOGOUT: 'logout',
+  ME: 'me',
+  SET_DISPLAY_NAME: 'set-display-name'
 };

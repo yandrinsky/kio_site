@@ -5,19 +5,21 @@ import { UserInfoField } from '@components/user-profile-fields/user-info-field/u
 import { UserDeleteField } from '@components/user-profile-fields/user-delete-field/user-delete-field.component';
 import { useMeRequest } from '@api/routes/me';
 import { BASE_URL } from '@api/constants/base';
+import { useSetDisplayNameMutation } from '@api/routes/set-display-name';
 
 export const ProfileCommon = () => {
   const { data } = useMeRequest();
+  const { mutate, isError, isLoading } = useSetDisplayNameMutation();
 
   return (
     <div className={css['profile-common__forms']}>
       <UserInputField
-        title="Ваше имя"
+        title="Ваш никнейм"
         subtitle="Это ваше имя, которое будет отображаться публично"
         footerText="Пожалуйста, используйте не больше 32 символов"
-        value={data?.name}
+        value={data?.displayName}
         validate={data => (data?.length < 2 ? 'Имя должно быть больше 1 символа' : true)}
-        onSave={data => console.log('onSave', data)}
+        onSave={value => mutate({ displayName: value })}
       />
       <UserInputField
         title="Ваш email адрес"
