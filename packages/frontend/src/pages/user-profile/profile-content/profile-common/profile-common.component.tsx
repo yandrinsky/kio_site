@@ -1,10 +1,9 @@
 import { UserInputField } from '@components/user-profile-fields/user-input-field/user-input-field.component';
 import css from './profile-common.module.css';
-import { UserAvatarField } from '@components/user-profile-fields/user-avatar-field/user-avatar-field.component';
 import { UserInfoField } from '@components/user-profile-fields/user-info-field/user-info-field.component';
 import { UserDeleteField } from '@components/user-profile-fields/user-delete-field/user-delete-field.component';
 import { useMeRequest } from '@api/routes/me';
-import { BASE_URL } from '@api/constants/base';
+import { AvatarField } from './fields/avatar-field/avatar-field.component';
 
 export const ProfileCommon = () => {
   const { data } = useMeRequest();
@@ -26,13 +25,7 @@ export const ProfileCommon = () => {
         value={data?.email}
         onSave={data => console.log('onSave', data)}
       />
-      <UserAvatarField
-        title="Ваш аватар"
-        subtitle="Это ваш аватар, который видят все"
-        mainText="Нажмите на картинку, чтобы сменить аватар"
-        footerText="Аватар - необязательная часть"
-        img={data?.avatarUrl ? BASE_URL + '/' + data?.avatarUrl : '/default-avatar.svg'}
-      />
+      <AvatarField />
       <UserInfoField
         title="Ваш уникальный ID"
         subtitle="Это ваш уникальный ID"

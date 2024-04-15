@@ -5,12 +5,13 @@ import css from './nav.module.css';
 import { NAV_ROUTES } from './routes';
 import { clx } from '@utils/clx';
 import { IHoverStyle } from './nav';
-import { ROUTES } from '../../../constants/routes';
+import { ROUTES, routesData } from '../../../constants/routes';
 import { Link } from '../../ui-kit/link/link.component';
 import { Badge } from '../../ui-kit/badge/badge.component';
 import { useMeRequest } from '@api/index';
 import { Popup } from '@components/ui-kit/popup/popup.component';
 import { ProfilePopup } from '@components/user/profile-popup/profile-popup.component';
+import { BASE_URL } from '@api/constants/base';
 
 export const Nav: FC = memo(() => {
   const [hoverStyle, setHoverStyle] = useState<IHoverStyle>();
@@ -34,7 +35,11 @@ export const Nav: FC = memo(() => {
   }
 
   const NavBadge: React.ReactNode = (
-    <Badge src={data?.avatarUrl || '/default-avatar.svg'} width={25} height={25} />
+    <Badge
+      src={data?.avatarUrl ? BASE_URL + '/' + data?.avatarUrl : '/default-avatar.svg'}
+      width={25}
+      height={25}
+    />
   );
 
   return (

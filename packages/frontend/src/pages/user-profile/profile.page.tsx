@@ -12,7 +12,6 @@ export const UserProfile: React.FC = () => {
   const [activeTab, setActiveTab] = useState(
     profileTab.profileTab ? profileTab.profileTab : UserProfileTabs[0].name
   );
-
   return (
     <div className={css.page}>
       <Layout withNav />
