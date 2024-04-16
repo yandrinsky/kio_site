@@ -10,12 +10,12 @@ export const UserInputField: FC<IUserInputField> = ({
   subtitle,
   footerText,
   value,
-  isChangeableInfo,
+  isEditable: isEditableProp,
   validate,
   onSave
 }) => {
   const [state, setState] = useState(value);
-  const [isChanging, setIsChanging] = useState(!!isChangeableInfo);
+  const [isChanging, setIsChanging] = useState(!Boolean(isEditableProp));
   const [isError, setIsError] = useState(false);
 
   const validationResult = validate?.(state);
@@ -32,7 +32,7 @@ export const UserInputField: FC<IUserInputField> = ({
   const UserInputButton = (
     <Button
       onClick={() => {
-        setIsChanging(state => !state);
+        !isError && Boolean(isEditableProp) && setIsChanging(state => !state);
         !isError && onSave.call(this, state);
       }}
       theme="accent"
@@ -46,13 +46,13 @@ export const UserInputField: FC<IUserInputField> = ({
       title={title}
       subtitle={subtitle}
       footerText={footerText}
-      PropButton={UserInputButton}
-      isChangeableInfo={isChanging}
-      setIsChangeableInfo={setIsChanging}
+      Button={UserInputButton}
+      isChanging={isChanging}
+      setIsChanging={setIsChanging}
     >
       <div className={css['user-input-field__container']}>
         <Input
-          disabled={isChanging}
+          disabled={!isChanging}
           value={state}
           onChange={e => changeState(e.target.value)}
           isError={isError}

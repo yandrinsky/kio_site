@@ -8,13 +8,13 @@ export const UserInitialField: FC<PropsWithChildren<IUserInitialField>> = ({
   title,
   subtitle,
   footerText,
-  PropButton,
+  Button: PropButton,
   children,
-  isChangeableInfo,
-  setIsChangeableInfo,
+  isChanging,
+  setIsChanging,
   theme = 'default'
 }) => {
-  const isChangeButton = isChangeableInfo === undefined ? false : isChangeableInfo;
+  const isChangeButton = !Boolean(isChanging);
 
   return (
     <div
@@ -29,9 +29,9 @@ export const UserInitialField: FC<PropsWithChildren<IUserInitialField>> = ({
 
       {(footerText || PropButton) && (
         <div className={css['user-initial-field__footer']}>
-          {isChangeButton ? (
+          {isChanging !== undefined && isChangeButton ? (
             <div className={css['user-initial-field__button-container']}>
-              <Button onClick={() => setIsChangeableInfo?.(state => !state)} theme="accent">
+              <Button onClick={() => setIsChanging?.(state => !state)} theme="accent">
                 Изменить
               </Button>
             </div>

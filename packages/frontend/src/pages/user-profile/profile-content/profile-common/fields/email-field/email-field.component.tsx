@@ -11,7 +11,6 @@ export const EmailField: React.FC = () => {
       title="Ваш email адрес"
       subtitle="Это ваш email, с помощью которого вы входите в kio"
       footerText="Мы отправим письмо на эту почту для проверки"
-      // isChangeableInfo
       value={data?.email}
       validate={value => getValidationResult(value)}
       onSave={data => console.log('onSave', data)}

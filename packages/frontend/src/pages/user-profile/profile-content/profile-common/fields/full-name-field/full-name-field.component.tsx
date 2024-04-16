@@ -15,7 +15,7 @@ export const FullNameField: React.FC = () => {
       title="Ваше имя"
       subtitle="Это ваше полное имя"
       footerText="Введите ваше ФИО (отчество при наличии)"
-      isChangeableInfo
+      isEditable
       value={fullName}
       validate={value => getValidationResult(parseFullName(value))}
       onSave={value => mutate(parseFullName(value))}

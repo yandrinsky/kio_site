@@ -13,7 +13,7 @@ export const NicknameField: React.FC = () => {
       title="Ваш никнейм"
       subtitle="Это ваше имя, которое будет отображаться публично"
       footerText="Пожалуйста, используйте не больше 32 символов"
-      isChangeableInfo
+      isEditable
       value={data?.displayName}
       validate={value => getValidationResult(value)}
       onSave={value => mutate({ displayName: value })}
