@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import css from './user-avatar-field.module.css';
 import { IUserAvatarField } from './user-avatar-field';
-import { useAvatarMutation } from '@api/routes/set-avatar';
+import { useSetAvatarMutation } from '@api/routes/set-avatar';
 
 export const UserAvatarField: FC<IUserAvatarField> = ({ title, subtitle, footerText, img, mainText }) => {
-  const { mutate } = useAvatarMutation();
+  const { mutate } = useSetAvatarMutation();
 
   return (
     <div className={css[`user-avatar-field__container`]}>

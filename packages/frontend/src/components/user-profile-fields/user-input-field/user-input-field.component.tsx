@@ -28,7 +28,7 @@ export const UserInputField: FC<IUserInputField> = ({
   };
 
   const UserInputButton = (
-    <Button onClick={() => !isError && onSave.call(this, state)} theme="accent">
+    <Button type="button" onClick={() => !isError && onSave.call(this, state)} theme="accent">
       Сохранить
     </Button>
   );

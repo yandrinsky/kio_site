@@ -17,7 +17,7 @@ export async function setAvatarRequest(body: ISetAvatarDto) {
   });
 }
 
-export const useAvatarMutation = () => {
+export const useSetAvatarMutation = () => {
   const client = useQueryClient();
 
   return useAppMutation<ISetAvatarResponse, TError, ISetAvatarDto>({
