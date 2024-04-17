@@ -8,5 +8,6 @@ export const QUERY_KEYS = {
   GET_NOT_APPROVED_TASKS_LIST: 'get-not-approved-tasks-list',
   SET_AVATAR: 'set-avatar',
   CREATE_TASK: 'create-task',
-  UPDATE_TASK: 'update_task'
+  UPDATE_TASK: 'update_task',
+  UPLOAD_TASK_SOURCE: 'upload_task_source'
 };

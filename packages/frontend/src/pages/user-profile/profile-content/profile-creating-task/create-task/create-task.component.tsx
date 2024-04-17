@@ -4,18 +4,20 @@ import css from './create-task.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { useState } from 'react';
 import { useCreateTaskMutation } from '@api/routes/create-task';
-import { UserPreviewTaskField } from '@components/user-profile-fields/user-preview-task-field/user-avatar-field.component';
+import { UserPreviewTaskField } from '@components/user-profile-fields/user-preview-task-field/user-preview-task-field.component';
 import { ICreateTask } from './create-task';
 import { useUpdateTaskMutation } from '@api/routes/update-task';
 import { UserTextareaField } from '@components/user-profile-fields/user-textarea-field/user-textarea-field.component';
+import { useUploadTaskSourceMutation } from '@api/routes/upload-task-source';
 
 export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskId }) => {
   const { mutate: createTaskMutation } = useCreateTaskMutation();
   const { mutate: updateTaskMutation } = useUpdateTaskMutation();
+  const { mutate: uploadTaskSourceMutation } = useUploadTaskSourceMutation();
 
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
-  const [preview, setPreview] = useState('/default-avatar.svg');
+  const [preview, setPreview] = useState<string>();
 
   const formData = new FormData();
 
@@ -46,7 +48,7 @@ export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskI
       : createTaskMutation({
           name: taskName,
           description: description,
-          settings: { test: 'test' },
+          settings: { test: 'test' }
           // preview: formData
         });
   };
@@ -83,16 +85,22 @@ export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskI
       />
 
       {updateTaskId ? (
-        <div>
-          <Button onClick={() => setUpdateTaskId(undefined)} disabled={!isRequiredFieldsFilled}>
-            Изменить
+        <div className={css['create-task__editable-buttons']}>
+          <Button
+            theme="accent"
+            onClick={() => setUpdateTaskId(undefined)}
+            disabled={!isRequiredFieldsFilled}
+          >
+            Редактировать
           </Button>
-          <Button type="button" onClick={() => setUpdateTaskId(undefined)}>
+          <Button theme="colored-red" type="button" onClick={() => setUpdateTaskId(undefined)}>
             Отменить
           </Button>
         </div>
       ) : (
-        <Button disabled={!isRequiredFieldsFilled}>Создать задачу</Button>
+        <Button theme="accent" disabled={!isRequiredFieldsFilled}>
+          Создать задачу
+        </Button>
       )}
     </form>
   );

@@ -20,7 +20,7 @@ export const ProfileCreatingTask = () => {
       {toggle ? (
         <CreateTask updateTaskId={updateTaskId} setUpdateTaskId={setUpdateTaskId} />
       ) : (
-        <CreatedTaskList updateTask={updateTask}/>
+        <CreatedTaskList updateTask={updateTask} />
       )}
     </div>
   );
