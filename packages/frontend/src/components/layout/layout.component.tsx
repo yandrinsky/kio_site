@@ -28,7 +28,7 @@ export const Layout: FC<PropsWithChildren<ILayout>> = ({
   if (isLoading && !error && !data) return <SplashScreen />;
   if (
     (error?.name === AUTH_ERRORS.UNAUTHORIZED && protectedFrom === 'anonymous') ||
-    (data && protectedFrom === 'authorized')
+    (data && error?.name !== AUTH_ERRORS.UNAUTHORIZED && protectedFrom === 'authorized')
   ) {
     return <Navigate to={ROUTES.DEFAULT_ROUTE} />;
   }

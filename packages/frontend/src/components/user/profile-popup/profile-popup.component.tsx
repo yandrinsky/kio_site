@@ -11,9 +11,11 @@ import { Option } from '@components/ui-kit/select/option/option.component';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@atoms/theme/theme.store';
 import { Button } from '@components/ui-kit/button/button.component';
+import { useLogoutMutation } from '@api/routes/logout';
 
 export const ProfilePopup = () => {
   const { data } = useMeRequest();
+  const { mutate } = useLogoutMutation();
   const [theme, setTheme] = useAtom(themeAtom);
 
   if (!data) return null;
@@ -63,7 +65,7 @@ export const ProfilePopup = () => {
           </Link>
         </li>
         <li className={css.popup__item}>
-          <Link to={ROUTES.DEFAULT_ROUTE} theme="block-hover" isAlert>
+          <Link onClick={() => mutate()} to={ROUTES.DEFAULT_ROUTE} theme="block-hover" isAlert>
             Выйти
           </Link>
         </li>
