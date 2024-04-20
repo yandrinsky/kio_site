@@ -8,3 +8,4 @@ export * from './set-full-name';
 export * from './create-task';
 export * from './update-task';
 export * from './upload-task-source';
+export * from './get-created-tasks-list';
