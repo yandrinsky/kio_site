@@ -3,21 +3,18 @@ import css from './created-task-list.module.css';
 import { ICreatedTaskList } from './created-task-list';
 import { Button } from '@components/ui-kit/button/button.component';
 import { TaskCard } from '../task-card/task-card.component';
+import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
 
 export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
-  const taskListMock = [
-    { name: 'Задача Пасьянс', preview: '', id: '1' },
-    { name: 'Задача Пасьянс', preview: '', id: '2' },
-    { name: 'Задача Пасьянс', preview: '', id: '3' }
-  ];
+  const { data: taskList } = useGetCreatedTasksListRequest();
 
   const [isOpen, setIsOpen] = useState(false);
-  let taskId = '';
+  const [state, setState] = useState<string>();
 
   return (
     <div className={css['created-task-list']}>
-      {isOpen && <TaskCard taskId={taskId} setIsOpen={setIsOpen} updateTask={updateTask} />}
-      {taskListMock.map(task => (
+      {isOpen && <TaskCard taskId={state ?? ''} setIsOpen={setIsOpen} updateTask={updateTask} />}
+      {taskList?.map(task => (
         <div key={task.id} className={css['created-task-list__container']}>
           <div className={css['created-task-list__content']}>
             <div>
@@ -27,7 +24,7 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
                   theme="accent"
                   onClick={() => {
                     setIsOpen(true);
-                    taskId = task.id;
+                    setState(task.id);
                   }}
                 >
                   Открыть

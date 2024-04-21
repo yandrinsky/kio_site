@@ -5,6 +5,6 @@ export interface IUpdateTaskDTO {
     name: string;
     description: string;
     settings: object;
-    isAvailable: boolean;
+    isAvailable?: boolean;
 }
 export interface IUpdateTaskResponse extends ISuccessResponse {}

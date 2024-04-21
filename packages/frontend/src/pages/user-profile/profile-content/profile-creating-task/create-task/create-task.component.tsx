@@ -9,19 +9,37 @@ import { ICreateTask } from './create-task';
 import { useUpdateTaskMutation } from '@api/routes/update-task';
 import { UserTextareaField } from '@components/user-profile-fields/user-textarea-field/user-textarea-field.component';
 import { useUploadTaskSourceMutation } from '@api/routes/upload-task-source';
+import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
+import { useMeRequest } from '@api/index';
+import { UserUploadTaskSourceField } from '@components/user-profile-fields/user-upload-task-source-field/user-upload-task-source-field.component';
 
 export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskId }) => {
-  const { mutate: createTaskMutation } = useCreateTaskMutation();
+  const {
+    mutate: createTaskMutation,
+    isError: isCreateTaskMutationError,
+    isLoading: isCreateTaskMutationLoading
+  } = useCreateTaskMutation();
   const { mutate: updateTaskMutation } = useUpdateTaskMutation();
-  const { mutate: uploadTaskSourceMutation } = useUploadTaskSourceMutation();
 
-  const [taskName, setTaskName] = useState('');
-  const [description, setDescription] = useState('');
-  const [preview, setPreview] = useState<string>();
+  const { data: userData } = useMeRequest();
+
+  const { data: taskList } = useGetCreatedTasksListRequest();
+  const updatedTask = taskList?.filter(task => task.id === updateTaskId)[0];
+
+  const [isTaskCreated, setIsTaskCreated] = useState(Boolean(updatedTask));
+  const createdTaskId = taskList?.[taskList.length - 1].id;
+
+  const { mutate: uploadTaskSourceMutation, isError, isLoading } = useUploadTaskSourceMutation();
+
+  const [taskName, setTaskName] = useState(updatedTask?.name ?? '');
+  const [description, setDescription] = useState(updatedTask?.description ?? '');
+  const [preview, setPreview] = useState(updatedTask?.preview ?? '');
 
   const formData = new FormData();
 
   const isRequiredFieldsFilled = taskName !== '' && description !== '';
+  const isUploadTaskSourceVisible =
+    isTaskCreated && !isCreateTaskMutationError && !isCreateTaskMutationLoading;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
@@ -38,19 +56,29 @@ export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskI
   };
 
   const handleOnSubmit = () => {
-    updateTaskId
-      ? updateTaskMutation({
-          id: updateTaskId,
-          name: taskName,
-          description: description,
-          settings: { test: 'test' }
-        })
-      : createTaskMutation({
-          name: taskName,
-          description: description,
-          settings: { test: 'test' }
-          // preview: formData
-        });
+    if (updatedTask) {
+      updateTaskMutation({
+        id: updateTaskId!,
+        name: taskName,
+        description: description,
+        isAvailable: userData?.role === 'Admin' ? updatedTask.isAvailable : undefined,
+        settings: { test: 'test' }
+      });
+
+      setUpdateTaskId(undefined);
+      setTaskName('');
+      setDescription('');
+      setPreview('');
+      setIsTaskCreated(false);
+    } else {
+      createTaskMutation({
+        name: taskName,
+        description: description,
+        settings: { test: 'test' }
+        // preview: formData
+      });
+      setIsTaskCreated(true);
+    }
   };
 
   return (
@@ -84,16 +112,30 @@ export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskI
         handleFileChange={handleFileChange}
       />
 
-      {updateTaskId ? (
+      {isUploadTaskSourceVisible && (
+        <UserUploadTaskSourceField
+          taskId={createdTaskId!}
+          uploadTaskSource={uploadTaskSourceMutation}
+          isError={isError}
+          isLoading={isLoading}
+        />
+      )}
+
+      {updatedTask ? (
         <div className={css['create-task__editable-buttons']}>
-          <Button
-            theme="accent"
-            onClick={() => setUpdateTaskId(undefined)}
-            disabled={!isRequiredFieldsFilled}
-          >
+          <Button theme="accent" disabled={!isRequiredFieldsFilled}>
             Редактировать
           </Button>
-          <Button theme="colored-red" type="button" onClick={() => setUpdateTaskId(undefined)}>
+          <Button
+            theme="colored-red"
+            onClick={() => {
+              setUpdateTaskId(undefined);
+              setTaskName('');
+              setDescription('');
+              setPreview('');
+              setIsTaskCreated(false);
+            }}
+          >
             Отменить
           </Button>
         </div>

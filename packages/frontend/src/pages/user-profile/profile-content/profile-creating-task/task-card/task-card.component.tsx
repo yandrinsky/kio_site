@@ -2,20 +2,22 @@ import React from 'react';
 import css from './task-card.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { ITaskCard } from './task-card';
+import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
 
 export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen }) => {
-  const img = '';
+  const { data: taskList } = useGetCreatedTasksListRequest();
+  const task = taskList?.filter(task => task.id === taskId)[0];
 
   return (
     <>
       <div onClick={e => e.stopPropagation()} className={css['task-card']}>
         <div className={css['task-card__container']}>
-          <div className={css['task-card__header']}>Заголовок</div>
+          <div className={css['task-card__header']}>{task?.name}</div>
 
           <div className={css['task-card__content']}>
-            {img ? (
+            {task?.preview ? (
               <div className={css['task-card__img-container']}>
-                <img className={css['task-card__img']} src="" alt="" />
+                <img className={css['task-card__img']} src={task.preview} alt="" />
               </div>
             ) : (
               <div className={css['task-card__without-img-container']}>
@@ -37,13 +39,7 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen })
 
           <div className={css['task-card__description-container']}>
             <div className={css['task-card__header--h4']}>Описание</div>
-            <div>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam deserunt pariatur dicta ullam
-              molestiae corrupti autem blanditiis aspernatur libero voluptatem, adipisci saepe consectetur vel
-              praesentium ut, tempore soluta possimus nihil! Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Ex eos libero aperiam fugiat molestiae minima nulla aspernatur hic incidunt
-              quia? Earum odit doloremque totam veniam explicabo fugit labore nesciunt autem?
-            </div>
+            <div>{task?.description}</div>
           </div>
         </div>
       </div>

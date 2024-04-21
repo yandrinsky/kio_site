@@ -6,6 +6,7 @@ export const QUERY_KEYS = {
   SET_DISPLAY_NAME: 'set-display-name',
   SET_FULL_NAME: 'set-full-name',
   GET_NOT_APPROVED_TASKS_LIST: 'get-not-approved-tasks-list',
+  GET_CREATED_TASKS_LIST: 'get-created-tasks-list',
   SET_AVATAR: 'set-avatar',
   CREATE_TASK: 'create-task',
   UPDATE_TASK: 'update_task',
