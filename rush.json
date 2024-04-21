@@ -33,8 +33,8 @@
       "projectFolder": "packages/backend"
     },
     {
-      "packageName": "@kio/test-service",
-      "projectFolder": "packages/test-service"
+      "packageName": "@kio/api",
+      "projectFolder": "packages/api"
     }
   ]
 }

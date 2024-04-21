@@ -3,12 +3,7 @@ import { QUERY_KEYS } from '../../query-keys';
 import { validationMiddleware } from '../../../domain/middleware';
 import { check } from 'express-validator';
 
-import {
-    startSolutionController,
-    getTasksListController,
-    getTaskValidator,
-    getTaskController
-} from '../../controllers';
+import { getTasksListController, getTaskValidator, getTaskController } from '../../controllers';
 import { controllerErrorBounding } from '../../../domain/errors';
 
 const siteRouter = Router();

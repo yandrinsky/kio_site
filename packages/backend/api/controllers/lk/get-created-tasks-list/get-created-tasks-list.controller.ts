@@ -15,6 +15,7 @@ export const getCreatedTasksListController: TController<null> = async (req, resp
             isAvailable,
             isApproved,
             preview,
+            settings,
             id: _id
         })
     );

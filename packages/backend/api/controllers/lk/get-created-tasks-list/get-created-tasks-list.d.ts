@@ -5,4 +5,5 @@ export type IGetCreatedTasksListResponse = {
     isAvailable: boolean;
     isApproved: boolean;
     preview: string;
+    settings: object;
 }[];
