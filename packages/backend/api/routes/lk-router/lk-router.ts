@@ -22,7 +22,9 @@ import {
     updateTaskController,
     updateTaskValidator,
     uploadTaskSourceController,
-    uploadTaskSourceValidator
+    uploadTaskSourceValidator,
+    getCreatedTasksListController,
+    getCreatedTasksListValidator
 } from '../../controllers';
 
 import { controllerErrorBounding } from '../../../domain/errors';
@@ -65,11 +67,17 @@ apiRouter.get(
     controllerErrorBounding(getNotApprovedTasksListController)
 );
 
+apiRouter.get(
+    QUERY_KEYS.GET_CREATED_TASKS_LIST,
+    validationMiddleware([], getCreatedTasksListValidator),
+    controllerErrorBounding(getCreatedTasksListController)
+);
+
 apiRouter.post(
     QUERY_KEYS.CREATE_TASK,
 
     validationMiddleware(
-        [check('name').isString(), check('description').isString(), check('settings').isObject().optional()],
+        [check('name').isString(), check('description').isString(), check('settings').optional()],
         createTaskValidator
     ),
 

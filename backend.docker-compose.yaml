@@ -16,6 +16,21 @@ services:
             - 3001:3001
         networks:
             - app-network
+    api:
+        image: node:18-alpine
+        volumes:
+            - .:/app
+        working_dir: /app
+        user: '${UID-1000}:${GID-1000}'
+        command:
+            - sh
+            - -c
+            - |
+                cd packages/api; node ../../common/scripts/install-run-rushx.js dev
+        ports:
+            - 3010:3010
+        networks:
+            - app-network
 
 #    test-service:
 #        container_name: test-service
