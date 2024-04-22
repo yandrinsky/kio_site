@@ -3,10 +3,13 @@ import css from './task-card.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { ITaskCard } from './task-card';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
+import { useApproveTaskMutation } from '@api/routes/approve-task';
 
-export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen }) => {
+export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
   const { data: taskList } = useGetCreatedTasksListRequest();
   const task = taskList?.filter(task => task.id === taskId)[0];
+
+  const { mutate } = useApproveTaskMutation();
 
   return (
     <>
@@ -28,7 +31,14 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen })
             <div className={css['task-card__buttons-container']}>
               <div className={css['task-card__buttons']}>
                 <Button theme="accent">Начать</Button>
-                <Button onClick={() => updateTask(taskId)}>Редактировать</Button>
+                <Button
+                  onClick={() => {
+                    setIsOpen(false);
+                    mutate({ taskId: taskId });
+                  }}
+                >
+                  Подтвердить
+                </Button>
                 <Button theme="colored-red" onClick={() => setIsOpen(false)}>
                   Закрыть
                 </Button>

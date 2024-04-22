@@ -51,22 +51,6 @@
     padding: 0 30px 20px 30px;
 }
 
-.user-preview-task-field__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 30px;
-    min-height: 55px;
-
-    background-color: var(--primary-light-color);
-    border-top: 1px solid var(--accent-light-color);
-}
-
-.user-preview-task-field__footer-text {
-    font-size: 0.9rem;
-    color: var(--blur-text-color);
-}
-
 .user-preview-task-field__info-text {
     font-size: 0.9rem;
     color: var(--blur-text-color);

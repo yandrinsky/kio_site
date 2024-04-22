@@ -9,11 +9,11 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
   const { data: taskList } = useGetCreatedTasksListRequest();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [state, setState] = useState<string>();
+  const [taskId, setTaskId] = useState<string>();
 
   return (
     <div className={css['created-task-list']}>
-      {isOpen && <TaskCard taskId={state ?? ''} setIsOpen={setIsOpen} updateTask={updateTask} />}
+      {isOpen && <TaskCard taskId={taskId ?? ''} setIsOpen={setIsOpen} updateTask={updateTask} />}
       {taskList?.map(task => (
         <div key={task.id} className={css['created-task-list__container']}>
           <div className={css['created-task-list__content']}>
@@ -24,7 +24,7 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
                   theme="accent"
                   onClick={() => {
                     setIsOpen(true);
-                    setState(task.id);
+                    setTaskId(task.id);
                   }}
                 >
                   Открыть

@@ -9,6 +9,7 @@ export const QUERY_KEYS = {
   GET_CREATED_TASKS_LIST: 'get-created-tasks-list',
   SET_AVATAR: 'set-avatar',
   CREATE_TASK: 'create-task',
-  UPDATE_TASK: 'update_task',
-  UPLOAD_TASK_SOURCE: 'upload_task_source'
+  UPDATE_TASK: 'update-task',
+  APPROVE_TASK: 'approve-task',
+  UPLOAD_TASK_SOURCE: 'upload-task-source'
 };
