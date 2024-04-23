@@ -19,7 +19,10 @@ export const ProfilePopup = () => {
   const { mutate } = useLogoutMutation();
   const [theme, setTheme] = useAtom(themeAtom);
 
-  if (!data) return null;
+  if (!data) {
+    return null;
+  }
+  
   const { avatarUrl, email } = data;
 
   return (

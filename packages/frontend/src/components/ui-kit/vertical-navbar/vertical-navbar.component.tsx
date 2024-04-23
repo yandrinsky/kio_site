@@ -8,7 +8,7 @@ import { useQueryParams } from '../../../history/use-query/use-query-params';
 export const VerticalNavbar: FC<IVerticalNavbar> = ({ items, setIsActive }) => {
   const [query, setParams] = useQueryParams();
 
-  const [isActiveNavbarItem, setIsActiveNavbarItem] = useState(query.profileTab ? query.profileTab : 0);
+  const [isActiveNavbarItem, setIsActiveNavbarItem] = useState(query.profileTab ?? 0);
 
   return (
     <div>
@@ -22,7 +22,7 @@ export const VerticalNavbar: FC<IVerticalNavbar> = ({ items, setIsActive }) => {
             }}
             item={item}
             isActive={isActiveNavbarItem === item ? 'active' : 'default'}
-            key={`${index}`}
+            key={index}
           />
         ))}
       </ul>
