@@ -28,7 +28,6 @@ import {
 } from '../../controllers';
 
 import { controllerErrorBounding } from '../../../domain/errors';
-import { apiRouter } from '../api-router';
 
 const lkRouter = Router();
 
@@ -61,19 +60,19 @@ lkRouter.post(
     controllerErrorBounding(changeRoleController)
 );
 
-apiRouter.get(
+lkRouter.get(
     QUERY_KEYS.GET_NOT_APPROVED_TASKS_LIST,
     validationMiddleware([], getNotApprovedTasksListValidator),
     controllerErrorBounding(getNotApprovedTasksListController)
 );
 
-apiRouter.get(
+lkRouter.get(
     QUERY_KEYS.GET_CREATED_TASKS_LIST,
     validationMiddleware([], getCreatedTasksListValidator),
     controllerErrorBounding(getCreatedTasksListController)
 );
 
-apiRouter.post(
+lkRouter.post(
     QUERY_KEYS.CREATE_TASK,
 
     validationMiddleware(
@@ -84,7 +83,7 @@ apiRouter.post(
     controllerErrorBounding(createTaskController)
 );
 
-apiRouter.post(
+lkRouter.post(
     QUERY_KEYS.UPDATE_TASK,
 
     validationMiddleware(
@@ -95,7 +94,7 @@ apiRouter.post(
     controllerErrorBounding(updateTaskController)
 );
 
-apiRouter.post(
+lkRouter.post(
     QUERY_KEYS.APPROVE_TASK,
 
     validationMiddleware([check('taskId').isString()], approveTaskValidator),
@@ -103,7 +102,7 @@ apiRouter.post(
     controllerErrorBounding(approveTaskController)
 );
 
-apiRouter.post(
+lkRouter.post(
     QUERY_KEYS.UPLOAD_TASK_SOURCE,
 
     validationMiddleware([], uploadTaskSourceValidator),

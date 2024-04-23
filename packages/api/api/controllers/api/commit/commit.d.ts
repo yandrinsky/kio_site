@@ -9,4 +9,4 @@ export interface ICommitDto {
     comment?: string;
 }
 
-export interface ICommitDtoResponse extends ISuccessResponse {}
+export interface ICommitResponse extends ISuccessResponse {}

@@ -8,4 +8,5 @@ export interface ITaskDB {
     preview: string;
     creatorId: string;
     timestamp: number;
+    url: string;
 }

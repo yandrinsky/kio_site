@@ -1,2 +1,2 @@
 export { commitController } from './commit.controller';
-export { ICommitDtoResponse, ICommitDto } from './commit';
+export { ICommitResponse, ICommitDto } from './commit';
