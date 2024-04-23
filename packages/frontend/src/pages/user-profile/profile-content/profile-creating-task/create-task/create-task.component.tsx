@@ -74,8 +74,8 @@ export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskI
       createTaskMutation({
         name: taskName,
         description: description,
-        settings: { test: 'test' }
-        // preview: formData
+        settings: { test: 'test' },
+        preview: formData
       });
       setIsTaskCreated(true);
     }

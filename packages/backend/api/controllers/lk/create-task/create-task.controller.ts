@@ -5,7 +5,7 @@ import { saveFile } from '../../../../domain/utils/save-file';
 
 export const createTaskController: TController<ICreateTaskDTO> = async (req, resp) => {
     const { name, settings, description } = req.body;
-    const preview = req.files?.preview;
+    const preview = Array.isArray(req.files?.preview) ? req.files?.preview[0] : req.files?.preview;
 
     const task = new Task({
         name,

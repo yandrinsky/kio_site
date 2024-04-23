@@ -4,6 +4,7 @@ export interface ICreateTaskDTO {
     name: string;
     description: string;
     settings: object;
+    preview: file;
 }
 
 export interface ICreateTaskResponse extends ISuccessResponse {}

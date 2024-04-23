@@ -88,7 +88,11 @@ apiRouter.post(
     QUERY_KEYS.UPDATE_TASK,
 
     validationMiddleware(
-        [check('name').isString(), check('description').isString(), check('settings').isObject().optional()],
+        [
+            check('name').isString().optional(),
+            check('description').isString().optional(),
+            check('settings').isObject().optional()
+        ],
         updateTaskValidator
     ),
 
