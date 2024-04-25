@@ -2,11 +2,17 @@ import React from 'react';
 import { UserInputField } from '@components/user-profile-fields/user-input-field/user-input-field.component';
 import css from './create-task.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
+import { useState } from 'react';
+import { useCreateTaskMutation } from '@api/routes/create-task';
 import { UserPreviewTaskField } from '@components/user-profile-fields/user-preview-task-field/user-preview-task-field.component';
-import { ICreateTask } from './create-task';
+import { ICreateTask } from './update-task';
+import { useUpdateTaskMutation } from '@api/routes/update-task';
 import { UserTextareaField } from '@components/user-profile-fields/user-textarea-field/user-textarea-field.component';
+import { useUploadTaskSourceMutation } from '@api/routes/upload-task-source';
+import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
+import { useMeRequest } from '@api/index';
 import { UserUploadTaskSourceField } from '@components/user-profile-fields/user-upload-task-source-field/user-upload-task-source-field.component';
-import { useCreateTask } from './create-task.hook';
+import { useCreateTask } from './update-task.hook';
 
 export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskId }) => {
   const {
@@ -77,13 +83,7 @@ export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskI
   };
 
   return (
-    <form
-      className={css['create-task__forms']}
-      onSubmit={e => {
-        e.preventDefault();
-        handleOnSubmit();
-      }}
-    >
+    <div className={css['create-task__forms']}>
       <UserInputField
         title="Название задачи"
         subtitle="Это название задачи, которое будут видеть пользователи"
@@ -116,29 +116,14 @@ export const CreateTask: React.FC<ICreateTask> = ({ updateTaskId, setUpdateTaskI
         />
       )}
 
-      {updatedTask ? (
-        <div className={css['create-task__editable-buttons']}>
-          <Button theme="accent" disabled={!isRequiredFieldsFilled}>
-            Редактировать
-          </Button>
-          <Button
-            theme="colored-red"
-            onClick={() => {
-              setUpdateTaskId(undefined);
-              setTaskName('');
-              setDescription('');
-              setPreview('');
-              setIsTaskCreated(false);
-            }}
-          >
-            Отменить
-          </Button>
-        </div>
-      ) : (
-        <Button theme="accent" disabled={!isRequiredFieldsFilled}>
-          Создать задачу
-        </Button>
-      )}
-    </form>
+      <Button
+        theme="colored-red"
+        onClick={() => {
+          setIsTaskCreated(false);
+        }}
+      >
+        Отменить
+      </Button>
+    </div>
   );
 };
