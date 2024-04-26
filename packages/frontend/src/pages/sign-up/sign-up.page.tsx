@@ -28,7 +28,11 @@ export const SignUp = () => {
     setView(i => --i);
   };
 
-  const baseFormSelect = { email: combinedForm.email || '', role: combinedForm.role || '' };
+  const baseFormSelect = {
+    email: combinedForm.email || '',
+    role: combinedForm.role || ''
+  } as TSignUpSelectForm;
+
   return (
     <Layout protectedFrom="authorized" withHelp>
       <main className={css['sign-up']}>

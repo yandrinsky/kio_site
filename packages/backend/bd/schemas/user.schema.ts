@@ -13,6 +13,13 @@ const userSchema = new mongoose.Schema<IUserBD>(
         phoneNumber: { type: String, required: false },
         studyPlace: { type: String, required: false },
         paymentStatus: { type: Boolean, required: false },
+        birthday: {
+            type: Object,
+            required: false,
+            day: { type: String, required: true },
+            month: { type: String, required: true },
+            year: { type: String, required: true }
+        },
         connections: { type: [String], required: true },
         claims: { type: { role: String }, required: true },
         info: { type: { createdDate: Date, lastLoginDate: Date }, required: true },

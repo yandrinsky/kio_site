@@ -18,8 +18,19 @@ export const meController: TController<null> = async (req, resp) => {
         claims: { role },
         avatarUrl,
         email,
+        birthday,
         _id
     } = user;
+
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const isAgeDecreased =
+        Number(String(month) + String(day).padStart(2, '0')) -
+            Number(String(birthday.month) + String(birthday.day).padStart(2, '0')) <
+        0;
 
     const response: IMeResponse = {
         displayName,
@@ -29,6 +40,8 @@ export const meController: TController<null> = async (req, resp) => {
         role,
         avatarUrl,
         email,
+        age: year - birthday.year - Number(isAgeDecreased),
+        birthday,
         id: _id.toString()
     };
 
