@@ -31,8 +31,8 @@ const SignUpSelect: FC<ISignUpSelect> = ({ onSubmit, baseForm }) => {
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit} className={css['sign-up-select']}>
           <RadioContainerFormField name="role">
-            {SELECT_OPTIONS.map(({ title, content }) => (
-              <Radio title={title} value={title} key={title}>
+            {SELECT_OPTIONS.map(({ title, content, id }) => (
+              <Radio title={title} value={id} key={title}>
                 {content}
               </Radio>
             ))}

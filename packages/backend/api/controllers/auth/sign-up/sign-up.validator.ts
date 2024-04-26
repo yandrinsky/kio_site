@@ -1,10 +1,10 @@
 import { ISignUpDto } from './sign-up';
 
-import { CLIENT_ERRORS } from '../../../../domain/errors/client-errors';
+import { CLIENT_ERRORS } from '../../../../domain/errors';
 import { ERoles, User } from '../../../../bd';
-import { TValidator } from '../../../../domain/types/validator.type';
+import { TValidator } from '../../../../domain/types';
 import { isOnlyRussian } from '../../../../domain/testers';
-import { keycloakApi } from '../../../../keycloak/api/keycloakApi';
+import { keycloakApi } from '../../../../keycloak/api';
 
 export const signUpValidator: TValidator<ISignUpDto> = async req => {
     const { email, name, surname, patronymic, role, password } = req.body;
@@ -17,7 +17,7 @@ export const signUpValidator: TValidator<ISignUpDto> = async req => {
         return CLIENT_ERRORS.BAD_NAME;
     }
 
-    if (role !== ERoles.User && role !== ERoles.Creator) {
+    if (![ERoles.User, ERoles.Creator, ERoles.Watcher].includes(role)) {
         return CLIENT_ERRORS.BAD_DTO;
     }
 

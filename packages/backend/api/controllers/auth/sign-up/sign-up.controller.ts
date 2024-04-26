@@ -6,7 +6,7 @@ import { keycloakApi } from '../../../../keycloak/api';
 import { setAuthTokens } from '../../../../domain/token/token-service';
 
 export const signUpController: TController<ISignUpDto> = async (req, resp) => {
-    const { password, email, name, surname, patronymic, role } = req.body;
+    const { password, email, name, surname, patronymic, role, day, year, month } = req.body;
 
     await keycloakApi['create-user']({
         username: email,
@@ -33,6 +33,7 @@ export const signUpController: TController<ISignUpDto> = async (req, resp) => {
             name,
             surname,
             patronymic,
+            birthday: { day, month, year },
             displayName: name,
             avatarUrl: '',
             phoneNumber: '',

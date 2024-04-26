@@ -5,6 +5,7 @@ export interface IUserBD {
     name: string;
     surname: string;
     patronymic: string;
+    birthday: { day: number; month: number; year: number };
     email: string;
     passHash: string;
     displayName: string;

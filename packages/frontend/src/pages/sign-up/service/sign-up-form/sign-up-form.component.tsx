@@ -10,7 +10,7 @@ import { useToast } from '@hooks/use-toast.hook';
 import { Form } from 'react-final-form';
 import { InputFormField } from '@components/form/input-form-field/input-form-field.component';
 
-const initialForm = { password: '', fullName: '', passwordRepeat: '' };
+const initialForm = { password: '', fullName: '', passwordRepeat: '', date: '' };
 
 const SignUpForm: FC<ISignUpFormProps> = ({ onSubmit, goBack, isLoading }) => {
   const toast = useToast();
@@ -22,6 +22,7 @@ const SignUpForm: FC<ISignUpFormProps> = ({ onSubmit, goBack, isLoading }) => {
     }
 
     const fullName = values.fullName.split(' ').filter(Boolean);
+    const [year, month, day] = values.date.split('-').map(Number);
 
     if (!fullName || fullName.length < 2) {
       toast.push({ title: 'Введите полное имя', theme: 'error' });
@@ -32,7 +33,10 @@ const SignUpForm: FC<ISignUpFormProps> = ({ onSubmit, goBack, isLoading }) => {
       password: values.password || '',
       name: fullName[1] || '',
       surname: fullName[0] || '',
-      patronymic: fullName[2] || ''
+      patronymic: fullName[2] || '',
+      year,
+      month,
+      day
     });
   };
 
@@ -80,6 +84,18 @@ const SignUpForm: FC<ISignUpFormProps> = ({ onSubmit, goBack, isLoading }) => {
             placeholder="Повтор пароля"
             stretch
           />
+
+          <InputFormField
+            required
+            type="date"
+            pattern=".{6,}"
+            name="date"
+            disabled={isLoading}
+            isError={submitErrors?.passwordRepeat && !dirtySinceLastSubmit}
+            placeholder="Дата рождения"
+            stretch
+          />
+
           <div className={css['sign-up-form__buttons']}>
             <Button onClick={goBack} disabled={isLoading} type="button">
               Назад
