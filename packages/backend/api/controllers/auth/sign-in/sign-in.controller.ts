@@ -3,6 +3,7 @@ import { ISignInResponse, ISignInDto } from './sign-in';
 import { TOKEN_COLLECTION } from '../../../../domain/token/token-collection';
 import { keycloakApi } from '../../../../keycloak/api';
 import { CLIENT_ERRORS } from '../../../../domain/errors';
+import { setAuthTokens } from '../../../../domain/token/token-service';
 
 export const signInController: TController<ISignInDto> = async (req, resp) => {
     const { email, password } = req.body;
@@ -14,6 +15,11 @@ export const signInController: TController<ISignInDto> = async (req, resp) => {
             .status(CLIENT_ERRORS.BAD_LOGIN_OR_PASSWORD.code)
             .json(CLIENT_ERRORS.BAD_LOGIN_OR_PASSWORD);
     }
+
+    setAuthTokens({
+        ...authResult,
+        resp
+    });
 
     resp.cookie(TOKEN_COLLECTION.ACCESS_TOKEN, authResult.access_token, {
         httpOnly: true,

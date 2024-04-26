@@ -12,7 +12,8 @@ const taskSchema = new Schema<ITaskDB>(
         isApproved: { type: Boolean, default: false },
         settings: { type: Schema.Types.Mixed, default: {} },
         preview: { type: String, default: '' },
-        timestamp: { type: Number, default: () => Date.now() }
+        timestamp: { type: Number, default: () => Date.now() },
+        url: { type: String, default: '' }
     },
     { _id: false }
 );

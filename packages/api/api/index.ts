@@ -7,7 +7,7 @@ export {
     IGetCurrentSolutionDto,
     ISwitchTryResponse,
     INewTryResponse,
-    ICommitDtoResponse,
+    ICommitResponse,
     IStartSolutionResponse,
     IGetCurrentSolutionResponse,
     ISwitchHeadFrameResponse

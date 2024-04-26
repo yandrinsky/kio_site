@@ -4,6 +4,8 @@ import cors from 'cors';
 
 import { errorBoundingMiddleware } from './domain/middleware';
 import { apiRouter } from './api';
+import { authMiddleware } from './domain/middleware/auth-middleware';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -12,7 +14,9 @@ const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWOR
 
 app.use(cors({ origin: '*' }));
 app.use(express.json());
+app.use(cookieParser('secret'));
 app.use(express.urlencoded({ extended: true }));
+app.use(authMiddleware);
 
 app.use(apiRouter);
 

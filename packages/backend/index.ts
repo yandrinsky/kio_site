@@ -3,9 +3,8 @@ import * as mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import fileUpload from 'express-fileupload';
-
 import { authMiddleware, errorBoundingMiddleware } from './domain/middleware';
-import { authRouter, lkRouter, apiRouter, siteRouter } from './api';
+import { authRouter, lkRouter, siteRouter } from './api';
 
 const app = express();
 
@@ -24,7 +23,6 @@ app.use(authMiddleware);
 app.use(authRouter);
 app.use(lkRouter);
 app.use(siteRouter);
-app.use(apiRouter);
 
 app.use(errorBoundingMiddleware);
 
@@ -32,4 +30,12 @@ app.listen(port, async () => {
     await mongoose.connect(url);
 
     console.log(`App listening on port ${port}`);
+
+    if (!process.env.KEY) {
+        console.error('В .env нет KEY. Установите в KEY значение crypto.randomBytes(32)');
+    }
+
+    if (!process.env.KEY) {
+        console.error('В .env нет IV. Установите в IV значение crypto.randomBytes(16)');
+    }
 });

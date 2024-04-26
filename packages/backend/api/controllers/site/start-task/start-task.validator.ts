@@ -1,12 +1,12 @@
 import { ERoles } from '../../../../bd';
 import { TValidator } from '../../../../domain/types';
 import { CLIENT_ERRORS } from '../../../../domain/errors';
-import { IGetTaskDto } from './get-task';
 import { Task } from '../../../../bd/schemas/task.schema';
+import { IStartTaskDto } from './start-task';
 
-export const getTaskValidator: TValidator<IGetTaskDto> = async req => {
+export const startTaskValidator: TValidator<IStartTaskDto> = async req => {
     const role = req.user?.claims.role;
-    const task = await Task.findOne({ _id: req.body.taskId });
+    const task = await Task.findOne({ _id: req.body.taskId }).select('isApproved creatorId');
 
     if (!task) {
         return CLIENT_ERRORS.TASK_DOESNT_EXIST;
