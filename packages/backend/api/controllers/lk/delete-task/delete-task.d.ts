@@ -1,7 +1,7 @@
 import { ISuccessResponse } from '../../../../domain/types';
 
 export interface IDeleteTaskDTO {
-    id: string;
+    taskId: string;
 }
 
 export interface IDeleteTaskResponse extends ISuccessResponse {}

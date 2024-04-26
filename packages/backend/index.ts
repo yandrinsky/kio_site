@@ -3,7 +3,6 @@ import * as mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import fileUpload from 'express-fileupload';
-import crypto from 'crypto';
 import { authMiddleware, errorBoundingMiddleware } from './domain/middleware';
 import { authRouter, lkRouter, siteRouter } from './api';
 

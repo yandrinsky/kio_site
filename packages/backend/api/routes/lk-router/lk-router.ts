@@ -28,6 +28,7 @@ import {
 } from '../../controllers';
 
 import { controllerErrorBounding } from '../../../domain/errors';
+import { deleteTaskController, deleteTaskValidator } from '../../controllers/lk/delete-task';
 
 const lkRouter = Router();
 
@@ -81,6 +82,14 @@ lkRouter.post(
     ),
 
     controllerErrorBounding(createTaskController)
+);
+
+lkRouter.delete(
+    QUERY_KEYS.DELETE_TASK,
+
+    validationMiddleware([check('taskId').isString()], deleteTaskValidator),
+
+    controllerErrorBounding(deleteTaskController)
 );
 
 lkRouter.post(

@@ -8,4 +8,4 @@ export const QUERY_KEYS = {
     LOGIN: '/LOGIN_QUERY'
 };
 
-export const QUERY_WITHOUT_AUTH = ['LOGIN_QUERY'];
+export const QUERY_WITHOUT_AUTH = [QUERY_KEYS.LOGIN];

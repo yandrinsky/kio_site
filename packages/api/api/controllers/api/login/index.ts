@@ -1,2 +1,2 @@
 export { loginController } from './login.controller';
-export { ICommitDtoResponse, ICommitDto } from './login';
+export { ILoginDto, ILoginResponse } from './login';

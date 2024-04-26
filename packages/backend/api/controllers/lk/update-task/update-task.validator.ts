@@ -18,7 +18,7 @@ export const updateTaskValidator: TValidator<IUpdateTaskDTO> = async req => {
         return CLIENT_ERRORS.TASK_DOESNT_EXIST;
     }
 
-    if (role === ERoles.Creator && task?.creatorId !== req.user?._id) {
+    if (role === ERoles.Creator && (task?.creatorId !== req.user?._id || task.isApproved)) {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 

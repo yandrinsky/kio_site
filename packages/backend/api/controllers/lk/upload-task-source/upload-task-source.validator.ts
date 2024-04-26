@@ -12,9 +12,13 @@ export const uploadTaskSourceValidator: TValidator<IUploadTaskSourceDTO> = async
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 
-    const task = await Task.exists({ _id: taskId });
+    const task = await Task.findOne({ _id: taskId }).select('creatorId isApproved');
 
     if (!task) {
         return CLIENT_ERRORS.TASK_DOESNT_EXIST;
+    }
+
+    if (role === ERoles.Creator && (task?.creatorId !== req.user?._id || task.isApproved)) {
+        return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 };
