@@ -29,6 +29,7 @@ import {
 
 import { controllerErrorBounding } from '../../../domain/errors';
 import { deleteTaskController, deleteTaskValidator } from '../../controllers/lk/delete-task';
+import { searchUserController, searchUserValidator } from '../../controllers/lk/search-user';
 
 const lkRouter = Router();
 
@@ -59,6 +60,12 @@ lkRouter.post(
     QUERY_KEYS.CHANGE_ROLE,
     validationMiddleware([check('role').isString(), check('userId').isString()], changeRoleValidator),
     controllerErrorBounding(changeRoleController)
+);
+
+lkRouter.post(
+    QUERY_KEYS.SEARCH_USER,
+    validationMiddleware([check('search').isString()], searchUserValidator),
+    controllerErrorBounding(searchUserController)
 );
 
 lkRouter.get(
