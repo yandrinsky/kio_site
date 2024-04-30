@@ -1,5 +1,5 @@
 import { useElement } from '@hooks/use-element.hook';
-import { FC, PropsWithChildren, MouseEvent, useMemo, useRef } from 'react';
+import { FC, PropsWithChildren, MouseEvent, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import './modal.animation.css';

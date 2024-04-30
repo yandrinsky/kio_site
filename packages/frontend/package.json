@@ -6,7 +6,9 @@
   "scripts": {
     "start": "vite serve --force",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "browserslist": [
     ">2%"
@@ -23,6 +25,16 @@
     "reactjs-popup": "^2.0.5"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.3.3",
+    "@storybook/addon-a11y": "^8.0.9",
+    "@storybook/addon-essentials": "^8.0.9",
+    "@storybook/addon-interactions": "^8.0.9",
+    "@storybook/addon-links": "^8.0.9",
+    "@storybook/addon-onboarding": "^8.0.9",
+    "@storybook/blocks": "^8.0.9",
+    "@storybook/react": "^8.0.9",
+    "@storybook/react-vite": "^8.0.9",
+    "@storybook/test": "^8.0.9",
     "@tanstack/react-query-devtools": "^4.29.12",
     "@types/marked": "4.3.0",
     "@types/node": "^20.3.2",
@@ -32,6 +44,8 @@
     "@vitejs/plugin-react-swc": "3.0.0",
     "autoprefixer": "10.4.14",
     "prettier": "2.8.4",
+    "storybook": "^8.0.9",
+    "storybook-addon-remix-react-router": "^3.0.0",
     "typescript": "4.9.3",
     "typescript-plugin-css-modules": "4.2.3",
     "vite": "4.1.0"

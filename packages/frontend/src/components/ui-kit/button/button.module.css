@@ -23,7 +23,6 @@
 
   background-color: var(--error-color);
   border: 1px solid var(--error-color);
-  ;
 }
 
 .button_colored-red:hover,

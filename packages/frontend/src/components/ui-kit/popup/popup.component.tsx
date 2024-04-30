@@ -1,11 +1,12 @@
 import './popup.animation.css';
-import { FC, forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 
 import ReactPopup from 'reactjs-popup';
 import { IPopup } from './popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
 
-export const Popup = forwardRef<PopupActions, IPopup>(({ closeOnScroll = false, ...props }, popupRef) => {
+export const Popup = forwardRef<PopupActions, IPopup>((props: IPopup, popupRef) => {
+  const { closeOnScroll = false, ...other } = props;
   const insidePopupRef = useRef<PopupActions | null>(null);
 
   useEffect(() => {
@@ -24,5 +25,5 @@ export const Popup = forwardRef<PopupActions, IPopup>(({ closeOnScroll = false, 
     insidePopupRef.current = actions;
   }
 
-  return <ReactPopup {...props} ref={setRef} />;
+  return <ReactPopup {...other} ref={setRef} />;
 });

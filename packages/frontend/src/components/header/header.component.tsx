@@ -6,11 +6,8 @@ import { Breadcrumbs } from '../ui-kit/breadcrumbs/breadcrumbs.component';
 import css from './header.module.css';
 
 import type { IHeader } from './header';
-import { Modal } from '@components/ui-kit/modal/modal.comoponenxt';
 
 export const Header: FC<IHeader> = memo(({ withNav, withHelp }) => {
-  const [isOpen, setOpen] = useState(false);
-
   return (
     <>
       <div className={css.header__breadcrumbs} onClick={() => setOpen(a => !a)}>
@@ -21,10 +18,6 @@ export const Header: FC<IHeader> = memo(({ withNav, withHelp }) => {
           <Nav />
         </div>
       )}
-
-      <Modal isOpen={isOpen} onClose={() => setOpen(a => !a)}>
-        Хуй
-      </Modal>
     </>
   );
 });
