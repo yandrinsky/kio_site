@@ -1,4 +1,4 @@
-import { ICommitDtoResponse, ICommitDto } from './commit';
+import { ICommitResponse, ICommitDto } from './commit';
 import { CLIENT_ERRORS, SERVER_ERRORS } from '../../../../domain/errors';
 import { TController } from '../../../../domain/types';
 import { Solution, Try, Frame } from '../../../../bd';
@@ -48,7 +48,7 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
 
     await Promise.all([solution.save(), currentTry.save(), newFrame.save()]);
 
-    const response: ICommitDtoResponse = { status: 'ok' };
+    const response: ICommitResponse = { status: 'ok' };
 
     resp.status(200).json(response);
 };

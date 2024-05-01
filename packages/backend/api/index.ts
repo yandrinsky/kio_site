@@ -13,12 +13,6 @@ export {
     IApproveTaskDTO,
     IGetTaskDto,
     ICreateTaskDTO,
-    ISwitchHeadFrameDto,
-    ISwitchTryDto,
-    INewTryDto,
-    ICommitDto,
-    IStartSolutionDto,
-    IGetCurrentSolutionDto,
     IUpdateTaskDTO,
     IChangePasswordResponse,
     IChangeRoleResponse,
@@ -29,17 +23,10 @@ export {
     IGetTasksListResponse,
     IGetNotApprovedTasksListResponse,
     IApproveTaskResponse,
-    ISwitchTryResponse,
-    INewTryResponse,
-    ICommitDtoResponse,
-    IStartSolutionResponse,
-    IGetCurrentSolutionResponse,
     ICreateTaskResponse,
-    ISwitchHeadFrameResponse,
     IUpdateTaskResponse
 } from './controllers';
 
 export { authRouter } from './routes/auth-router';
 export { lkRouter } from './routes/lk-router';
-export { apiRouter } from './routes/api-router';
 export { siteRouter } from './routes/site-router';

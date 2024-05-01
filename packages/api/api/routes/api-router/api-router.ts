@@ -12,6 +12,7 @@ import {
     switchHeadFrameController
 } from '../../controllers';
 import { controllerErrorBounding } from '../../../domain/errors';
+import { loginController } from '../../controllers/api/login';
 
 const apiRouter = Router();
 
@@ -66,6 +67,12 @@ apiRouter.post(
         check('frameId').isString()
     ]),
     controllerErrorBounding(switchHeadFrameController)
+);
+
+apiRouter.post(
+    QUERY_KEYS.LOGIN,
+    validationMiddleware([check('token').isString()]),
+    controllerErrorBounding(loginController)
 );
 
 export { apiRouter };
