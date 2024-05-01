@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useGetNotApprovedTacksListRequest } from '@api/routes/get-not-approved-tasks-list';
 import { useApproveTaskMutation } from '@api/routes/approve-task';
 import { TaskCard } from './task-card/task-card.component';
+import { BASE_URL } from '@api/constants/base';
 
 export const ProfileNotApprovedTasks = () => {
   const { data: taskList } = useGetNotApprovedTacksListRequest();
@@ -46,7 +47,7 @@ export const ProfileNotApprovedTasks = () => {
                 <div className={css['profile-not-approved-tasks__img-container']}>
                   <img
                     className={css['profile-not-approved-tasks__img']}
-                    src={task.preview}
+                    src={BASE_URL + '/' + task.preview}
                     alt="иконка задачи"
                   />
                 </div>

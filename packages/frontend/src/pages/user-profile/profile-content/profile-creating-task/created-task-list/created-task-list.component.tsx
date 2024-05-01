@@ -4,6 +4,7 @@ import { ICreatedTaskList } from './created-task-list';
 import { Button } from '@components/ui-kit/button/button.component';
 import { TaskCard } from '../task-card/task-card.component';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
+import { BASE_URL } from '@api/constants/base';
 
 export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
   const { data: taskList } = useGetCreatedTasksListRequest();
@@ -35,7 +36,11 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
 
             {task.preview ? (
               <div className={css['created-task-list__img-container']}>
-                <img className={css['created-task-list__img']} src={task.preview} alt="иконка задачи" />
+                <img
+                  className={css['created-task-list__img']}
+                  src={BASE_URL + '/' + task.preview}
+                  alt="иконка задачи"
+                />
               </div>
             ) : (
               <div className={css['created-task-list__without-img-container']}>

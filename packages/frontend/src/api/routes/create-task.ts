@@ -9,8 +9,14 @@ import { ICreateTaskDTO, ICreateTaskResponse } from '../../../../backend/api';
 const CREATE_TASK_URL = `${BASE_URL}/CREATE_TASK_QUERY`;
 
 export async function createTaskRequest(body: ICreateTaskDTO) {
+  const formData = new FormData();
+
+  Object.entries(body).forEach(([key, value]) => {
+    key === 'settings' ? formData.append(key, JSON.stringify(value)) : formData.append(key, value);
+  });
+
   return await makeRequest<ICreateTaskResponse>(CREATE_TASK_URL, {
-    body
+    body: formData
   });
 }
 
