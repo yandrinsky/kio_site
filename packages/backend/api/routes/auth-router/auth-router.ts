@@ -22,7 +22,10 @@ authRouter.post(
             check('surname').isString(),
             check('email').isEmail(),
             check('password').isString(),
-            check('role').isString()
+            check('role').isString(),
+            check('day').isInt(),
+            check('month').isInt(),
+            check('year').isInt()
         ],
         signUpValidator
     ),

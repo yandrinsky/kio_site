@@ -14,8 +14,6 @@ export const getCurrentSolutionController: TController<IGetCurrentSolutionDto> =
         return resp.status(SERVER_ERRORS.BD_ERROR.code).json(SERVER_ERRORS.BD_ERROR);
     }
 
-    console.log('getCurrentSolutionController', solution);
-
     if (!solution) {
         return resp
             .status(CLIENT_ERRORS.SOLUTION_DOESNT_EXIST.code)

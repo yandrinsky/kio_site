@@ -7,4 +7,6 @@ export interface ICreateTaskDTO {
     preview: file;
 }
 
-export interface ICreateTaskResponse extends ISuccessResponse {}
+export interface ICreateTaskResponse {
+    taskId: string;
+}

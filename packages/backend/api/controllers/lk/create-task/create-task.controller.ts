@@ -21,7 +21,7 @@ export const createTaskController: TController<ICreateTaskDTO> = async (req, res
 
     await task.save();
 
-    const response: ICreateTaskResponse = { status: 'ok' };
+    const response: ICreateTaskResponse = { taskId: task._id };
 
     resp.status(200).json(response);
 };

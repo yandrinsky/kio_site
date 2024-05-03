@@ -1,4 +1,4 @@
-import { ISuccessResponse } from '../../../../domain/types/success-anwer.interface';
+import { ISuccessResponse } from '../../../../domain/types';
 import { ERoles } from '../../../../bd';
 
 export interface ISignUpDto {
@@ -7,7 +7,10 @@ export interface ISignUpDto {
     patronymic: string;
     name: string;
     surname: string;
-    role: ERoles.User | ERoles.Creator;
+    day: number;
+    month: number;
+    year: number;
+    role: ERoles.User | ERoles.Creator | ERoles.Watcher;
 }
 
 export interface ISignUpResponse extends ISuccessResponse {}
