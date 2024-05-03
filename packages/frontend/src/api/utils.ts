@@ -17,14 +17,15 @@ async function checkRequest(res: Response) {
 export async function makeRequest<T>(url: string, options?: TOptions) {
   let headers: HeadersInit = {};
 
-  if (options?.method === 'POST' || options?.body) headers = { 'Content-Type': 'application/json' };
+  if ((options?.method === 'POST' || options?.body) && !(options?.body instanceof FormData))
+    headers = { 'Content-Type': 'application/json' };
 
   return fetch(url, {
-    method: options?.body ? 'POST' : 'GET',
+    method: options?.method ? options?.method : options?.body ? 'POST' : 'GET',
     credentials: 'include',
     redirect: 'follow',
     ...options,
-    body: options?.body && JSON.stringify(options?.body),
+    body: options?.body instanceof FormData ? options?.body : JSON.stringify(options?.body),
     headers: { ...(options?.headers || {}), ...headers }
   }).then<T>(checkRequest);
 }

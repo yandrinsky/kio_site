@@ -1,0 +1,11 @@
+.create-task__forms {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+}
+
+.create-task__editable-buttons {
+    display: flex;
+    justify-content: space-between;
+}

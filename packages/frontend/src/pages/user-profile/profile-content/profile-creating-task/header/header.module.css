@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header__headerContent-container {
+    padding-bottom: 20px;
+    width: 50%;
+
+    border-bottom: 2px solid #B7C8D3;
+
+    cursor: pointer;
+    transition: 200ms ease-in;
+}
+
+.header__headerContent-container-active {
+    border-bottom: 2px solid #0078D2;
+}
+
+.header__headerContent-container-right {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -8,9 +8,7 @@ import { useQueryParams } from '../../../history/use-query/use-query-params';
 export const VerticalNavbar: FC<IVerticalNavbar> = ({ items, setIsActive }) => {
   const [query, setParams] = useQueryParams();
 
-  const [isActiveNavbarItem, setIsActiveNavbarItem] = useState(
-    query.profileTab ? items.indexOf(query.profileTab) : 0
-  );
+  const [isActiveNavbarItem, setIsActiveNavbarItem] = useState(query.profileTab ?? 0);
 
   return (
     <div>
@@ -18,13 +16,13 @@ export const VerticalNavbar: FC<IVerticalNavbar> = ({ items, setIsActive }) => {
         {items.map((item: string, index: number) => (
           <NavbarItem
             onClick={() => {
-              setIsActiveNavbarItem(index);
+              setIsActiveNavbarItem(item);
               setIsActive(item);
               setParams(query => ({ ...query, profileTab: item }));
             }}
             item={item}
-            isActive={isActiveNavbarItem === index ? 'active' : 'default'}
-            key={`${index}`}
+            isActive={isActiveNavbarItem === item ? 'active' : 'default'}
+            key={index}
           />
         ))}
       </ul>

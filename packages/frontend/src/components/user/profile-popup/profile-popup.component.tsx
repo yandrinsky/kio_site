@@ -11,6 +11,7 @@ import { Option } from '@components/ui-kit/select/option/option.component';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@atoms/theme/theme.store';
 import { Button } from '@components/ui-kit/button/button.component';
+import { BASE_URL } from '@api/constants/base';
 import { useLogoutMutation } from '@api/routes/logout';
 
 export const ProfilePopup = () => {
@@ -18,14 +19,17 @@ export const ProfilePopup = () => {
   const { mutate } = useLogoutMutation();
   const [theme, setTheme] = useAtom(themeAtom);
 
-  if (!data) return null;
+  if (!data) {
+    return null;
+  }
+  
   const { avatarUrl, email } = data;
 
   return (
     <section className={css.popup}>
       <Badge
         to={ROUTES.PROFILE_ROUTE}
-        src={avatarUrl || '/default-avatar.svg'}
+        src={avatarUrl ? BASE_URL + '/' + avatarUrl : '/default-avatar.svg'}
         className={css.popup__badge}
         width={25}
         height={25}

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "vite serve --force",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "tsc && npx prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "browserslist": [
     ">2%"

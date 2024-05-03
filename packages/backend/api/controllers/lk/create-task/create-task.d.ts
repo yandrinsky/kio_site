@@ -3,7 +3,8 @@ import { ISuccessResponse } from '../../../../domain/types';
 export interface ICreateTaskDTO {
     name: string;
     description: string;
-    settings: object;
+    settings: string;
+    preview?: File;
 }
 
 export interface ICreateTaskResponse {
