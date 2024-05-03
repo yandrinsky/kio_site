@@ -24,7 +24,8 @@ import {
     uploadTaskSourceController,
     uploadTaskSourceValidator,
     getCreatedTasksListController,
-    getCreatedTasksListValidator
+    getCreatedTasksListValidator,
+    getMyTasksListController
 } from '../../controllers';
 
 import { controllerErrorBounding } from '../../../domain/errors';
@@ -73,6 +74,8 @@ lkRouter.get(
     validationMiddleware([], getNotApprovedTasksListValidator),
     controllerErrorBounding(getNotApprovedTasksListController)
 );
+
+lkRouter.get(QUERY_KEYS.GET_MY_TASKS_LIST, controllerErrorBounding(getMyTasksListController));
 
 lkRouter.get(
     QUERY_KEYS.GET_CREATED_TASKS_LIST,
