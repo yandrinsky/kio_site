@@ -11,19 +11,19 @@ export const UserUploadTaskSourceField: FC<IUserUploadTaskSourceField> = ({
   const [isUploadTaskSource, setIsUploadTaskSource] = useState(false);
 
   return (
-    <div className={css[`user-upload-task-source-field__container`]}>
-      <div className={css[`user-upload-task-source-field__content`]}>
+    <div className={css['field__container']}>
+      <div className={css['field__content']}>
         <div>
-          <div className={css['user-upload-task-source-field__header']}>
-            <h3 className={css['user-upload-task-source-field__header--h3']}>Загрузка модуля</h3>
-            <h5 className={css['user-upload-task-source-field__header--h5']}>
+          <div className={css['field__header']}>
+            <h3 className={css['field__header--h3']}>Загрузка модуля</h3>
+            <h5 className={css['field__header--h5']}>
               Вы можете загрузить модуль для вашей задачи. Для этого нажмите на иконку загрузки
             </h5>
           </div>
 
           {isUploadTaskSource && (
-            <div className={css['user-upload-task-source-field__main']}>
-              <span className={css['user-upload-task-source-field__info-text']}>
+            <div className={css['field__main']}>
+              <span className={css['field__info-text']}>
                 {isLoading
                   ? 'Идет загрузка модуля'
                   : isError
@@ -34,14 +34,10 @@ export const UserUploadTaskSourceField: FC<IUserUploadTaskSourceField> = ({
           )}
         </div>
 
-        <div className={css['user-upload-task-source-field__img-container']}>
-          <img
-            className={css['user-upload-task-source-field__img']}
-            src="/download.svg"
-            alt="Иконка модуля"
-          />
+        <div className={css['field__img-container']}>
+          <img className={css['field__img']} src="/download.svg" alt="Иконка модуля" />
           <input
-            className={css['user-upload-task-source-field__input-file']}
+            className={css['field__input-file']}
             onChange={e => {
               if (e.target.files) {
                 uploadTaskSource({ taskId });
@@ -50,7 +46,7 @@ export const UserUploadTaskSourceField: FC<IUserUploadTaskSourceField> = ({
             }}
             type="file"
             name="file"
-            accept=".png, .jpeg, .jpg"
+            accept=".zip, .rar"
           />
         </div>
       </div>

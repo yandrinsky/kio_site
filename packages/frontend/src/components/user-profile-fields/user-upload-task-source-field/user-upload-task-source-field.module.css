@@ -1,4 +1,4 @@
-.user-upload-task-source-field__container {
+.field__container {
     display: flex;
     flex-direction: column;
     min-width: 700px;
@@ -10,27 +10,27 @@
     overflow: hidden;
 }
 
-.user-upload-task-source-field__content {
+.field__content {
     display: flex;
     justify-content: space-between;
     padding-right: 30px;
 }
 
-.user-upload-task-source-field__header {
+.field__header {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 20px;
 }
 
-.user-upload-task-source-field__header--h3 {
+.field__header--h3 {
     margin: 0;
 
     font-weight: lighter;
     font-size: 1.4rem;
 }
 
-.user-upload-task-source-field__header--h5 {
+.field__header--h5 {
     margin: 0;
 
     font-weight: lighter;
@@ -38,37 +38,37 @@
     color: var(--blur-text-color);
 }
 
-.user-upload-task-source-field__main {
+.field__main {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 30px 20px 30px;
 }
 
-.user-upload-task-source-field__info-text {
+.field__info-text {
     font-size: 0.9rem;
     color: var(--blur-text-color);
 }
 
-.user-upload-task-source-field__img-container {
+.field__img-container {
     position: relative;
 
     display: flex;
     justify-content: flex-end;
     width: 200px;
     height: 200px;
-    padding: 15px 0 10px 0px;
+    padding: 15px 0 10px 0;
     margin-top: 5px;
 
     cursor: pointer;
     transition: 200ms ease-in;
 }
 
-.user-upload-task-source-field__img-container:hover {
+.field__img-container:hover {
     background-color: whitesmoke;
 }
 
-.user-upload-task-source-field__input-file {
+.field__input-file {
     position: absolute;
     top: 0;
     left: 0;
@@ -83,7 +83,7 @@
     }
 }
 
-.user-upload-task-source-field__img {
+.field__img {
     height: 100%;
     width: 200px;
 

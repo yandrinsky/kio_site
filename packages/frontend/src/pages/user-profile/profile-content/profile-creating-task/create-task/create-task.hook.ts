@@ -11,11 +11,11 @@ export const useCreateTask: IUseCreateTask = () => {
     isLoading: isCreateTaskMutationLoading
   } = useCreateTaskMutation();
   const { data: taskList } = useGetCreatedTasksListRequest();
+  const { mutate: uploadTaskSourceMutation, isError, isLoading } = useUploadTaskSourceMutation();
 
   const [isTaskCreated, setIsTaskCreated] = useState(false);
-  const createdTaskId = taskList?.[taskList.length - 1]?.id;
 
-  const { mutate: uploadTaskSourceMutation, isError, isLoading } = useUploadTaskSourceMutation();
+  const createdTaskId = taskList?.[taskList.length - 1]?.id;
 
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');

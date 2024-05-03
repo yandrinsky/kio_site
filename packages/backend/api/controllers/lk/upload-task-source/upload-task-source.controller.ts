@@ -9,7 +9,7 @@ export const uploadTaskSourceController: TController<IUploadTaskSourceDTO> = asy
     const { taskId } = req.body;
     const uploadedFile = req.files?.project as UploadedFile;
 
-    if (Array.isArray(uploadedFile)) {
+    if (Array.isArray(uploadedFile) || !uploadedFile) {
         return resp.status(CLIENT_ERRORS.BAD_DTO.code).send(CLIENT_ERRORS.BAD_DTO);
     }
 
