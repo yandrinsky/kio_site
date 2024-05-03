@@ -13,6 +13,7 @@ import { handleFileChange } from './update-task.utils';
 export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskId }) => {
   const {
     updateTaskMutation,
+    deleteTaskMutation,
     uploadTaskSourceMutation,
     isError,
     isLoading,
@@ -67,8 +68,17 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
         isLoading={isLoading}
       />
 
-      <Button onClick={() => setUpdateTaskId(undefined)} theme="colored-red">
+      <Button onClick={() => setUpdateTaskId(undefined)} theme="accent">
         Закончить редактирование
+      </Button>
+      <Button
+        onClick={() => {
+          deleteTaskMutation({ taskId: updateTaskId });
+          setUpdateTaskId(undefined);
+        }}
+        theme="colored-red"
+      >
+        Удалить задачу
       </Button>
     </div>
   );

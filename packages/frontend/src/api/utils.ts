@@ -21,7 +21,7 @@ export async function makeRequest<T>(url: string, options?: TOptions) {
     headers = { 'Content-Type': 'application/json' };
 
   return fetch(url, {
-    method: options?.body ? 'POST' : 'GET',
+    method: options?.method ? options?.method : options?.body ? 'POST' : 'GET',
     credentials: 'include',
     redirect: 'follow',
     ...options,

@@ -5,6 +5,10 @@ import {
   IUploadTaskSourceDTO,
   IUploadTaskSourceResponse
 } from '../../../../../../../backend/api/controllers';
+import {
+  IDeleteTaskDTO,
+  IDeleteTaskResponse
+} from '../../../../../../../backend/api/controllers/lk/delete-task';
 
 export interface IUpdateTask {
   updateTaskId: string;
@@ -13,6 +17,7 @@ export interface IUpdateTask {
 
 export type IUseUpdateTask = (updateTaskId: string | undefined) => {
   updateTaskMutation: UseMutateFunction<IUpdateTaskResponse, ICLIENT_ERROR, IUpdateTaskDTO, unknown>;
+  deleteTaskMutation: UseMutateFunction<IDeleteTaskResponse, ICLIENT_ERROR, IDeleteTaskDTO, unknown>;
   uploadTaskSourceMutation: UseMutateFunction<
     IUploadTaskSourceResponse,
     ICLIENT_ERROR,

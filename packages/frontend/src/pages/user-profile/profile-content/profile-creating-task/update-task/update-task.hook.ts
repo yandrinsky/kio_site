@@ -3,9 +3,11 @@ import { useUpdateTaskMutation } from '@api/routes/update-task';
 import { useUploadTaskSourceMutation } from '@api/routes/upload-task-source';
 import { useState } from 'react';
 import { IUseUpdateTask } from './update-task';
+import { useDeleteTaskMutation } from '@api/routes/delete-task';
 
 export const useUpdateTask: IUseUpdateTask = updateTaskId => {
   const { mutate: updateTaskMutation } = useUpdateTaskMutation();
+  const { mutate: deleteTaskMutation } = useDeleteTaskMutation();
 
   const { data: taskList } = useGetCreatedTasksListRequest();
   const updatedTask = taskList?.filter(task => task.id === updateTaskId)[0];
@@ -18,6 +20,7 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
 
   return {
     updateTaskMutation,
+    deleteTaskMutation,
     uploadTaskSourceMutation,
     isError,
     isLoading,
