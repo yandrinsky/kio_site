@@ -112,5 +112,5 @@
 
     border-radius: var(--border-radius);
     overflow: hidden;
-    object-fit: fill;
+    object-fit: cover;
 }

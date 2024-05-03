@@ -11,7 +11,8 @@ export const UserTextareaField: FC<IUserTextareaField> = ({
   footerText,
   value,
   validate,
-  onSave
+  onSave,
+  onChangeInput
 }) => {
   const [state, setState] = useState(value);
   const [isError, setIsError] = useState(false);
@@ -25,10 +26,11 @@ export const UserTextareaField: FC<IUserTextareaField> = ({
   const changeState = (value: any) => {
     setState(value);
     validate && setIsError(validate?.(value) !== true);
+    onChangeInput?.(value);
   };
 
-  const UserTextareaButton = (
-    <Button type="button" onClick={() => !isError && onSave.call(this, state)} theme="accent">
+  const UserTextareaButton = onSave && (
+    <Button type="button" onClick={() => !isError && onSave?.call(this, state)} theme="accent">
       Сохранить
     </Button>
   );

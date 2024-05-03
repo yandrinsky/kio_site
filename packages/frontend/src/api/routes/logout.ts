@@ -20,11 +20,9 @@ export const useLogoutMutation = () => {
     mutationFn: logoutRequest,
     retry: 1,
     onSuccess: () => {
-      client.invalidateQueries([
-        QUERY_KEYS.ME,
-        QUERY_KEYS.GET_CREATED_TASKS_LIST,
-        QUERY_KEYS.GET_NOT_APPROVED_TASKS_LIST
-      ]);
+      client.invalidateQueries([QUERY_KEYS.ME]);
+      client.invalidateQueries([QUERY_KEYS.GET_CREATED_TASKS_LIST]);
+      client.invalidateQueries([QUERY_KEYS.GET_NOT_APPROVED_TASKS_LIST]);
     }
   });
 };

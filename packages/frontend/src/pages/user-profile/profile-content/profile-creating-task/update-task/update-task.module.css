@@ -1,0 +1,6 @@
+.update-task__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+}

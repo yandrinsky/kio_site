@@ -11,7 +11,7 @@ export const createTaskController: TController<ICreateTaskDTO> = async (req, res
         name,
         description,
         isAvailable: false,
-        settings: settings ?? {},
+        settings: JSON.parse(settings) ?? {},
         creatorId: req.user?._id
     });
 

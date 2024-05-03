@@ -4,7 +4,7 @@ import { clx } from '@utils/clx';
 import { HeaderContent } from '../../profile-content-header/header-content.component';
 import { IHeader } from './header';
 
-export const Header: React.FC<IHeader> = ({ toggle, setToggle }) => {
+export const Header: React.FC<IHeader> = ({ toggle, setToggle, isUpdateTask }) => {
   return (
     <div className={css['header']}>
       <div
@@ -15,9 +15,9 @@ export const Header: React.FC<IHeader> = ({ toggle, setToggle }) => {
         )}
       >
         <HeaderContent
-          title="Создать задачу"
+          title="Созданные задачи"
           text={`
-              Тут вы можете создать свою задачу.
+              Тут вы можете видеть список созданных вами задач.
             `}
         />
       </div>
@@ -30,12 +30,21 @@ export const Header: React.FC<IHeader> = ({ toggle, setToggle }) => {
           css['header__headerContent-container-right']
         )}
       >
-        <HeaderContent
-          title="Созданные задачи"
-          text={`
-              Тут вы можете видеть список созданных вами задач.
+        {isUpdateTask ? (
+          <HeaderContent
+            title="Редактирование задачи"
+            text={`
+              Тут вы можете редактировать свою задачу.
             `}
-        />
+          />
+        ) : (
+          <HeaderContent
+            title="Создать задачу"
+            text={`
+            Тут вы можете создать свою задачу.
+          `}
+          />
+        )}
       </div>
     </div>
   );

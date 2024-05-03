@@ -3,6 +3,7 @@ import css from './task-card.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { ITaskCard } from './task-card';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
+import { BASE_URL } from '@api/constants/base';
 
 export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen }) => {
   const { data: taskList } = useGetCreatedTasksListRequest();
@@ -17,7 +18,7 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen })
           <div className={css['task-card__content']}>
             {task?.preview ? (
               <div className={css['task-card__img-container']}>
-                <img className={css['task-card__img']} src={task.preview} alt="" />
+                <img className={css['task-card__img']} src={BASE_URL + '/' + task.preview} alt="" />
               </div>
             ) : (
               <div className={css['task-card__without-img-container']}>

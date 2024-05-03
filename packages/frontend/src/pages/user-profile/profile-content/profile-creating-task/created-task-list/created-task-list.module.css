@@ -26,6 +26,15 @@
     font-size: 1.4rem;
 }
 
+.created-task-list__no-task-header {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+    font-weight: lighter;
+    font-size: 1.4rem;
+}
+
 .created-task-list__header--h5 {
     font-weight: lighter;
     font-size: 1.2rem;
@@ -66,5 +75,5 @@
 
     border-radius: var(--border-radius);
     overflow: hidden;
-    object-fit: fill;
+    object-fit: cover;
 }
