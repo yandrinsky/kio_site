@@ -1,12 +1,12 @@
 {
-    "name": "@kio/api",
+    "name": "@kio/validation",
     "version": "1.0.0",
     "description": "",
     "main": "index.ts",
     "scripts": {
         "start": "rushx build && node -r dotenv/config dist/index.js",
         "build": "npx tsc",
-        "dev": "tsnd -r dotenv/config --respawn index.ts"
+        "dev": "npm i && tsnd -r dotenv/config --respawn index.ts"
     },
     "author": "",
     "license": "ISC",
@@ -15,7 +15,6 @@
         "cors": "2.8.5",
         "dotenv": "~16.1.0",
         "express": "4.18.2",
-        "express-fileupload": "~1.4.0",
         "express-validator": "7.0.1",
         "mongoose": "~7.0.3"
     },
