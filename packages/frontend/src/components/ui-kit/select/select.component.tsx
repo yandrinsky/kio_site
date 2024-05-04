@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { Popup } from '../popup/popup.component';
 import { ISelect } from './select';
 import { Badge } from '../badge/badge.component';

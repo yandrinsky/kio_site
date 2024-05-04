@@ -6,7 +6,7 @@ import css from './input.module.css';
 import { propsAreEqual } from '@utils/propsAreEqual';
 
 /**
- * @description Input component for displaying inputs on the page. Takes all the props of the input element and the stretch prop (boolean)
+ * Input component for displaying inputs on the page. Takes all the props of the input element and the stretch prop
  */
 export const Input: FC<IInput> = memo(({ className, stretch, isError, value, ...props }) => {
   return (
@@ -19,4 +19,4 @@ export const Input: FC<IInput> = memo(({ className, stretch, isError, value, ...
   );
 }, propsAreEqual);
 
-Input.displayName = 'memo(Input)';
+Input.displayName = 'Input';
