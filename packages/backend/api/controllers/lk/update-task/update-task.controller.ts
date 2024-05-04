@@ -11,9 +11,17 @@ export const updateTaskController: TController<IUpdateTaskDTO> = async (req, res
 
     const task = await Task.findOne({ _id: id });
 
-    task!.name = name;
-    task!.settings = settings ?? {};
-    task!.description = description;
+    if (name) {
+        task!.name = name;
+    }
+
+    if (settings) {
+        task!.settings = settings;
+    }
+
+    if (description) {
+        task!.description = description;
+    }
 
     if (preview) {
         if (task!.preview) {

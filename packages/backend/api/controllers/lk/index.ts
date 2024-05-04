@@ -9,3 +9,4 @@ export * from './create-task';
 export * from './update-task';
 export * from './upload-task-source';
 export * from './get-created-tasks-list';
+export * from './get-my-tasks-list';

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { ROUTES } from '../constants/routes';
+import { ROUTES } from '@constants/routes';
 
 import { Error } from '@pages/error/error.page';
 
@@ -7,14 +7,14 @@ export const REACT_ROUTER = createBrowserRouter([
   {
     path: ROUTES.DEFAULT_ROUTE,
     async lazy() {
-      return { Component: (await import('../pages/home/home.page')).Home };
+      return { Component: (await import('@pages/home/home.page')).Home };
     },
     errorElement: <Error />
   },
   {
     path: ROUTES.TASKS_ROUTE,
     async lazy() {
-      return { Component: (await import('../pages/home/home.page')).Home };
+      return { Component: (await import('@pages/home/home.page')).Home };
     },
     errorElement: <Error />
   },

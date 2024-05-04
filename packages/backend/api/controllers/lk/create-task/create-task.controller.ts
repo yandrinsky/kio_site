@@ -5,13 +5,13 @@ import { saveFile } from '../../../../domain/utils/save-file';
 
 export const createTaskController: TController<ICreateTaskDTO> = async (req, resp) => {
     const { name, settings, description } = req.body;
-    const preview = req.files?.preview;
+    const preview = Array.isArray(req.files?.preview) ? req.files?.preview[0] : req.files?.preview;
 
     const task = new Task({
         name,
         description,
         isAvailable: false,
-        settings: settings ?? {},
+        settings: JSON.parse(settings) ?? {},
         creatorId: req.user?._id
     });
 
@@ -21,7 +21,7 @@ export const createTaskController: TController<ICreateTaskDTO> = async (req, res
 
     await task.save();
 
-    const response: ICreateTaskResponse = { status: 'ok' };
+    const response: ICreateTaskResponse = { taskId: task._id };
 
     resp.status(200).json(response);
 };

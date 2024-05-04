@@ -37,6 +37,6 @@ export const routesData: TRoutesData = {
   },
   [ROUTES.PROFILE_ROUTE]: {
     icon: '/default-avatar.svg',
-    title: 'Профиль'
+    title: 'Аккаунт'
   }
 } as const;

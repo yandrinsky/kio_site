@@ -1,0 +1,12 @@
+.user-textarea-field__container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+}
+
+.user-textarea-field__error-message {
+    color: var(--error-color);
+}

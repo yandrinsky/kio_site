@@ -12,6 +12,7 @@ export const UserInputField: FC<IUserInputField> = ({
   value,
   isEditable: isEditableProp,
   validate,
+  onChangeInput,
   onSave
 }) => {
   const [state, setState] = useState(value);
@@ -27,13 +28,15 @@ export const UserInputField: FC<IUserInputField> = ({
   const changeState = (value: any) => {
     setState(value);
     validate && setIsError(validate?.(value) !== true);
+    onChangeInput?.(value);
   };
 
-  const UserInputButton = (
+  const UserInputButton = onSave && (
     <Button
+      type="button"
       onClick={() => {
         !isError && Boolean(isEditableProp) && setIsChanging(state => !state);
-        !isError && onSave.call(this, state);
+        !isError && onSave?.call(this, state);
       }}
       theme="accent"
     >

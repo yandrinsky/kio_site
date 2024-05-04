@@ -1,0 +1,7 @@
+.profile-create-task__tab {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-right: 100px;
+    width: 100%;
+}
