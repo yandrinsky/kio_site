@@ -16,6 +16,7 @@ export interface IUpdateTask {
 }
 
 export type IUseUpdateTask = (updateTaskId: string | undefined) => {
+  userRole: string | undefined;
   updateTaskMutation: UseMutateFunction<IUpdateTaskResponse, ICLIENT_ERROR, IUpdateTaskDTO, unknown>;
   deleteTaskMutation: UseMutateFunction<IDeleteTaskResponse, ICLIENT_ERROR, IDeleteTaskDTO, unknown>;
   uploadTaskSourceMutation: UseMutateFunction<
@@ -30,7 +31,11 @@ export type IUseUpdateTask = (updateTaskId: string | undefined) => {
   setTaskName: React.Dispatch<React.SetStateAction<string>>;
   description: string;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
+  isAvailable: boolean;
+  setIsAvailable: React.Dispatch<React.SetStateAction<boolean>>;
   preview: string;
+  settings: string;
+  setSettings: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type IHandleFileChange = (props: {
@@ -38,3 +43,15 @@ export type IHandleFileChange = (props: {
   updateTaskMutation: UseMutateFunction<IUpdateTaskResponse, ICLIENT_ERROR, IUpdateTaskDTO, unknown>;
   updateTaskId: string;
 }) => void;
+
+export type IHandleToggleChange = (props: {
+  updateTaskId: string;
+  isAvailable: boolean;
+  setIsAvailable: React.Dispatch<React.SetStateAction<boolean>>;
+  updateTaskMutation: UseMutateFunction<IUpdateTaskResponse, ICLIENT_ERROR, IUpdateTaskDTO, unknown>;
+}) => void;
+
+export type IGetValidationResult = (props: {
+  value: string;
+  type: 'description' | 'taskName' | 'settings';
+}) => boolean | string;

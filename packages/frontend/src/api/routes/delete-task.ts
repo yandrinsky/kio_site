@@ -25,6 +25,7 @@ export const useDeleteTaskMutation = () => {
     onSuccess: () => {
       client.invalidateQueries([QUERY_KEYS.GET_NOT_APPROVED_TASKS_LIST]);
       client.invalidateQueries([QUERY_KEYS.GET_CREATED_TASKS_LIST]);
+      client.invalidateQueries([QUERY_KEYS.GET_TASKS_LIST]);
     }
   });
 };

@@ -6,7 +6,7 @@ import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-lis
 import { BASE_URL } from '@api/constants/base';
 import { useStartTaskMutation } from '@api/routes/start-task';
 
-export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen }) => {
+export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
   const { data: taskList } = useGetCreatedTasksListRequest();
   const { mutate } = useStartTaskMutation();
 
@@ -15,26 +15,26 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen })
   return (
     <>
       <div onClick={e => e.stopPropagation()} className={css['task-card']}>
-        <div className={css['task-card__container']}>
-          <div className={css['task-card__header']}>{task?.name}</div>
+        <div className={css['container']}>
+          <div className={css['header']}>{task?.name}</div>
 
-          <div className={css['task-card__content']}>
+          <div className={css['content']}>
             {task?.preview ? (
-              <div className={css['task-card__img-container']}>
-                <img className={css['task-card__img']} src={BASE_URL + '/' + task.preview} alt="" />
+              <div className={css['img-container']}>
+                <img className={css['img']} src={BASE_URL + '/' + task.preview} alt="" />
               </div>
             ) : (
-              <div className={css['task-card__without-img-container']}>
+              <div className={css['without-img-container']}>
                 <span>У этой задачи нет иконки</span>
               </div>
             )}
 
-            <div className={css['task-card__buttons-container']}>
-              <div className={css['task-card__buttons']}>
+            <div className={css['buttons-container']}>
+              <div className={css['buttons']}>
                 <Button theme="accent" onClick={() => mutate({ taskId: task?.id ?? '' })}>
                   Начать
                 </Button>
-                <Button onClick={() => updateTask(taskId)}>Редактировать</Button>
+                <Button>Статистика</Button>
                 <Button theme="colored-red" onClick={() => setIsOpen(false)}>
                   Закрыть
                 </Button>
@@ -42,13 +42,13 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen })
             </div>
           </div>
 
-          <div className={css['task-card__description-container']}>
-            <div className={css['task-card__header--h4']}>Описание</div>
+          <div className={css['description-container']}>
+            <div className={css['header--h4']}>Описание</div>
             <div>{task?.description}</div>
           </div>
         </div>
       </div>
-      <div className={css['task-card__hidden']} onClick={() => setIsOpen(false)} />
+      <div className={css['hidden']} onClick={() => setIsOpen(false)} />
     </>
   );
 };

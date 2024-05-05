@@ -40,8 +40,10 @@ export const UserUploadTaskSourceField: FC<IUserUploadTaskSourceField> = ({
             className={css['field__input-file']}
             onChange={e => {
               if (e.target.files) {
-                uploadTaskSource({ taskId });
+                uploadTaskSource({ taskId, project: e.target.files[0] });
                 setIsUploadTaskSource(true);
+
+                e.target.value = '';
               }
             }}
             type="file"

@@ -8,10 +8,12 @@ import { UserTextareaField } from '@components/user-profile-fields/user-textarea
 import { UserUploadTaskSourceField } from '@components/user-profile-fields/user-upload-task-source-field/user-upload-task-source-field.component';
 import { useUpdateTask } from './update-task.hook';
 import { BASE_URL } from '@api/constants/base';
-import { handleFileChange } from './update-task.utils';
+import { getValidationResult, handleFileChange, handleToggleChange } from './update-task.utils';
+import { Toggle } from '@components/ui-kit/toggle/toggle.component';
 
 export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskId }) => {
   const {
+    userRole,
     updateTaskMutation,
     deleteTaskMutation,
     uploadTaskSourceMutation,
@@ -21,7 +23,11 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
     setTaskName,
     description,
     setDescription,
-    preview
+    isAvailable,
+    setIsAvailable,
+    preview,
+    settings,
+    setSettings
   } = useUpdateTask(updateTaskId);
 
   return (
@@ -31,7 +37,7 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
         subtitle="Это название задачи, которое будут видеть пользователи"
         footerText="Пожалуйста, используйте не больше 32 символов"
         value={taskName}
-        validate={data => (data?.length < 2 ? 'Имя должно быть больше 1 символа' : true)}
+        validate={data => getValidationResult({ value: data, type: 'taskName' })}
         onSave={data => {
           setTaskName(data);
           updateTaskMutation({
@@ -40,11 +46,12 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
           });
         }}
       />
+
       <UserTextareaField
         title="Описание задачи"
         subtitle="Опишите пользователям, о чем будет ваша задача"
         value={description}
-        validate={data => (data?.length < 1 ? 'Это поле обязательное для заполнения' : true)}
+        validate={data => getValidationResult({ value: data, type: 'description' })}
         onSave={data => {
           setDescription(description);
           updateTaskMutation({
@@ -53,6 +60,21 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
           });
         }}
       />
+
+      <UserTextareaField
+        title="Настройки задачи"
+        subtitle="Введите настройки вашей задачи"
+        value={settings}
+        validate={data => getValidationResult({ value: data, type: 'settings' })}
+        onSave={data => {
+          setSettings(settings);
+          updateTaskMutation({
+            id: updateTaskId!,
+            settings: JSON.parse(data)
+          });
+        }}
+      />
+
       <UserPreviewTaskField
         title="Иконка вашей задачи"
         subtitle="Иконку вашей задачи увидят другие пользователи"
@@ -68,9 +90,28 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
         isLoading={isLoading}
       />
 
+      {userRole === 'Admin' && (
+        <div className={css['available-task-container']}>
+          <h3 className={css['available-task-container__header--h3']}>Доступность задачи для прохождения</h3>
+
+          <Toggle
+            checked={isAvailable}
+            onChange={value => {
+              handleToggleChange({
+                isAvailable: value,
+                setIsAvailable: setIsAvailable,
+                updateTaskId: updateTaskId,
+                updateTaskMutation
+              });
+            }}
+          />
+        </div>
+      )}
+
       <Button onClick={() => setUpdateTaskId(undefined)} theme="accent">
         Закончить редактирование
       </Button>
+
       <Button
         onClick={() => {
           deleteTaskMutation({ taskId: updateTaskId });

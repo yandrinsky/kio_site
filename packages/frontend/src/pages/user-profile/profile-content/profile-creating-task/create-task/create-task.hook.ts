@@ -23,7 +23,7 @@ export const useCreateTask: IUseCreateTask = () => {
   const [settings, setSettings] = useState('');
   const [previewFile, setPreviewFile] = useState<File>();
 
-  const isRequiredFieldsFilled = Boolean(taskName && description);
+  const isRequiredFieldsFilled = Boolean(taskName && description && settings);
   const isUploadTaskSourceVisible =
     isTaskCreated && !isCreateTaskMutationError && !isCreateTaskMutationLoading;
 
@@ -44,6 +44,7 @@ export const useCreateTask: IUseCreateTask = () => {
     setPreviewFile,
     isRequiredFieldsFilled,
     isUploadTaskSourceVisible,
-    settings
+    settings,
+    setSettings
   };
 };

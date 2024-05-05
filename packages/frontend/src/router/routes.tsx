@@ -14,7 +14,7 @@ export const REACT_ROUTER = createBrowserRouter([
   {
     path: ROUTES.TASKS_ROUTE,
     async lazy() {
-      return { Component: (await import('@pages/home/home.page')).Home };
+      return { Component: (await import('@pages/tasks/tasks.page')).Tasks };
     },
     errorElement: <Error />
   },

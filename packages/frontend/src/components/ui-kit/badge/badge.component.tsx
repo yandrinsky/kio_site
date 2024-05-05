@@ -20,7 +20,7 @@ export const Badge = memo(
       const content = (
         <figure className={clx(css.badge, className)} ref={ref} tabIndex={0} {...other}>
           <figcaption>{children}</figcaption>
-          <img src={src} width={width} height={height} />
+          <img src={src} className={css.img} width={width} height={height} />
         </figure>
       );
       return to ? <Link to={to}>{content}</Link> : content;

@@ -26,7 +26,8 @@ export const CreateTask: React.FC = () => {
     setPreviewFile,
     isRequiredFieldsFilled,
     isUploadTaskSourceVisible,
-    settings
+    settings,
+    setSettings
   } = useCreateTask();
 
   return (
@@ -55,6 +56,7 @@ export const CreateTask: React.FC = () => {
             : setTaskName('')
         }
       />
+
       <UserTextareaField
         title="Описание задачи"
         subtitle="Опишите пользователям, о чем будет ваша задача"
@@ -65,6 +67,18 @@ export const CreateTask: React.FC = () => {
             : setDescription('')
         }
       />
+
+      <UserTextareaField
+        title="Настройки задачи"
+        subtitle="Введите настройки вашей задачи"
+        validate={data => getValidationResult({ value: data, type: 'settings' })}
+        onChangeInput={data =>
+          getValidationResult({ value: data, type: 'settings' }) === true
+            ? setSettings(data && JSON.parse(data))
+            : setSettings('')
+        }
+      />
+
       <UserPreviewTaskField
         title="Иконка вашей задачи"
         subtitle="Иконку вашей задачи увидят другие пользователи"

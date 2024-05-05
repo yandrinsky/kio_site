@@ -5,6 +5,7 @@ import { Button } from '@components/ui-kit/button/button.component';
 import { TaskCard } from '../task-card/task-card.component';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
 import { BASE_URL } from '@api/constants/base';
+import { clx } from '@utils/clx';
 
 export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
   const { data: taskList } = useGetCreatedTasksListRequest();
@@ -21,6 +22,31 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
             <div className={css['created-task-list__content']}>
               <div>
                 <div className={css['created-task-list__header']}>{task.name}</div>
+
+                <div className={css['task-status-container']}>
+                  <span
+                    className={clx(
+                      task.isApproved
+                        ? css['task-status-container__item--green']
+                        : css['task-status-container__item--red'],
+                      css['created-task-list__header--h5']
+                    )}
+                  >
+                    {task.isApproved ? 'Задача утверждена' : 'Задача на рассмотрении'}
+                  </span>
+
+                  <span
+                    className={clx(
+                      task.isAvailable
+                        ? css['task-status-container__item--green']
+                        : css['task-status-container__item--red'],
+                      css['created-task-list__header--h5']
+                    )}
+                  >
+                    {task.isAvailable ? 'Задача доступна для решения' : 'Задача недоступна для решения'}
+                  </span>
+                </div>
+
                 <div className={css['created-task-list__buttons']}>
                   <Button
                     theme="accent"
