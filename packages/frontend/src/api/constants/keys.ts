@@ -12,5 +12,13 @@ export const QUERY_KEYS = {
   DELETE_TASK: 'delete-task',
   UPDATE_TASK: 'update-task',
   APPROVE_TASK: 'approve-task',
-  UPLOAD_TASK_SOURCE: 'upload-task-source'
+  UPLOAD_TASK_SOURCE: 'upload-task-source',
+  SEARCH_USER: 'search-user',
+  CHANGE_ROLE: 'change-role',
+  START_SOLUTION: 'start-solution',
+  SWITCH_HEAD_FRAME: 'switch-head-frame',
+  SWITCH_TRY: 'switch-try',
+  NEW_TRY: 'new-try',
+  COMMIT: 'commit',
+  GET_CURRENT_SOLUTION: 'get-current-solution'
 };
