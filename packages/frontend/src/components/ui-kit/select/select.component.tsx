@@ -4,7 +4,7 @@ import { ISelect } from './select';
 import { Badge } from '../badge/badge.component';
 import { PopupActions } from 'reactjs-popup/dist/types';
 
-export const Select: FC<ISelect> = ({ children, isInPopup, onChange, value }) => {
+export const Select: FC<ISelect> = ({ children, isInPopup, onChange, disabled, value }) => {
     const [selected, setSelected] = useState<string>(value);
     const popupRef = useRef<PopupActions>(null);
 
@@ -32,6 +32,7 @@ export const Select: FC<ISelect> = ({ children, isInPopup, onChange, value }) =>
             trigger={<Badge src={'./select-icon.svg'}>{selectedTitle}</Badge>}
             nested={isInPopup}
             arrow={false}
+            disabled={disabled}
         >
             {React.Children.map(children, child => {
                 return React.cloneElement(child, {

@@ -11,6 +11,7 @@ export const UserInputField: FC<IUserInputField> = ({
     footerText,
     value,
     isEditable: isEditableProp,
+    buttonText,
     validate,
     onChangeInput,
     onSave
@@ -40,7 +41,7 @@ export const UserInputField: FC<IUserInputField> = ({
             }}
             theme="accent"
         >
-            Сохранить
+            {buttonText ?? 'Сохранить'}
         </Button>
     );
 

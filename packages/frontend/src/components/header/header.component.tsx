@@ -21,10 +21,6 @@ export const Header: FC<IHeader> = memo(({ withNav, withHelp }) => {
                     <Nav />
                 </div>
             )}
-
-            <Modal isOpen={isOpen} onClose={() => setOpen(a => !a)}>
-                Хуй
-            </Modal>
         </>
     );
 });
