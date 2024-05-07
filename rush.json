@@ -24,10 +24,10 @@
   "variants": [],
 
   "projects": [
-    {
-      "packageName": "@kio/frontend",
-      "projectFolder": "packages/frontend"
-    },
+//    {
+//      "packageName": "@kio/frontend",
+//      "projectFolder": "packages/frontend"
+//    },
     {
       "packageName": "@kio/backend",
       "projectFolder": "packages/backend"
@@ -35,6 +35,15 @@
     {
       "packageName": "@kio/api",
       "projectFolder": "packages/api"
+    },
+    {
+      "packageName": "@kio/verification",
+      "projectFolder": "packages/verification"
+    },
+    {
+      "packageName": "@kio/common",
+      "projectFolder": "packages/common",
+      "reviewCategory": "libraries"
     }
   ]
 }

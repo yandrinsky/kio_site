@@ -1,7 +1,7 @@
 import { ICommitResponse, ICommitDto } from './commit';
 import { CLIENT_ERRORS, SERVER_ERRORS } from '../../../../domain/errors';
 import { TController } from '../../../../domain/types';
-import { Solution, Try, Frame } from '../../../../bd';
+import { Solution, Try, Frame, CommitVerificationQueue } from '../../../../bd';
 import { treeForwardTraversal } from '../../../../domain/utils';
 
 export const commitController: TController<ICommitDto> = async (req, resp) => {
@@ -46,7 +46,13 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
 
     currentTry.markModified('framesTree');
 
-    await Promise.all([solution.save(), currentTry.save(), newFrame.save()]);
+    const CommitQueueItem = new CommitVerificationQueue({
+        taskId,
+        tryId,
+        commitId: newFrame._id
+    });
+
+    await Promise.all([solution.save(), currentTry.save(), newFrame.save(), CommitQueueItem.save()]);
 
     const response: ICommitResponse = { status: 'ok' };
 

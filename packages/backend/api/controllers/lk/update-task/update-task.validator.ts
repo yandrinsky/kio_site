@@ -22,8 +22,8 @@ export const updateTaskValidator: TValidator<IUpdateTaskDTO> = async req => {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 
-    //Creator не может менять значения isAvailable
-    if (isAvailable !== undefined && role === ERoles.Creator) {
+    //Только Admin может менять значения isAvailable
+    if (isAvailable !== undefined && role !== ERoles.Admin) {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 };
