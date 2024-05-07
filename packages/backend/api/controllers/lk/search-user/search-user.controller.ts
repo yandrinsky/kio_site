@@ -1,5 +1,5 @@
 import { ISearchUserDto, ISearchUserResponse } from './search-user';
-import { User } from '../../../../bd';
+import { ERoles, User } from '../../../../bd';
 import { TController } from '../../../../domain/types';
 
 export const searchUserController: TController<ISearchUserDto> = async (req, resp) => {
@@ -23,7 +23,8 @@ export const searchUserController: TController<ISearchUserDto> = async (req, res
         id: user._id,
         email: user.email,
         avatarUrl: user.avatarUrl,
-        birthday: user.birthday
+        birthday: user.birthday,
+        role: user.claims.role as ERoles
     }));
 
     resp.status(200).json(response);
