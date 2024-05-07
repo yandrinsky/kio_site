@@ -5,18 +5,18 @@ import React from 'react';
 import { getValidationResult } from './nickname-field.utils';
 
 export const NicknameField: React.FC = () => {
-  const { data } = useMeRequest();
-  const { mutate } = useSetDisplayNameMutation();
+    const { data } = useMeRequest();
+    const { mutate } = useSetDisplayNameMutation();
 
-  return (
-    <UserInputField
-      title="Ваш никнейм"
-      subtitle="Это ваше имя, которое будет отображаться публично"
-      footerText="Пожалуйста, используйте не больше 32 символов"
-      isEditable
-      value={data?.displayName}
-      validate={value => getValidationResult(value)}
-      onSave={value => mutate({ displayName: value })}
-    />
-  );
+    return (
+        <UserInputField
+            title="Ваш никнейм"
+            subtitle="Это ваше имя, которое будет отображаться публично"
+            footerText="Пожалуйста, используйте не больше 32 символов"
+            isEditable
+            value={data?.displayName}
+            validate={value => getValidationResult(value)}
+            onSave={value => mutate({ displayName: value })}
+        />
+    );
 };

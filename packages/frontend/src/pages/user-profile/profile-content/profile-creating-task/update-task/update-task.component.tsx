@@ -11,75 +11,75 @@ import { BASE_URL } from '@api/constants/base';
 import { handleFileChange } from './update-task.utils';
 
 export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskId }) => {
-  const {
-    updateTaskMutation,
-    deleteTaskMutation,
-    uploadTaskSourceMutation,
-    isError,
-    isLoading,
-    taskName,
-    setTaskName,
-    description,
-    setDescription,
-    preview
-  } = useUpdateTask(updateTaskId);
+    const {
+        updateTaskMutation,
+        deleteTaskMutation,
+        uploadTaskSourceMutation,
+        isError,
+        isLoading,
+        taskName,
+        setTaskName,
+        description,
+        setDescription,
+        preview
+    } = useUpdateTask(updateTaskId);
 
-  return (
-    <div className={css['update-task__wrapper']}>
-      <UserInputField
-        title="Название задачи"
-        subtitle="Это название задачи, которое будут видеть пользователи"
-        footerText="Пожалуйста, используйте не больше 32 символов"
-        value={taskName}
-        validate={data => (data?.length < 2 ? 'Имя должно быть больше 1 символа' : true)}
-        onSave={data => {
-          setTaskName(data);
-          updateTaskMutation({
-            id: updateTaskId!,
-            name: data
-          });
-        }}
-      />
-      <UserTextareaField
-        title="Описание задачи"
-        subtitle="Опишите пользователям, о чем будет ваша задача"
-        value={description}
-        validate={data => (data?.length < 1 ? 'Это поле обязательное для заполнения' : true)}
-        onSave={data => {
-          setDescription(description);
-          updateTaskMutation({
-            id: updateTaskId!,
-            description: data
-          });
-        }}
-      />
-      <UserPreviewTaskField
-        title="Иконка вашей задачи"
-        subtitle="Иконку вашей задачи увидят другие пользователи"
-        mainText="Нажмите на картинку, чтобы сменить иконку"
-        img={preview ? BASE_URL + '/' + preview : preview}
-        handleFileChange={event => handleFileChange({ event, updateTaskMutation, updateTaskId })}
-      />
+    return (
+        <div className={css['update-task__wrapper']}>
+            <UserInputField
+                title="Название задачи"
+                subtitle="Это название задачи, которое будут видеть пользователи"
+                footerText="Пожалуйста, используйте не больше 32 символов"
+                value={taskName}
+                validate={data => (data?.length < 2 ? 'Имя должно быть больше 1 символа' : true)}
+                onSave={data => {
+                    setTaskName(data);
+                    updateTaskMutation({
+                        id: updateTaskId!,
+                        name: data
+                    });
+                }}
+            />
+            <UserTextareaField
+                title="Описание задачи"
+                subtitle="Опишите пользователям, о чем будет ваша задача"
+                value={description}
+                validate={data => (data?.length < 1 ? 'Это поле обязательное для заполнения' : true)}
+                onSave={data => {
+                    setDescription(description);
+                    updateTaskMutation({
+                        id: updateTaskId!,
+                        description: data
+                    });
+                }}
+            />
+            <UserPreviewTaskField
+                title="Иконка вашей задачи"
+                subtitle="Иконку вашей задачи увидят другие пользователи"
+                mainText="Нажмите на картинку, чтобы сменить иконку"
+                img={preview ? BASE_URL + '/' + preview : preview}
+                handleFileChange={event => handleFileChange({ event, updateTaskMutation, updateTaskId })}
+            />
 
-      <UserUploadTaskSourceField
-        taskId={updateTaskId}
-        uploadTaskSource={uploadTaskSourceMutation}
-        isError={isError}
-        isLoading={isLoading}
-      />
+            <UserUploadTaskSourceField
+                taskId={updateTaskId}
+                uploadTaskSource={uploadTaskSourceMutation}
+                isError={isError}
+                isLoading={isLoading}
+            />
 
-      <Button onClick={() => setUpdateTaskId(undefined)} theme="accent">
-        Закончить редактирование
-      </Button>
-      <Button
-        onClick={() => {
-          deleteTaskMutation({ taskId: updateTaskId });
-          setUpdateTaskId(undefined);
-        }}
-        theme="colored-red"
-      >
-        Удалить задачу
-      </Button>
-    </div>
-  );
+            <Button onClick={() => setUpdateTaskId(undefined)} theme="accent">
+                Закончить редактирование
+            </Button>
+            <Button
+                onClick={() => {
+                    deleteTaskMutation({ taskId: updateTaskId });
+                    setUpdateTaskId(undefined);
+                }}
+                theme="colored-red"
+            >
+                Удалить задачу
+            </Button>
+        </div>
+    );
 };

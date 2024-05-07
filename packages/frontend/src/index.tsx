@@ -7,24 +7,24 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Provider } from 'jotai';
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 15 * 60 * 1000, // 15 minutes
-      refetchOnWindowFocus: false,
-      retry: false,
-      retryOnMount: false
-    },
-    mutations: {}
-  }
+    defaultOptions: {
+        queries: {
+            staleTime: 15 * 60 * 1000, // 15 minutes
+            refetchOnWindowFocus: false,
+            retry: false,
+            retryOnMount: false
+        },
+        mutations: {}
+    }
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Provider>
-        <RouterProvider router={REACT_ROUTER} />
-        <ReactQueryDevtools position="bottom-right" />
-      </Provider>
-    </QueryClientProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <Provider>
+                <RouterProvider router={REACT_ROUTER} />
+                <ReactQueryDevtools position="bottom-right" />
+            </Provider>
+        </QueryClientProvider>
+    </React.StrictMode>
 );

@@ -11,22 +11,22 @@ import type { TRoutesResult, TRoutesNames } from '../types/routes';
  */
 
 export function useBreadcrumbs(): TRoutesResult {
-  const location = useLocation();
-  return useMemo(() => {
-    const path = location.pathname.replaceAll('/', ' ').trim().split(' ');
-    if (path[0]) path.unshift('');
+    const location = useLocation();
+    return useMemo(() => {
+        const path = location.pathname.replaceAll('/', ' ').trim().split(' ');
+        if (path[0]) path.unshift('');
 
-    const result: TRoutesResult = path.reduce((last: TRoutesResult, el) => {
-      last.push({
-        icon: routesData[`/${el}` as TRoutesNames]?.icon || '',
-        title: routesData[`/${el}` as TRoutesNames]?.title || '',
-        path: (last[last.length - 1]?.path || '') + el + '/'
-      });
-      return last;
-    }, []);
+        const result: TRoutesResult = path.reduce((last: TRoutesResult, el) => {
+            last.push({
+                icon: routesData[`/${el}` as TRoutesNames]?.icon || '',
+                title: routesData[`/${el}` as TRoutesNames]?.title || '',
+                path: (last[last.length - 1]?.path || '') + el + '/'
+            });
+            return last;
+        }, []);
 
-    if (result.length > 1) result[0].title = '';
+        if (result.length > 1) result[0].title = '';
 
-    return result;
-  }, [location.pathname]);
+        return result;
+    }, [location.pathname]);
 }

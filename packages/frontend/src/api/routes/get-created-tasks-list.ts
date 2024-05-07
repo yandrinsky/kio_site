@@ -9,14 +9,14 @@ import { IGetCreatedTasksListResponse } from '../../../../backend/api/controller
 const GET_CREATED_TASKS_LIST_URL = `${BASE_URL}/GET_CREATED_TASKS_LIST_QUERY`;
 
 export async function getCreatedTasksListRequest() {
-  return makeRequest<IGetCreatedTasksListResponse>(GET_CREATED_TASKS_LIST_URL);
+    return makeRequest<IGetCreatedTasksListResponse>(GET_CREATED_TASKS_LIST_URL);
 }
 
 export const useGetCreatedTasksListRequest = () =>
-  useQuery<IGetCreatedTasksListResponse, TError>({
-    queryKey: [QUERY_KEYS.GET_CREATED_TASKS_LIST],
-    queryFn: () => getCreatedTasksListRequest(),
-    keepPreviousData: true,
-    refetchOnReconnect: true,
-    staleTime: Infinity
-  });
+    useQuery<IGetCreatedTasksListResponse, TError>({
+        queryKey: [QUERY_KEYS.GET_CREATED_TASKS_LIST],
+        queryFn: () => getCreatedTasksListRequest(),
+        keepPreviousData: true,
+        refetchOnReconnect: true,
+        staleTime: Infinity
+    });

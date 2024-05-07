@@ -8,20 +8,20 @@ import { ServiceStatistics } from '../service-statistics/service-statistics.comp
 import { ServiceTitle } from '../service-title/service-title.component';
 
 export const ServicePreview = () => {
-  const startRef = useRef<TServiceRefProps>(null);
+    const startRef = useRef<TServiceRefProps>(null);
 
-  function scrollIntoStartHandler() {
-    startRef.current?.scrollIntoView();
-  }
+    function scrollIntoStartHandler() {
+        startRef.current?.scrollIntoView();
+    }
 
-  return (
-    <>
-      <main className={css.preview}>
-        <ServiceTitle scrollIntoStart={scrollIntoStartHandler} />
-        <ServicePresentation ref={startRef} />
-      </main>
-      <ServiceStatistics />
-      <ServiceStart />
-    </>
-  );
+    return (
+        <>
+            <main className={css.preview}>
+                <ServiceTitle scrollIntoStart={scrollIntoStartHandler} />
+                <ServicePresentation ref={startRef} />
+            </main>
+            <ServiceStatistics />
+            <ServiceStart />
+        </>
+    );
 };

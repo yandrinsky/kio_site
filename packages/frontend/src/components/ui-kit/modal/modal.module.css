@@ -1,7 +1,7 @@
 .modal {
-  overscroll-behavior: contain;
+    overscroll-behavior: contain;
 }
 
 .modal::backdrop {
-  background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0.35);
 }

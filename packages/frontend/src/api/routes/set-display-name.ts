@@ -9,20 +9,20 @@ import { ISetDisplayNameDto, ISetDisplayNameDtoResponse } from '../../../../back
 const SET_DISPLAY_NAME_URL = `${BASE_URL}/SET_DISPLAY_NAME_QUERY`;
 
 export async function setDisplayNameRequest(body: ISetDisplayNameDto) {
-  return await makeRequest<ISetDisplayNameDtoResponse>(SET_DISPLAY_NAME_URL, {
-    body
-  });
+    return await makeRequest<ISetDisplayNameDtoResponse>(SET_DISPLAY_NAME_URL, {
+        body
+    });
 }
 
 export const useSetDisplayNameMutation = () => {
-  const client = useQueryClient();
+    const client = useQueryClient();
 
-  return useAppMutation<ISetDisplayNameDtoResponse, TError, ISetDisplayNameDto>({
-    mutationKey: [QUERY_KEYS.SET_DISPLAY_NAME],
-    mutationFn: setDisplayNameRequest,
-    retry: 1,
-    onSuccess: () => {
-      client.invalidateQueries([QUERY_KEYS.ME]);
-    }
-  });
+    return useAppMutation<ISetDisplayNameDtoResponse, TError, ISetDisplayNameDto>({
+        mutationKey: [QUERY_KEYS.SET_DISPLAY_NAME],
+        mutationFn: setDisplayNameRequest,
+        retry: 1,
+        onSuccess: () => {
+            client.invalidateQueries([QUERY_KEYS.ME]);
+        }
+    });
 };

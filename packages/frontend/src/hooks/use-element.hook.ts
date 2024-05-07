@@ -11,17 +11,17 @@ import { useEffect, useRef, useState } from 'react';
  */
 
 export function useElement(type: string = 'div') {
-  const [element, setElement] = useState<HTMLElement | null>(null);
+    const [element, setElement] = useState<HTMLElement | null>(null);
 
-  useEffect(() => {
-    const el = document.createElement(type);
-    setElement(el);
-    document.body.appendChild(el);
-    return () => {
-      el.remove();
-      setElement(null);
-    };
-  }, []);
+    useEffect(() => {
+        const el = document.createElement(type);
+        setElement(el);
+        document.body.appendChild(el);
+        return () => {
+            el.remove();
+            setElement(null);
+        };
+    }, []);
 
-  return element;
+    return element;
 }

@@ -17,19 +17,25 @@ import { useElement } from '@hooks/use-element.hook';
  * DO NOT USE THIS COMPONENT DIRECTLY, use the useToast hook instead
  */
 export const Toast: FC = () => {
-  const [toasts] = useAtom(readToastAtom);
-  const container = useElement('aside');
+    const [toasts] = useAtom(readToastAtom);
+    const container = useElement('aside');
 
-  if (!container) return null;
+    if (!container) return null;
 
-  return ReactDOM.createPortal(
-    <TransitionGroup className={css.toasts}>
-      {toasts.map(({ id, nodeRef, ...props }) => (
-        <CSSTransition timeout={BASE_ANIMATION_TIME} key={id} in nodeRef={nodeRef} classNames="toasts__item">
-          <ToastItem id={id} ref={nodeRef} {...props} />
-        </CSSTransition>
-      ))}
-    </TransitionGroup>,
-    container
-  );
+    return ReactDOM.createPortal(
+        <TransitionGroup className={css.toasts}>
+            {toasts.map(({ id, nodeRef, ...props }) => (
+                <CSSTransition
+                    timeout={BASE_ANIMATION_TIME}
+                    key={id}
+                    in
+                    nodeRef={nodeRef}
+                    classNames="toasts__item"
+                >
+                    <ToastItem id={id} ref={nodeRef} {...props} />
+                </CSSTransition>
+            ))}
+        </TransitionGroup>,
+        container
+    );
 };
