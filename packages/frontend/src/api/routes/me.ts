@@ -9,14 +9,14 @@ import { QUERY_KEYS } from '../../api/constants/keys';
 const ME_URL = `${BASE_URL}/ME_QUERY`;
 
 export async function meRequest() {
-  return makeRequest<IMeResponse>(ME_URL);
+    return makeRequest<IMeResponse>(ME_URL);
 }
 
 export const useMeRequest = () =>
-  useQuery<IMeResponse, TError>({
-    queryKey: [QUERY_KEYS.ME],
-    queryFn: () => meRequest(),
-    keepPreviousData: true,
-    refetchOnReconnect: true,
-    staleTime: Infinity
-  });
+    useQuery<IMeResponse, TError>({
+        queryKey: [QUERY_KEYS.ME],
+        queryFn: () => meRequest(),
+        keepPreviousData: true,
+        refetchOnReconnect: true,
+        staleTime: Infinity
+    });

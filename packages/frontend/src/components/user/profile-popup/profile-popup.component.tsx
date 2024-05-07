@@ -15,69 +15,69 @@ import { BASE_URL } from '@api/constants/base';
 import { useLogoutMutation } from '@api/routes/logout';
 
 export const ProfilePopup = () => {
-  const { data } = useMeRequest();
-  const { mutate } = useLogoutMutation();
-  const [theme, setTheme] = useAtom(themeAtom);
+    const { data } = useMeRequest();
+    const { mutate } = useLogoutMutation();
+    const [theme, setTheme] = useAtom(themeAtom);
 
-  if (!data) {
-    return null;
-  }
-  
-  const { avatarUrl, email } = data;
+    if (!data) {
+        return null;
+    }
 
-  return (
-    <section className={css.popup}>
-      <Badge
-        to={ROUTES.PROFILE_ROUTE}
-        src={avatarUrl ? BASE_URL + '/' + avatarUrl : '/default-avatar.svg'}
-        className={css.popup__badge}
-        width={25}
-        height={25}
-      >
-        {email}
-      </Badge>
-      <ul className={css.popup__list}>
-        {PROFILE_CONTENT.map(el => (
-          <li className={css.popup__item} key={el.path}>
-            <Link to={el.path} theme="block-hover">
-              {el.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <Hr />
-      <ul className={css.popup__list}>
-        <li className={css.popup__item}>
-          <Link to={ROUTES.HELP_ROUTE} theme="block-hover">
-            Поддрежка
-          </Link>
-        </li>
-        <li className={css['popup__nolink-item']}>
-          <p>Тема сайта</p>
-          <Select isInPopup value={theme} onChange={title => setTheme(title)}>
-            <Option name="light">Светлая</Option>
-            <Option name="dark">Темная</Option>
-            <Option name="system">Системная</Option>
-          </Select>
-        </li>
-      </ul>
-      <Hr />
-      <ul className={css.popup__list}>
-        <li className={css.popup__item}>
-          <Link to={ROUTES.DEFAULT_ROUTE} theme="block-hover">
-            Домашняя страница
-          </Link>
-        </li>
-        <li className={css.popup__item}>
-          <Link onClick={() => mutate()} to={ROUTES.DEFAULT_ROUTE} theme="block-hover" isAlert>
-            Выйти
-          </Link>
-        </li>
-      </ul>
+    const { avatarUrl, email } = data;
 
-      <Button className={css.popup__subscribe} theme="accent" size="long">
-        Оплатить подписку
-      </Button>
-    </section>
-  );
+    return (
+        <section className={css.popup}>
+            <Badge
+                to={ROUTES.PROFILE_ROUTE}
+                src={avatarUrl ? BASE_URL + '/' + avatarUrl : '/default-avatar.svg'}
+                className={css.popup__badge}
+                width={25}
+                height={25}
+            >
+                {email}
+            </Badge>
+            <ul className={css.popup__list}>
+                {PROFILE_CONTENT.map(el => (
+                    <li className={css.popup__item} key={el.path}>
+                        <Link to={el.path} theme="block-hover">
+                            {el.title}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+            <Hr />
+            <ul className={css.popup__list}>
+                <li className={css.popup__item}>
+                    <Link to={ROUTES.HELP_ROUTE} theme="block-hover">
+                        Поддрежка
+                    </Link>
+                </li>
+                <li className={css['popup__nolink-item']}>
+                    <p>Тема сайта</p>
+                    <Select isInPopup value={theme} onChange={title => setTheme(title)}>
+                        <Option name="light">Светлая</Option>
+                        <Option name="dark">Темная</Option>
+                        <Option name="system">Системная</Option>
+                    </Select>
+                </li>
+            </ul>
+            <Hr />
+            <ul className={css.popup__list}>
+                <li className={css.popup__item}>
+                    <Link to={ROUTES.DEFAULT_ROUTE} theme="block-hover">
+                        Домашняя страница
+                    </Link>
+                </li>
+                <li className={css.popup__item}>
+                    <Link onClick={() => mutate()} to={ROUTES.DEFAULT_ROUTE} theme="block-hover" isAlert>
+                        Выйти
+                    </Link>
+                </li>
+            </ul>
+
+            <Button className={css.popup__subscribe} theme="accent" size="long">
+                Оплатить подписку
+            </Button>
+        </section>
+    );
 };

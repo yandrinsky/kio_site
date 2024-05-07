@@ -4,15 +4,15 @@ import { IUserNotificationsInformationBoard } from './user-notifications-informa
 import { UserInitialInformationBoard } from '../user-initial-information-board/user-initial-information-board.component';
 
 export const UserNotificationsInformationBoard: FC<IUserNotificationsInformationBoard> = ({
-  title,
-  iconSrc,
-  statusIcon
+    title,
+    iconSrc,
+    statusIcon
 }) => {
-  return (
-    <div>
-      <UserInitialInformationBoard title={title} iconSrc={iconSrc}>
-        <img className={css[`notifications-information-board__icon`]} src={statusIcon} />
-      </UserInitialInformationBoard>
-    </div>
-  );
+    return (
+        <div>
+            <UserInitialInformationBoard title={title} iconSrc={iconSrc}>
+                <img className={css[`notifications-information-board__icon`]} src={statusIcon} />
+            </UserInitialInformationBoard>
+        </div>
+    );
 };

@@ -1,70 +1,70 @@
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.3rem;
-  height: 100%;
-  flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    height: 100%;
+    flex-grow: 1;
 }
 
 .nav__list {
-  list-style: none;
-  display: flex;
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  position: relative;
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    position: relative;
 }
 
 .nav__link {
-  color: inherit;
-  text-decoration: inherit;
+    color: inherit;
+    text-decoration: inherit;
 }
 
 .nav__item {
-  padding-left: 20px;
-  padding-right: 20px;
-  z-index: 10;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 10;
 }
 
 .nav__list .nav__item:nth-child(2) {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 .nav__item,
 .nav__link {
-  height: 100%;
+    height: 100%;
 }
 
 .nav__link {
-  display: flex;
-  align-items: center;
-  border-bottom: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
 }
 
 .nav__link:hover {
-  color: var(--dark-text-color);
-  transition: color var(--default-transition-time);
+    color: var(--dark-text-color);
+    transition: color var(--default-transition-time);
 }
 
 .nav__link_active {
-  border-bottom: 2px solid var(--dark-text-color);
-  color: var(--dark-text-color);
+    border-bottom: 2px solid var(--dark-text-color);
+    color: var(--dark-text-color);
 }
 
 .nav__hover {
-  position: absolute;
-  height: calc(var(--nav-height) - 10px);
-  background-color: var(--accent-light-color-glass);
-  z-index: 0;
-  border-radius: var(--border-radius);
-  top: 50%;
-  transform: translateY(-50%);
-  transition: all var(--default-transition-time);
+    position: absolute;
+    height: calc(var(--nav-height) - 10px);
+    background-color: var(--accent-light-color-glass);
+    z-index: 0;
+    border-radius: var(--border-radius);
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all var(--default-transition-time);
 }
 
 .nav__sign {
-  display: flex;
-  gap: 40px;
-  align-items: center;
+    display: flex;
+    gap: 40px;
+    align-items: center;
 }

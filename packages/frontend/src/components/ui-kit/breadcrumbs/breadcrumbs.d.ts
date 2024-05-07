@@ -1,3 +1,3 @@
 export interface IBreadcrumbs {
-  withHelp?: boolean
+  withHelp?: boolean;
 }

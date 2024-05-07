@@ -12,22 +12,27 @@ import { clx } from '@utils/clx';
  */
 
 export const Link: FC<PropsWithChildren<ILink>> = memo(
-  ({ children, theme = 'default', size, className, isAlert, ...props }) => {
-    const classNameFn = useCallback(
-      (attrs: TLinkClassNames) => {
-        let dropClassNames = className;
-        if (typeof className === 'function') dropClassNames = className(attrs);
-        return clx(css[`link_size-${size}`], css[`link_${theme}`], isAlert && css.link_alert, dropClassNames);
-      },
-      [theme, className]
-    );
+    ({ children, theme = 'default', size, className, isAlert, ...props }) => {
+        const classNameFn = useCallback(
+            (attrs: TLinkClassNames) => {
+                let dropClassNames = className;
+                if (typeof className === 'function') dropClassNames = className(attrs);
+                return clx(
+                    css[`link_size-${size}`],
+                    css[`link_${theme}`],
+                    isAlert && css.link_alert,
+                    dropClassNames
+                );
+            },
+            [theme, className]
+        );
 
-    return (
-      <NavLink className={classNameFn} {...props}>
-        {children}
-      </NavLink>
-    );
-  }
+        return (
+            <NavLink className={classNameFn} {...props}>
+                {children}
+            </NavLink>
+        );
+    }
 );
 
 Link.displayName = 'memo(Link)';

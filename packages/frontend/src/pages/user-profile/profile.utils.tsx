@@ -8,43 +8,43 @@ import { ProfileCreatingTask } from './profile-content/profile-creating-task/pro
 import { ProfileNotApprovedTasks } from './profile-content/profile-not-approved-tasks/profile-not-approved-tasks.component';
 
 export const userNavbarItems = [
-  'Общие',
-  'Социальные сети',
-  'Оплата',
-  'Задачи',
-  'Создание задачи',
-  'Конструкторы',
-  'Уведомления и интеграции'
+    'Общие',
+    'Социальные сети',
+    'Оплата',
+    'Задачи',
+    'Создание задачи',
+    'Конструкторы',
+    'Уведомления и интеграции'
 ];
 
 export const userProfileTabs = [
-  { name: 'Общие', children: <ProfileCommon /> },
-  { name: 'Социальные сети', children: <ProfileSocialMedia /> },
-  { name: 'Оплата', children: <ProfilePayment /> },
-  { name: 'Задачи', children: <ProfileTasks /> },
-  { name: 'Создание задачи', children: <ProfileCreatingTask /> },
-  { name: 'Конструкторы', children: <ProfileConstructors /> },
-  { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
+    { name: 'Общие', children: <ProfileCommon /> },
+    { name: 'Социальные сети', children: <ProfileSocialMedia /> },
+    { name: 'Оплата', children: <ProfilePayment /> },
+    { name: 'Задачи', children: <ProfileTasks /> },
+    { name: 'Создание задачи', children: <ProfileCreatingTask /> },
+    { name: 'Конструкторы', children: <ProfileConstructors /> },
+    { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
 ];
 
 export const adminNavbarItems = [
-  'Общие',
-  'Социальные сети',
-  'Оплата',
-  'Задачи',
-  'Создание задачи',
-  'Неподтвержденные задачи',
-  'Конструкторы',
-  'Уведомления и интеграции'
+    'Общие',
+    'Социальные сети',
+    'Оплата',
+    'Задачи',
+    'Создание задачи',
+    'Неподтвержденные задачи',
+    'Конструкторы',
+    'Уведомления и интеграции'
 ];
 
 export const adminProfileTabs = [
-  { name: 'Общие', children: <ProfileCommon /> },
-  { name: 'Социальные сети', children: <ProfileSocialMedia /> },
-  { name: 'Оплата', children: <ProfilePayment /> },
-  { name: 'Задачи', children: <ProfileTasks /> },
-  { name: 'Создание задачи', children: <ProfileCreatingTask /> },
-  { name: 'Неподтвержденные задачи', children: <ProfileNotApprovedTasks /> },
-  { name: 'Конструкторы', children: <ProfileConstructors /> },
-  { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
+    { name: 'Общие', children: <ProfileCommon /> },
+    { name: 'Социальные сети', children: <ProfileSocialMedia /> },
+    { name: 'Оплата', children: <ProfilePayment /> },
+    { name: 'Задачи', children: <ProfileTasks /> },
+    { name: 'Создание задачи', children: <ProfileCreatingTask /> },
+    { name: 'Неподтвержденные задачи', children: <ProfileNotApprovedTasks /> },
+    { name: 'Конструкторы', children: <ProfileConstructors /> },
+    { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
 ];

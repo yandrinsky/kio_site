@@ -1,4 +1,4 @@
 export interface ISwapper {
   view: number;
-  children: React.ReactElement[]
+  children: React.ReactElement[];
 }

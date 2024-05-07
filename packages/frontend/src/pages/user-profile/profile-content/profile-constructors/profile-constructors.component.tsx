@@ -2,15 +2,15 @@ import { HeaderContent } from '../profile-content-header/header-content.componen
 import css from './profile-constructors.module.css';
 
 export const ProfileConstructors = () => {
-  return (
-    <div className={css['profile-constructors__forms']}>
-      <HeaderContent
-        title="Конструктор"
-        text={`
+    return (
+        <div className={css['profile-constructors__forms']}>
+            <HeaderContent
+                title="Конструктор"
+                text={`
           Тут отображаются конструкторы задач, и те, которые можно начать. 
           Нажми на плитку, чтобы продолжить или начать.
         `}
-      />
-    </div>
-  );
+            />
+        </div>
+    );
 };

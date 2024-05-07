@@ -4,5 +4,5 @@ export type IUserTextareaField = Pick<IUserInitialField, 'title' | 'subtitle' | 
   value?: any;
   validate?: (data: string) => boolean | string;
   onSave?: (data: string) => void;
-  onChangeInput?: (value: any) => void; 
+  onChangeInput?: (value: any) => void;
 };
