@@ -48,7 +48,6 @@
     width: 40%;
 }
 
-
 .task-card__buttons {
     display: grid;
     grid-template-rows: 1fr 1fr;

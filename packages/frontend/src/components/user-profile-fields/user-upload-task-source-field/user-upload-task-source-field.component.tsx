@@ -4,10 +4,10 @@ import { IUserUploadTaskSourceField } from './user-upload-task-source-field';
 import { Button } from '@components/ui-kit/button/button.component';
 
 export const UserUploadTaskSourceField: FC<IUserUploadTaskSourceField> = ({
-  uploadTaskSource,
-  taskId,
-  isError,
-  isLoading
+    uploadTaskSource,
+    taskId,
+    isError,
+    isLoading
 }) => {
   const [moduleArchive, setModuleArchive] = useState<File>();
   const [js1, setJs1] = useState<File>();

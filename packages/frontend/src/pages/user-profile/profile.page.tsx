@@ -9,35 +9,35 @@ import { useQueryParams } from '../../history/use-query/use-query-params';
 import { useMeRequest } from '@api/index';
 
 export const UserProfile: React.FC = () => {
-  const [profileTab, _] = useQueryParams();
+    const [profileTab, _] = useQueryParams();
 
-  const { data } = useMeRequest();
-  const profileTabs = data?.role === 'Admin' ? adminProfileTabs : userProfileTabs;
-  const navbarItems = data?.role === 'Admin' ? adminNavbarItems : userNavbarItems;
+    const { data } = useMeRequest();
+    const profileTabs = data?.role === 'Admin' ? adminProfileTabs : userProfileTabs;
+    const navbarItems = data?.role === 'Admin' ? adminNavbarItems : userNavbarItems;
 
-  const [activeTab, setActiveTab] = useState(
-    profileTab.profileTab ? profileTab.profileTab : profileTabs[0].name
-  );
+    const [activeTab, setActiveTab] = useState(
+        profileTab.profileTab ? profileTab.profileTab : profileTabs[0].name
+    );
 
-  return (
-    <div className={css.page}>
-      <Layout withNav />
-      <ProfileHeader />
-      <div className={css['user-profile__container']}>
-        {data?.role === 'Admin' ? (
-          <VerticalNavbar items={adminNavbarItems} setIsActive={setActiveTab} />
-        ) : (
-          <VerticalNavbar items={userNavbarItems} setIsActive={setActiveTab} />
-        )}
+    return (
+        <div className={css.page}>
+            <Layout withNav />
+            <ProfileHeader />
+            <div className={css['user-profile__container']}>
+                {data?.role === 'Admin' ? (
+                    <VerticalNavbar items={adminNavbarItems} setIsActive={setActiveTab} />
+                ) : (
+                    <VerticalNavbar items={userNavbarItems} setIsActive={setActiveTab} />
+                )}
 
-        <div className={css['user-profile__tab']}>
-          {profileTabs
-            .filter(tab => tab.name === activeTab)
-            .map(tab => (
-              <Fragment key={'child_' + tab.name}>{tab.children}</Fragment>
-            ))}
+                <div className={css['user-profile__tab']}>
+                    {profileTabs
+                        .filter(tab => tab.name === activeTab)
+                        .map(tab => (
+                            <Fragment key={'child_' + tab.name}>{tab.children}</Fragment>
+                        ))}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };

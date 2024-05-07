@@ -5,13 +5,14 @@ import { ErrorInfo } from './error-info/error-info.component';
 import { FC } from 'react';
 
 export const Error: FC = () => {
-  const error = useRouteError();
-  if (!isRouteErrorResponse(error)) return <h1 className={css.page}>{'Это какая-то странная ошибка. :('}</h1>;
+    const error = useRouteError();
+    if (!isRouteErrorResponse(error))
+        return <h1 className={css.page}>{'Это какая-то странная ошибка. :('}</h1>;
 
-  return (
-    <main className={css.page}>
-      <ErrorInfo status={error.status} title={error.statusText} />
-      <SongText />
-    </main>
-  );
+    return (
+        <main className={css.page}>
+            <ErrorInfo status={error.status} title={error.statusText} />
+            <SongText />
+        </main>
+    );
 };

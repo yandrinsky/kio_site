@@ -16,19 +16,19 @@ import css from './swapper.module.css';
  */
 
 const Swapper: FC<ISwapper> = ({ children, view }) => {
-  const refs = useMemo(() => {
-    return Array.from({ length: children.length }).map(() => React.createRef<HTMLDivElement>());
-  }, [children.length]);
+    const refs = useMemo(() => {
+        return Array.from({ length: children.length }).map(() => React.createRef<HTMLDivElement>());
+    }, [children.length]);
 
-  return (
-    <SwitchTransition>
-      <CSSTransition classNames="swapper" timeout={BASE_ANIMATION_TIME} key={view} nodeRef={refs[view]}>
-        <div ref={refs[view]} className={css.swapper__container}>
-          {children[view]}
-        </div>
-      </CSSTransition>
-    </SwitchTransition>
-  );
+    return (
+        <SwitchTransition>
+            <CSSTransition classNames="swapper" timeout={BASE_ANIMATION_TIME} key={view} nodeRef={refs[view]}>
+                <div ref={refs[view]} className={css.swapper__container}>
+                    {children[view]}
+                </div>
+            </CSSTransition>
+        </SwitchTransition>
+    );
 };
 
 export default Swapper;

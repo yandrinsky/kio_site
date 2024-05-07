@@ -5,20 +5,20 @@ import { getValidationResult, parseFullName } from './full-name-field.utils';
 import { useSetFullNameMutation } from '@api/routes/set-full-name';
 
 export const FullNameField: React.FC = () => {
-  const { data } = useMeRequest();
-  const { mutate } = useSetFullNameMutation();
+    const { data } = useMeRequest();
+    const { mutate } = useSetFullNameMutation();
 
-  const fullName = `${data?.surname} ${data?.name} ${data?.patronymic}`;
+    const fullName = `${data?.surname} ${data?.name} ${data?.patronymic}`;
 
-  return (
-    <UserInputField
-      title="Ваше имя"
-      subtitle="Это ваше полное имя"
-      footerText="Введите ваше ФИО (отчество при наличии)"
-      isEditable
-      value={fullName}
-      validate={value => getValidationResult(parseFullName(value))}
-      onSave={value => mutate(parseFullName(value))}
-    />
-  );
+    return (
+        <UserInputField
+            title="Ваше имя"
+            subtitle="Это ваше полное имя"
+            footerText="Введите ваше ФИО (отчество при наличии)"
+            isEditable
+            value={fullName}
+            validate={value => getValidationResult(parseFullName(value))}
+            onSave={value => mutate(parseFullName(value))}
+        />
+    );
 };

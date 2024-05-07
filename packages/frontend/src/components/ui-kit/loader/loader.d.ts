@@ -1,4 +1,4 @@
 export interface ILoader {
-    theme?: "default" | "blueToСyan" | "violetToMagenta"
-    className?: string
+  theme?: 'default' | 'blueToСyan' | 'violetToMagenta';
+  className?: string;
 }

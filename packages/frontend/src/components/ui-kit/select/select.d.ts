@@ -7,4 +7,5 @@ export interface ISelect {
   isInPopup?: boolean;
   value: string;
   onChange?: (title: string) => void;
+  disabled?: boolean;
 }

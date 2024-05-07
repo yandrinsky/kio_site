@@ -4,6 +4,7 @@ export type IUserInputField = Pick<IUserInitialField, 'title' | 'subtitle' | 'fo
   value?: any;
   validate?: (data: string) => boolean | string;
   onSave?: (data: string) => void;
-  onChangeInput?: (value: any) => void; 
+  onChangeInput?: (value: any) => void;
   isEditable?: boolean;
+  buttonText?: string;
 };

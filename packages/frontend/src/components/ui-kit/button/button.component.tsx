@@ -9,21 +9,27 @@ import css from './button.module.css';
  * takes all the props of the button element and the theme and size props
  */
 export const Button = memo(
-  forwardRef<HTMLButtonElement, PropsWithChildren<IButton>>(
-    ({ children, className, stretch, theme = 'default', size = 'default', ...props }, forRef) => {
-      return (
-        <button
-          {...props}
-          ref={forRef}
-          className={clx(className, css.button_base, css[`button_${theme}`], css[`button_size-${size}`], {
-            [css.button_stretch]: stretch
-          })}
-        >
-          {children}
-        </button>
-      );
-    }
-  )
+    forwardRef<HTMLButtonElement, PropsWithChildren<IButton>>(
+        ({ children, className, stretch, theme = 'default', size = 'default', ...props }, forRef) => {
+            return (
+                <button
+                    {...props}
+                    ref={forRef}
+                    className={clx(
+                        className,
+                        css.button_base,
+                        css[`button_${theme}`],
+                        css[`button_size-${size}`],
+                        {
+                            [css.button_stretch]: stretch
+                        }
+                    )}
+                >
+                    {children}
+                </button>
+            );
+        }
+    )
 );
 
 Button.displayName = 'memo(Button)';

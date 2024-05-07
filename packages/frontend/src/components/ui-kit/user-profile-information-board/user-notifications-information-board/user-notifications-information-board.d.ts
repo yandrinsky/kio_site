@@ -1,5 +1,5 @@
 export interface IUserNotificationsInformationBoard {
-    title: string,
-    iconSrc: string,
-    statusIcon: string
+  title: string;
+  iconSrc: string;
+  statusIcon: string;
 }

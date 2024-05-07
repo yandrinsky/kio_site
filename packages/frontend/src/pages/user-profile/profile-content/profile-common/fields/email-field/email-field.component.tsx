@@ -4,16 +4,16 @@ import React from 'react';
 import { getValidationResult } from './email-field.utils';
 
 export const EmailField: React.FC = () => {
-  const { data } = useMeRequest();
+    const { data } = useMeRequest();
 
-  return (
-    <UserInputField
-      title="Ваш email адрес"
-      subtitle="Это ваш email, с помощью которого вы входите в kio"
-      footerText="Мы отправим письмо на эту почту для проверки"
-      value={data?.email}
-      validate={value => getValidationResult(value)}
-      onSave={data => console.log('onSave', data)}
-    />
-  );
+    return (
+        <UserInputField
+            title="Ваш email адрес"
+            subtitle="Это ваш email, с помощью которого вы входите в kio"
+            footerText="Мы отправим письмо на эту почту для проверки"
+            value={data?.email}
+            validate={value => getValidationResult(value)}
+            onSave={data => console.log('onSave', data)}
+        />
+    );
 };

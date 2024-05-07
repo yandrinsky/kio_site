@@ -60,7 +60,7 @@
 .user-initial-field__button-container {
     display: flex;
     justify-content: flex-end;
-    width: 100%
+    width: 100%;
 }
 
 .user-initial-field__footer-text {

@@ -8,15 +8,15 @@ import { IStartTaskDto, IStartTaskResponse } from '../../../../backend/api/contr
 const START_TASK_URL = `${BASE_URL}/START_TASK_QUERY`;
 
 export async function startTaskRequest(body: IStartTaskDto) {
-  return await makeRequest<IStartTaskResponse>(START_TASK_URL, {
-    body
-  });
+    return await makeRequest<IStartTaskResponse>(START_TASK_URL, {
+        body
+    });
 }
 
 export const useStartTaskMutation = () => {
-  return useAppMutation<IStartTaskResponse, TError, IStartTaskDto>({
-    mutationKey: [QUERY_KEYS.START_TASK],
-    mutationFn: startTaskRequest,
-    retry: 1
-  });
+    return useAppMutation<IStartTaskResponse, TError, IStartTaskDto>({
+        mutationKey: [QUERY_KEYS.START_TASK],
+        mutationFn: startTaskRequest,
+        retry: 1
+    });
 };

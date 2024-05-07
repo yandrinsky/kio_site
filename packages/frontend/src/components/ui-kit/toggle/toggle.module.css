@@ -42,10 +42,10 @@
     transition: 200ms ease;
 }
 
-.toggle-input:checked+.toggle-slider .toggle-pointer {
+.toggle-input:checked + .toggle-slider .toggle-pointer {
     transform: translateX(36px);
 }
 
-.toggle-input:checked+.toggle-slider {
+.toggle-input:checked + .toggle-slider {
     background-color: green;
 }

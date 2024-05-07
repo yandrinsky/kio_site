@@ -12,115 +12,117 @@ import { getValidationResult, handleFileChange, handleToggleChange } from './upd
 import { Toggle } from '@components/ui-kit/toggle/toggle.component';
 
 export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskId }) => {
-  const {
-    userRole,
-    updateTaskMutation,
-    deleteTaskMutation,
-    uploadTaskSourceMutation,
-    isError,
-    isLoading,
-    taskName,
-    setTaskName,
-    description,
-    setDescription,
-    isAvailable,
-    setIsAvailable,
-    preview,
-    settings,
-    setSettings
-  } = useUpdateTask(updateTaskId);
+    const {
+        userRole,
+        updateTaskMutation,
+        deleteTaskMutation,
+        uploadTaskSourceMutation,
+        isError,
+        isLoading,
+        taskName,
+        setTaskName,
+        description,
+        setDescription,
+        isAvailable,
+        setIsAvailable,
+        preview,
+        settings,
+        setSettings
+    } = useUpdateTask(updateTaskId);
 
-  return (
-    <div className={css['update-task__wrapper']}>
-      <UserInputField
-        title="Название задачи"
-        subtitle="Это название задачи, которое будут видеть пользователи"
-        footerText="Пожалуйста, используйте не больше 32 символов"
-        value={taskName}
-        validate={data => getValidationResult({ value: data, type: 'taskName' })}
-        onSave={data => {
-          setTaskName(data);
-          updateTaskMutation({
-            id: updateTaskId!,
-            name: data
-          });
-        }}
-      />
+    return (
+        <div className={css['update-task__wrapper']}>
+            <UserInputField
+                title="Название задачи"
+                subtitle="Это название задачи, которое будут видеть пользователи"
+                footerText="Пожалуйста, используйте не больше 32 символов"
+                value={taskName}
+                validate={data => getValidationResult({ value: data, type: 'taskName' })}
+                onSave={data => {
+                    setTaskName(data);
+                    updateTaskMutation({
+                        id: updateTaskId!,
+                        name: data
+                    });
+                }}
+            />
 
-      <UserTextareaField
-        title="Описание задачи"
-        subtitle="Опишите пользователям, о чем будет ваша задача"
-        value={description}
-        validate={data => getValidationResult({ value: data, type: 'description' })}
-        onSave={data => {
-          setDescription(description);
-          updateTaskMutation({
-            id: updateTaskId!,
-            description: data
-          });
-        }}
-      />
+            <UserTextareaField
+                title="Описание задачи"
+                subtitle="Опишите пользователям, о чем будет ваша задача"
+                value={description}
+                validate={data => getValidationResult({ value: data, type: 'description' })}
+                onSave={data => {
+                    setDescription(description);
+                    updateTaskMutation({
+                        id: updateTaskId!,
+                        description: data
+                    });
+                }}
+            />
 
-      <UserTextareaField
-        title="Настройки задачи"
-        subtitle="Введите настройки вашей задачи"
-        value={settings}
-        validate={data => getValidationResult({ value: data, type: 'settings' })}
-        onSave={data => {
-          setSettings(settings);
-          updateTaskMutation({
-            id: updateTaskId!,
-            settings: JSON.parse(data)
-          });
-        }}
-      />
+            <UserTextareaField
+                title="Настройки задачи"
+                subtitle="Введите настройки вашей задачи"
+                value={settings}
+                validate={data => getValidationResult({ value: data, type: 'settings' })}
+                onSave={data => {
+                    setSettings(settings);
+                    updateTaskMutation({
+                        id: updateTaskId!,
+                        settings: JSON.parse(data)
+                    });
+                }}
+            />
 
-      <UserPreviewTaskField
-        title="Иконка вашей задачи"
-        subtitle="Иконку вашей задачи увидят другие пользователи"
-        mainText="Нажмите на картинку, чтобы сменить иконку"
-        img={preview ? BASE_URL + '/' + preview : preview}
-        handleFileChange={event => handleFileChange({ event, updateTaskMutation, updateTaskId })}
-      />
+            <UserPreviewTaskField
+                title="Иконка вашей задачи"
+                subtitle="Иконку вашей задачи увидят другие пользователи"
+                mainText="Нажмите на картинку, чтобы сменить иконку"
+                img={preview ? BASE_URL + '/' + preview : preview}
+                handleFileChange={event => handleFileChange({ event, updateTaskMutation, updateTaskId })}
+            />
 
-      <UserUploadTaskSourceField
-        taskId={updateTaskId}
-        uploadTaskSource={uploadTaskSourceMutation}
-        isError={isError}
-        isLoading={isLoading}
-      />
+            <UserUploadTaskSourceField
+                taskId={updateTaskId}
+                uploadTaskSource={uploadTaskSourceMutation}
+                isError={isError}
+                isLoading={isLoading}
+            />
 
-      {userRole === 'Admin' && (
-        <div className={css['available-task-container']}>
-          <h3 className={css['available-task-container__header--h3']}>Доступность задачи для прохождения</h3>
+            {userRole === 'Admin' && (
+                <div className={css['available-task-container']}>
+                    <h3 className={css['available-task-container__header--h3']}>
+                        Доступность задачи для прохождения
+                    </h3>
 
-          <Toggle
-            checked={isAvailable}
-            onChange={value => {
-              handleToggleChange({
-                isAvailable: value,
-                setIsAvailable: setIsAvailable,
-                updateTaskId: updateTaskId,
-                updateTaskMutation
-              });
-            }}
-          />
+                    <Toggle
+                        checked={isAvailable}
+                        onChange={value => {
+                            handleToggleChange({
+                                isAvailable: value,
+                                setIsAvailable: setIsAvailable,
+                                updateTaskId: updateTaskId,
+                                updateTaskMutation
+                            });
+                        }}
+                    />
+                </div>
+            )}
+
+            <Button onClick={() => setUpdateTaskId(undefined)} theme="accent">
+                Закончить редактирование
+            </Button>
+
+            <Button
+                onClick={() => {
+                    deleteTaskMutation({ taskId: updateTaskId });
+                    setUpdateTaskId(undefined);
+                }}
+                theme="colored-red"
+            >
+                Удалить задачу
+            </Button>
         </div>
-      )}
-
-      <Button onClick={() => setUpdateTaskId(undefined)} theme="accent">
-        Закончить редактирование
-      </Button>
-
-      <Button
-        onClick={() => {
-          deleteTaskMutation({ taskId: updateTaskId });
-          setUpdateTaskId(undefined);
-        }}
-        theme="colored-red"
-      >
-        Удалить задачу
-      </Button>
-    </div>
-  );
+    );
 };

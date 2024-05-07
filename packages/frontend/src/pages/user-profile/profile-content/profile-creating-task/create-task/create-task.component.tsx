@@ -9,96 +9,96 @@ import { useCreateTask } from './create-task.hook';
 import { getValidationResult, handleFileChange, handleOnSubmit } from './create-task.utils';
 
 export const CreateTask: React.FC = () => {
-  const {
-    createTaskMutation,
-    setIsTaskCreated,
-    createdTaskId,
-    uploadTaskSourceMutation,
-    isError,
-    isLoading,
-    taskName,
-    setTaskName,
-    description,
-    setDescription,
-    preview,
-    setPreview,
-    previewFile,
-    setPreviewFile,
-    isRequiredFieldsFilled,
-    isUploadTaskSourceVisible,
-    settings,
-    setSettings
-  } = useCreateTask();
+    const {
+        createTaskMutation,
+        setIsTaskCreated,
+        createdTaskId,
+        uploadTaskSourceMutation,
+        isError,
+        isLoading,
+        taskName,
+        setTaskName,
+        description,
+        setDescription,
+        preview,
+        setPreview,
+        previewFile,
+        setPreviewFile,
+        isRequiredFieldsFilled,
+        isUploadTaskSourceVisible,
+        settings,
+        setSettings
+    } = useCreateTask();
 
-  return (
-    <form
-      className={css['create-task__forms']}
-      onSubmit={e => {
-        e.preventDefault();
-        handleOnSubmit({
-          createTaskMutation,
-          setIsTaskCreated,
-          taskName,
-          description,
-          settings,
-          previewFile
-        });
-      }}
-    >
-      <UserInputField
-        title="Название задачи"
-        subtitle="Это название задачи, которое будут видеть пользователи"
-        footerText="Пожалуйста, используйте не больше 32 символов"
-        validate={data => getValidationResult({ value: data, type: 'taskName' })}
-        onChangeInput={data =>
-          getValidationResult({ value: data, type: 'taskName' }) === true
-            ? setTaskName(data)
-            : setTaskName('')
-        }
-      />
+    return (
+        <form
+            className={css['create-task__forms']}
+            onSubmit={e => {
+                e.preventDefault();
+                handleOnSubmit({
+                    createTaskMutation,
+                    setIsTaskCreated,
+                    taskName,
+                    description,
+                    settings,
+                    previewFile
+                });
+            }}
+        >
+            <UserInputField
+                title="Название задачи"
+                subtitle="Это название задачи, которое будут видеть пользователи"
+                footerText="Пожалуйста, используйте не больше 32 символов"
+                validate={data => getValidationResult({ value: data, type: 'taskName' })}
+                onChangeInput={data =>
+                    getValidationResult({ value: data, type: 'taskName' }) === true
+                        ? setTaskName(data)
+                        : setTaskName('')
+                }
+            />
 
-      <UserTextareaField
-        title="Описание задачи"
-        subtitle="Опишите пользователям, о чем будет ваша задача"
-        validate={data => getValidationResult({ value: data, type: 'description' })}
-        onChangeInput={data =>
-          getValidationResult({ value: data, type: 'description' }) === true
-            ? setDescription(data)
-            : setDescription('')
-        }
-      />
+            <UserTextareaField
+                title="Описание задачи"
+                subtitle="Опишите пользователям, о чем будет ваша задача"
+                validate={data => getValidationResult({ value: data, type: 'description' })}
+                onChangeInput={data =>
+                    getValidationResult({ value: data, type: 'description' }) === true
+                        ? setDescription(data)
+                        : setDescription('')
+                }
+            />
 
-      <UserTextareaField
-        title="Настройки задачи"
-        subtitle="Введите настройки вашей задачи"
-        validate={data => getValidationResult({ value: data, type: 'settings' })}
-        onChangeInput={data =>
-          getValidationResult({ value: data, type: 'settings' }) === true
-            ? setSettings(data && JSON.parse(data))
-            : setSettings('')
-        }
-      />
+            <UserTextareaField
+                title="Настройки задачи"
+                subtitle="Введите настройки вашей задачи"
+                validate={data => getValidationResult({ value: data, type: 'settings' })}
+                onChangeInput={data =>
+                    getValidationResult({ value: data, type: 'settings' }) === true
+                        ? setSettings(data && JSON.parse(data))
+                        : setSettings('')
+                }
+            />
 
-      <UserPreviewTaskField
-        title="Иконка вашей задачи"
-        subtitle="Иконку вашей задачи увидят другие пользователи"
-        mainText="Нажмите на картинку, чтобы сменить иконку"
-        img={preview}
-        handleFileChange={event => handleFileChange({ event, setPreviewFile, setPreview })}
-      />
+            <UserPreviewTaskField
+                title="Иконка вашей задачи"
+                subtitle="Иконку вашей задачи увидят другие пользователи"
+                mainText="Нажмите на картинку, чтобы сменить иконку"
+                img={preview}
+                handleFileChange={event => handleFileChange({ event, setPreviewFile, setPreview })}
+            />
 
-      {isUploadTaskSourceVisible && (
-        <UserUploadTaskSourceField
-          taskId={createdTaskId!}
-          uploadTaskSource={uploadTaskSourceMutation}
-          isError={isError}
-          isLoading={isLoading}
-        />
-      )}
+            {isUploadTaskSourceVisible && (
+                <UserUploadTaskSourceField
+                    taskId={createdTaskId!}
+                    uploadTaskSource={uploadTaskSourceMutation}
+                    isError={isError}
+                    isLoading={isLoading}
+                />
+            )}
 
-      <Button theme="accent" disabled={!isRequiredFieldsFilled}>
-        Создать задачу
-      </Button>
-    </form>
-  );
+            <Button theme="accent" disabled={!isRequiredFieldsFilled}>
+                Создать задачу
+            </Button>
+        </form>
+    );
 };

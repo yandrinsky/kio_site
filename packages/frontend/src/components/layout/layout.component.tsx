@@ -17,28 +17,28 @@ import { AUTH_ERRORS } from '@api/constants/response';
  * @param {string} protectedFrom - if 'anonymous', redirects to default route if user is not logged in, if 'authorized', redirects to default route if user is logged in
  */
 export const Layout: FC<PropsWithChildren<ILayout>> = ({
-  withNav,
-  withHelp,
-  withFooter,
-  children,
-  protectedFrom
+    withNav,
+    withHelp,
+    withFooter,
+    children,
+    protectedFrom
 }) => {
-  const { isLoading, error, data } = useMeRequest();
+    const { isLoading, error, data } = useMeRequest();
 
-  if (isLoading && !error && !data) return <SplashScreen />;
-  if (
-    (error?.name === AUTH_ERRORS.UNAUTHORIZED && protectedFrom === 'anonymous') ||
-    (data && error?.name !== AUTH_ERRORS.UNAUTHORIZED && protectedFrom === 'authorized')
-  ) {
-    return <Navigate to={ROUTES.DEFAULT_ROUTE} />;
-  }
+    if (isLoading && !error && !data) return <SplashScreen />;
+    if (
+        (error?.name === AUTH_ERRORS.UNAUTHORIZED && protectedFrom === 'anonymous') ||
+        (data && error?.name !== AUTH_ERRORS.UNAUTHORIZED && protectedFrom === 'authorized')
+    ) {
+        return <Navigate to={ROUTES.DEFAULT_ROUTE} />;
+    }
 
-  return (
-    <>
-      <Header withNav={withNav} withHelp={withHelp} />
-      {children}
-      {withFooter && <Footer />}
-      <Toast />
-    </>
-  );
+    return (
+        <>
+            <Header withNav={withNav} withHelp={withHelp} />
+            {children}
+            {withFooter && <Footer />}
+            <Toast />
+        </>
+    );
 };

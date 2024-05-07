@@ -9,22 +9,22 @@ import { QUERY_KEYS } from '../constants/keys';
 const SIGN_IN_URL = `${BASE_URL}/SIGN_IN_QUERY`;
 
 export async function signInRequest(body: ISignInDto) {
-  return await makeRequest<ISignInResponse>(SIGN_IN_URL, {
-    body
-  });
+    return await makeRequest<ISignInResponse>(SIGN_IN_URL, {
+        body
+    });
 }
 
 export const useSignInMutation = () => {
-  const client = useQueryClient();
+    const client = useQueryClient();
 
-  return useAppMutation<ISignInResponse, TError, ISignInDto>({
-    mutationKey: [QUERY_KEYS.SIGN_IN],
-    mutationFn: signInRequest,
-    retry: 1,
-    onSuccess: () => {
-      client.invalidateQueries([QUERY_KEYS.ME]);
-      client.invalidateQueries([QUERY_KEYS.GET_CREATED_TASKS_LIST]);
-      client.invalidateQueries([QUERY_KEYS.GET_MY_TASKS_LIST]);
-    }
-  });
+    return useAppMutation<ISignInResponse, TError, ISignInDto>({
+        mutationKey: [QUERY_KEYS.SIGN_IN],
+        mutationFn: signInRequest,
+        retry: 1,
+        onSuccess: () => {
+            client.invalidateQueries([QUERY_KEYS.ME]);
+            client.invalidateQueries([QUERY_KEYS.GET_CREATED_TASKS_LIST]);
+            client.invalidateQueries([QUERY_KEYS.GET_MY_TASKS_LIST]);
+        }
+    });
 };
