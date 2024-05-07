@@ -23,7 +23,7 @@ export const updateTaskController: TController<IUpdateTaskDTO> = async (req, res
         task!.description = description;
     }
 
-    if (isAvailable) {
+    if (isAvailable !== undefined) {
         task!.isAvailable = isAvailable;
     }
 

@@ -5,12 +5,15 @@ import css from './tasks.module.css';
 import { TaskCard } from './task-card/task-card.component';
 import { Button } from '@components/ui-kit/button/button.component';
 import { BASE_URL } from '@api/constants/base';
+import { useMeRequest } from '@api/routes/me';
+import { clx } from '@utils/clx';
 
 export const Tasks: React.FC = () => {
     const { data: taskList } = useGetTasksListRequest();
 
     const [isOpen, setIsOpen] = useState(false);
     const [taskId, setTaskId] = useState<string>();
+    const { data: meData } = useMeRequest();
 
     return (
         <Layout withNav>
@@ -19,10 +22,17 @@ export const Tasks: React.FC = () => {
                 {taskList?.length ? (
                     <div className={css['task-list']}>
                         {taskList.map(task => (
-                            <div key={task.id} className={css['container']}>
+                            <div
+                                key={task.id}
+                                className={clx(css.container, !task.isAvailable && css['not-available'])}
+                            >
                                 <div className={css['content']}>
                                     <div>
                                         <div className={css['header']}>{task.name}</div>
+                                        {!task.isAvailable && <div>Задача недоступна</div>}
+                                        {!task.isAvailable && meData?.role === 'Admin' && (
+                                            <div>(Но так как вы Администратор, то вам доступна)</div>
+                                        )}
                                         <div className={css['button-wrapper']}>
                                             <Button
                                                 theme="accent"
@@ -30,6 +40,7 @@ export const Tasks: React.FC = () => {
                                                     setIsOpen(true);
                                                     setTaskId(task.id);
                                                 }}
+                                                disabled={meData?.role !== 'Admin' && !task.isAvailable}
                                             >
                                                 Открыть
                                             </Button>

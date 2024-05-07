@@ -14,6 +14,15 @@ export const ProfileNotApprovedTasks = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [state, setState] = useState<string>();
 
+    const getPrettyDateFromTimestamp = (timestamp: number) => {
+        const date = new Date(timestamp);
+
+        return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(
+            2,
+            '0'
+        )}.${String(date.getFullYear()).padStart(2, '0')}`;
+    };
+
     return (
         <div className={css['profile-not-approved-tasks']}>
             <HeaderContent
@@ -29,6 +38,16 @@ export const ProfileNotApprovedTasks = () => {
                         <div className={css['profile-not-approved-tasks__content']}>
                             <div>
                                 <div className={css['profile-not-approved-tasks__header']}>{task.name}</div>
+                                <div className={css['text']}>
+                                    Автор:{' '}
+                                    <span>
+                                        {task.creator.surname} {task.creator.name} {task.creator.patronymic}
+                                    </span>
+                                </div>
+                                <div className={css['text']}>Email: {task.creator.email}</div>
+                                <div className={css['text']}>
+                                    Дата создания: {getPrettyDateFromTimestamp(task.createdDate)}
+                                </div>
                                 <div className={css['profile-not-approved-tasks__buttons']}>
                                     <Button
                                         theme="accent"

@@ -12,7 +12,7 @@ export const updateTaskValidator: TValidator<IUpdateTaskDTO> = async req => {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 
-    const task = await Task.findOne({ _id: id }).select('creatorId');
+    const task = await Task.findOne({ _id: id }).select('creatorId isApproved');
 
     if (!task) {
         return CLIENT_ERRORS.TASK_DOESNT_EXIST;
@@ -25,5 +25,9 @@ export const updateTaskValidator: TValidator<IUpdateTaskDTO> = async req => {
     //Только Admin может менять значения isAvailable
     if (isAvailable !== undefined && role !== ERoles.Admin) {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
+    }
+
+    if (isAvailable !== undefined && !task.isApproved) {
+        return CLIENT_ERRORS.TASK_DOESNT_APPROVED;
     }
 };

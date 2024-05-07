@@ -35,6 +35,7 @@ export const handleToggleChange: IHandleToggleChange = ({
     setIsAvailable,
     updateTaskMutation
 }) => {
+    console.log('HERE', isAvailable);
     setIsAvailable(isAvailable);
 
     updateTaskMutation({

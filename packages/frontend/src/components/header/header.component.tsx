@@ -6,7 +6,6 @@ import { Breadcrumbs } from '../ui-kit/breadcrumbs/breadcrumbs.component';
 import css from './header.module.css';
 
 import type { IHeader } from './header';
-import { Modal } from '@components/ui-kit/modal/modal.comoponenxt';
 
 export const Header: FC<IHeader> = memo(({ withNav, withHelp }) => {
     const [isOpen, setOpen] = useState(false);

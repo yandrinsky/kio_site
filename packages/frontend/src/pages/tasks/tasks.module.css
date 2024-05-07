@@ -11,10 +11,15 @@
 .container {
     min-width: 700px;
     width: 100%;
+    padding: 20px;
 
     border: 1px solid var(--accent-light-color);
     border-radius: 8px;
     overflow: hidden;
+}
+
+.not-available {
+    background: #eeeeee;
 }
 
 .content {
@@ -24,10 +29,9 @@
 }
 
 .header {
-    padding: 20px;
-
     font-weight: lighter;
     font-size: 1.4rem;
+    margin-bottom: 10px;
 }
 
 .no-task-header {

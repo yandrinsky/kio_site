@@ -26,6 +26,14 @@
     font-size: 1.4rem;
 }
 
+.text {
+    padding: 6px;
+    margin-left: 30px;
+
+    font-weight: lighter;
+    font-size: 1.2rem;
+}
+
 .profile-not-approved-tasks__header--h5 {
     font-weight: lighter;
     font-size: 1.2rem;

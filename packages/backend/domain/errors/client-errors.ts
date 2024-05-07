@@ -16,7 +16,8 @@ export type EErrorNames =
     | 'TRY_DOESNT_EXIST'
     | 'FRAME_DOESNT_EXIST'
     | 'SOLUTION_ALREADY_EXIST'
-    | 'NAME_IS_ALREADY_USED';
+    | 'NAME_IS_ALREADY_USED'
+    | 'TASK_DOESNT_APPROVED';
 
 export type ICLIENT_ERROR = TError<EErrorNames>;
 
@@ -111,11 +112,16 @@ export const CLIENT_ERRORS: Record<EErrorNames, ICLIENT_ERROR> = {
         code: 404,
         name: 'FRAME_DOESNT_EXIST'
     },
-
     TRY_DOESNT_EXIST: {
         title: 'Попытка не найдена',
         message: 'Указанная попытка не был найдена в базе',
         code: 404,
+        name: 'TRY_DOESNT_EXIST'
+    },
+    TASK_DOESNT_APPROVED: {
+        title: 'Задача еще не подтверждена',
+        message: 'Невозможно совершить действие, пока задача на рассмотрении',
+        code: 400,
         name: 'TRY_DOESNT_EXIST'
     }
 };
