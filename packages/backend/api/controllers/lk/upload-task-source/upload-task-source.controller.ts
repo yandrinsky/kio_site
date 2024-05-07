@@ -9,7 +9,7 @@ export const uploadTaskSourceController: TController<IUploadTaskSourceDTO> = asy
     const { taskId } = req.body;
     const projectCode = req.files?.project as UploadedFile;
     const stateChecker = req.files?.stateChecker as UploadedFile;
-    const getResult = req.files?.getResult as UploadedFile;
+    const getResult = req.files?.resultChecker as UploadedFile;
 
     await unzip({
         data: projectCode.data,
