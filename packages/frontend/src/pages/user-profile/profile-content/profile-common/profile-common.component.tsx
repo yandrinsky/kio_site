@@ -8,25 +8,25 @@ import { EmailField } from './fields/email-field/email-field.component';
 import { AvatarField } from './fields/avatar-field/avatar-field.component';
 
 export const ProfileCommon = () => {
-  const { data } = useMeRequest();
+    const { data } = useMeRequest();
 
-  return (
-    <div className={css['profile-common__forms']}>
-      <NicknameField />
+    return (
+        <div className={css['profile-common__forms']}>
+            <NicknameField />
 
-      <FullNameField />
+            <FullNameField />
 
-      <EmailField />
+            <EmailField />
 
-      <AvatarField />
+            <AvatarField />
 
-      <UserInfoField
-        title="Ваш уникальный ID"
-        subtitle="Это ваш уникальный ID"
-        footerText="Используется для верификации пользователя"
-        mainText={data?.id}
-      />
-      <UserDeleteField title="Удалить мой аккаунт" />
-    </div>
-  );
+            <UserInfoField
+                title="Ваш уникальный ID"
+                subtitle="Это ваш уникальный ID"
+                footerText="Используется для верификации пользователя"
+                mainText={data?.id}
+            />
+            <UserDeleteField title="Удалить мой аккаунт" />
+        </div>
+    );
 };

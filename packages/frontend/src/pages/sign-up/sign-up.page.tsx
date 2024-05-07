@@ -10,37 +10,37 @@ import { ISignUpDto } from '@api/api';
 import { useSignUpMutation } from '@api/index';
 
 export const SignUp = () => {
-  const [combinedForm, setCombinedForm] = useState<Partial<ISignUpDto & { role: string }>>({});
-  const [currentView, setView] = useState(0);
+    const [combinedForm, setCombinedForm] = useState<Partial<ISignUpDto & { role: string }>>({});
+    const [currentView, setView] = useState(0);
 
-  const mutation = useSignUpMutation();
+    const mutation = useSignUpMutation();
 
-  const onSelectSubmit = (form: TSignUpSelectForm) => {
-    setCombinedForm(l => ({ ...l, ...form }));
-    setView(i => ++i);
-  };
+    const onSelectSubmit = (form: TSignUpSelectForm) => {
+        setCombinedForm(l => ({ ...l, ...form }));
+        setView(i => ++i);
+    };
 
-  const onSubmitHandler = (form: TSignUpDataForm) => {
-    mutation.mutate({ ...combinedForm, ...form } as ISignUpDto);
-  };
+    const onSubmitHandler = (form: TSignUpDataForm) => {
+        mutation.mutate({ ...combinedForm, ...form } as ISignUpDto);
+    };
 
-  const goBack = () => {
-    setView(i => --i);
-  };
+    const goBack = () => {
+        setView(i => --i);
+    };
 
-  const baseFormSelect = {
-    email: combinedForm.email || '',
-    role: combinedForm.role || ''
-  } as TSignUpSelectForm;
+    const baseFormSelect = {
+        email: combinedForm.email || '',
+        role: combinedForm.role || ''
+    } as TSignUpSelectForm;
 
-  return (
-    <Layout protectedFrom="authorized" withHelp>
-      <main className={css['sign-up']}>
-        <Swapper view={currentView}>
-          <SignUpSelect onSubmit={onSelectSubmit} baseForm={baseFormSelect} />
-          <SignUpForm onSubmit={onSubmitHandler} isLoading={mutation.isLoading} goBack={goBack} />
-        </Swapper>
-      </main>
-    </Layout>
-  );
+    return (
+        <Layout protectedFrom="authorized" withHelp>
+            <main className={css['sign-up']}>
+                <Swapper view={currentView}>
+                    <SignUpSelect onSubmit={onSelectSubmit} baseForm={baseFormSelect} />
+                    <SignUpForm onSubmit={onSubmitHandler} isLoading={mutation.isLoading} goBack={goBack} />
+                </Swapper>
+            </main>
+        </Layout>
+    );
 };

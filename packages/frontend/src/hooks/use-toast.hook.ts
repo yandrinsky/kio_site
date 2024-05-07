@@ -10,19 +10,19 @@ import { pushToastAtom } from '@atoms/index';
  */
 
 type TToastInterface = {
-  title: string;
-  theme?: 'error' | 'info' | 'success' | 'warning';
-  timeout?: string | number;
+    title: string;
+    theme?: 'error' | 'info' | 'success' | 'warning';
+    timeout?: string | number;
 };
 
 export function useToast() {
-  const [, pushToast] = useAtom(pushToastAtom);
+    const [, pushToast] = useAtom(pushToastAtom);
 
-  return useMemo(() => {
-    return {
-      push(toast: TToastInterface) {
-        pushToast({ ...toast, id: crypto.randomUUID(), nodeRef: createRef() });
-      }
-    };
-  }, []);
+    return useMemo(() => {
+        return {
+            push(toast: TToastInterface) {
+                pushToast({ ...toast, id: crypto.randomUUID(), nodeRef: createRef() });
+            }
+        };
+    }, []);
 }

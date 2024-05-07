@@ -1,68 +1,68 @@
 .link_default {
-  text-decoration: inherit;
-  color: var(--blur-text-color);
+    text-decoration: inherit;
+    color: var(--blur-text-color);
 }
 
 .link_default:hover,
 .link_default:focus {
-  color: var(--dark-text-color);
+    color: var(--dark-text-color);
 }
 
 .link_block-hover {
-  text-decoration: inherit;
-  color: var(--blur-text-color);
+    text-decoration: inherit;
+    color: var(--blur-text-color);
 }
 .link_block-hover:hover,
 .link_block-hover:focus {
-  background-color: var(--border-light-color);
+    background-color: var(--border-light-color);
 }
 
 .link_alert {
-  color: var(--error-color);
+    color: var(--error-color);
 }
 
 .link_accent {
-  color: var(--contrast-text-color);
-  text-decoration: inherit;
-  background-color: var(--contrast-bg-color);
-  padding: 8px 15px;
-  border: 1px solid var(--contrast-bg-color);
-  border-radius: var(--border-radius);
-  transition: color var(--default-transition-time);
+    color: var(--contrast-text-color);
+    text-decoration: inherit;
+    background-color: var(--contrast-bg-color);
+    padding: 8px 15px;
+    border: 1px solid var(--contrast-bg-color);
+    border-radius: var(--border-radius);
+    transition: color var(--default-transition-time);
 
-  transition: background-color var(--default-transition-time);
-  -webkit-transition: background-color var(--default-transition-time);
-  -ms-transition: background-color var(--default-transition-time);
+    transition: background-color var(--default-transition-time);
+    -webkit-transition: background-color var(--default-transition-time);
+    -ms-transition: background-color var(--default-transition-time);
 }
 
 .link_size-default {
-  composes: button_size-default from '../button/button.module.css';
+    composes: button_size-default from '../button/button.module.css';
 }
 
 .link_size-long {
-  composes: button_size-long from '../button/button.module.css';
+    composes: button_size-long from '../button/button.module.css';
 }
 
 .link_size-xlong {
-  composes: button_size-xlong from '../button/button.module.css';
+    composes: button_size-xlong from '../button/button.module.css';
 }
 .link_size-xxlong {
-  composes: button_size-xxlong from '../button/button.module.css';
+    composes: button_size-xxlong from '../button/button.module.css';
 }
 
 .link_accent:hover,
 .link_accent:focus {
-  background-color: transparent;
-  color: var(--dark-text-color);
+    background-color: transparent;
+    color: var(--dark-text-color);
 }
 
 .link_underline {
-  text-decoration: none;
-  color: var(--blur-text-color);
+    text-decoration: none;
+    color: var(--blur-text-color);
 }
 .link_underline:hover,
 .link_underline:focus {
-  outline: none;
-  text-decoration: underline;
-  color: var(--dark-text-color);
+    outline: none;
+    text-decoration: underline;
+    color: var(--dark-text-color);
 }

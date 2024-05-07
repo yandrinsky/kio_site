@@ -13,102 +13,107 @@ import { ERoles } from '../../../../../../backend/bd';
 import { useMeRequest } from '@api/index';
 
 export const ProfileChangeUserRole: React.FC = () => {
-  const { data } = useMeRequest();
-  const { mutate: searchUserMutation, data: userList } = useSearchUserMutation();
-  const { mutate: changeRoleMutation } = useChangeRoleMutation();
+    const { data } = useMeRequest();
+    const { mutate: searchUserMutation, data: userList } = useSearchUserMutation();
+    const { mutate: changeRoleMutation } = useChangeRoleMutation();
 
-  const [role, setRole] = useState<string[]>();
+    const [role, setRole] = useState<string[]>();
 
-  useEffect(() => setRole(userList?.map(() => 'Admin')), [userList]);
+    useEffect(() => setRole(userList?.map(() => 'Admin')), [userList]);
 
-  return (
-    <div className={css.page}>
-      <HeaderContent
-        title="Измение роли пользователей"
-        text={`
-          Здесь администратор может изменить роли пользователей.
-        `}
-      />
+    return (
+        <div className={css.page}>
+            <HeaderContent
+                title="Измение роли пользователей"
+                text="Здесь администратор может изменить роли пользователей."
+            />
 
-      <UserInputField
-        title="Найти пользователя"
-        subtitle="Введите данные пользователя, чтобы найти его"
-        buttonText="Искать"
-        onSave={value => searchUserMutation({ search: value })}
-      />
-      <div className={css['user-list']}>
-        {userList?.length ? (
-          userList.map((user, index) => (
-            <div key={user.id} className={css['user-list__container']}>
-              <div className={css['user-list__content']}>
-                <div>
-                  <div className={css['user-list__header']}>
-                    {`${user.surname} 
-                    ${user.name} 
-                    ${user.patronymic}`}
-                  </div>
+            <UserInputField
+                title="Найти пользователя"
+                subtitle="Введите данные пользователя, чтобы найти его"
+                buttonText="Искать"
+                onSave={value => searchUserMutation({ search: value })}
+            />
+            <div className={css['user-list']}>
+                {userList?.length ? (
+                    userList.map((user, index) => (
+                        <div key={user.id} className={css['container']}>
+                            <div className={css['content']}>
+                                <div>
+                                    <div className={css['header']}>
+                                        <span>
+                                            {user.surname} {user.name} {user.patronymic}
+                                        </span>
+                                    </div>
 
-                  <div className={css['user-info-container']}>
-                    <span className={css['user-list__header--h5']}>Электронная почта: {user.email}</span>
+                                    <div className={css['user-info-container']}>
+                                        <span className={css['header--h5']}>
+                                            Электронная почта: {user.email}
+                                        </span>
 
-                    <span className={css['user-list__header--h5']}>
-                      Дата рождения: {user.birthday.day}.{user.birthday.month}.{user.birthday.year}
-                    </span>
+                                        <span className={css['header--h5']}>
+                                            Дата рождения: {String(user.birthday.day).padStart(2, '0')}.
+                                            {String(user.birthday.month).padStart(2, '0')}.
+                                            {user.birthday.year}
+                                        </span>
 
-                    <span className={clx(css['user-list__header--h5'], css['select-container'])}>
-                      Роль:
-                      <Select
-                        value={role?.[index] ?? ''}
-                        onChange={role => setRole(state => [...(state ?? []), role])}
-                      >
-                        <Option name="Admin">Администратор</Option>
-                        <Option name="Creator">Создатель</Option>
-                        <Option name="User">Пользователь</Option>
-                        <Option name="Watcher">Наблюдатель</Option>
-                        <Option name="Tester">Тестировщик</Option>
-                      </Select>
-                    </span>
-                  </div>
+                                        <span className={clx(css['header--h5'], css['select-container'])}>
+                                            Роль:
+                                            <Select
+                                                value={role?.[index] ?? ''}
+                                                disabled={user.id === data?.id}
+                                                onChange={role => setRole(state => [...(state ?? []), role])}
+                                            >
+                                                <Option name="Admin">Администратор</Option>
+                                                <Option name="Creator">Создатель</Option>
+                                                <Option name="User">Пользователь</Option>
+                                                <Option name="Watcher">Наблюдатель</Option>
+                                                <Option name="Tester">Тестировщик</Option>
+                                            </Select>
+                                        </span>
+                                    </div>
 
-                  <div className={css['user-list__buttons']}>
-                    {user.id !== data?.id ? (
-                      <Button
-                        theme="accent"
-                        onClick={() =>
-                          changeRoleMutation({
-                            role: role?.[index] as ERoles,
-                            userId: user.id
-                          })
-                        }
-                      >
-                        Изменить роль
-                      </Button>
-                    ) : (
-                      <Button disabled>Это вы</Button>
-                    )}
-                  </div>
-                </div>
+                                    <div className={css['buttons']}>
+                                        {user.id !== data?.id ? (
+                                            <Button
+                                                theme="accent"
+                                                onClick={() =>
+                                                    changeRoleMutation({
+                                                        role: role?.[index] as ERoles,
+                                                        userId: user.id
+                                                    })
+                                                }
+                                            >
+                                                Изменить роль
+                                            </Button>
+                                        ) : (
+                                            <Button disabled>Это вы</Button>
+                                        )}
+                                    </div>
+                                </div>
 
-                {user.avatarUrl ? (
-                  <div className={css['user-list__img-container']}>
-                    <img
-                      className={css['user-list__img']}
-                      src={BASE_URL + '/' + user.avatarUrl}
-                      alt="иконка задачи"
-                    />
-                  </div>
+                                {user.avatarUrl ? (
+                                    <div className={css['img-container']}>
+                                        <img
+                                            className={css['img']}
+                                            src={BASE_URL + '/' + user.avatarUrl}
+                                            alt="иконка задачи"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className={css['without-img-container']}>
+                                        <span className={css['header--h5']}>
+                                            У этого пользователя нет иконки
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))
                 ) : (
-                  <div className={css['user-list__without-img-container']}>
-                    <span className={css['user-list__header--h5']}>У этого пользователя нет иконки</span>
-                  </div>
+                    <span className={css['no-task-header']}>Нет найденных пользователей</span>
                 )}
-              </div>
             </div>
-          ))
-        ) : (
-          <span className={css['user-list__no-task-header']}>Нет найденных пользователей</span>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };

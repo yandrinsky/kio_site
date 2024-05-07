@@ -10,7 +10,7 @@
     gap: 20px;
 }
 
-.user-list__container {
+.container {
     min-width: 700px;
     width: 100%;
 
@@ -19,20 +19,20 @@
     overflow: hidden;
 }
 
-.user-list__content {
+.content {
     display: flex;
     justify-content: space-between;
     padding-right: 30px;
 }
 
-.user-list__header {
+.header {
     padding: 20px;
 
     font-weight: lighter;
     font-size: 1.4rem;
 }
 
-.user-list__no-task-header {
+.no-task-header {
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -41,13 +41,13 @@
     font-size: 1.4rem;
 }
 
-.user-list__header--h5 {
+.header--h5 {
     font-weight: lighter;
     font-size: 1.2rem;
     color: var(--blur-text-color);
 }
 
-.user-list__buttons {
+.buttons {
     display: flex;
     align-items: flex-end;
     padding: 0 30px 20px 20px;
@@ -55,7 +55,7 @@
     height: 100px;
 }
 
-.user-list__img-container {
+.img-container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -63,7 +63,7 @@
     padding: 20px 0 15px 0;
 }
 
-.user-list__without-img-container {
+.without-img-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,7 +76,7 @@
     background-color: whitesmoke;
 }
 
-.user-list__img {
+.img {
     height: 185px;
     width: 450px;
 

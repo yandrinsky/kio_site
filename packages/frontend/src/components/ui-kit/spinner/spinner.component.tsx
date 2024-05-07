@@ -5,18 +5,18 @@ import { ISpinner } from './spinner';
 import { clx } from '../../../utils/clx';
 
 export const Spinner: FC<ISpinner> = ({ theme = 'default' }) => {
-  const ldsRollerTheme = clx(css[`lds__roller`], css[`lds__roller--${theme}`]);
+    const ldsRollerTheme = clx(css[`lds__roller`], css[`lds__roller--${theme}`]);
 
-  return (
-    <div className={ldsRollerTheme}>
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-    </div>
-  );
+    return (
+        <div className={ldsRollerTheme}>
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+        </div>
+    );
 };

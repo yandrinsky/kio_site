@@ -5,47 +5,47 @@ import { HeaderContent } from '../../profile-content-header/header-content.compo
 import { IHeader } from './header';
 
 export const Header: React.FC<IHeader> = ({ toggle, setToggle, isUpdateTask }) => {
-  return (
-    <div className={css['header']}>
-      <div
-        onClick={() => setToggle(true)}
-        className={clx(
-          toggle && css['header__headerContent-container-active'],
-          css['header__headerContent-container']
-        )}
-      >
-        <HeaderContent
-          title="Созданные задачи"
-          text={`
+    return (
+        <div className={css['header']}>
+            <div
+                onClick={() => setToggle(true)}
+                className={clx(
+                    toggle && css['header__headerContent-container-active'],
+                    css['header__headerContent-container']
+                )}
+            >
+                <HeaderContent
+                    title="Созданные задачи"
+                    text={`
               Тут вы можете видеть список созданных вами задач.
             `}
-        />
-      </div>
+                />
+            </div>
 
-      <div
-        onClick={() => setToggle(false)}
-        className={clx(
-          !toggle && css['header__headerContent-container-active'],
-          css['header__headerContent-container'],
-          css['header__headerContent-container-right']
-        )}
-      >
-        {isUpdateTask ? (
-          <HeaderContent
-            title="Редактирование задачи"
-            text={`
+            <div
+                onClick={() => setToggle(false)}
+                className={clx(
+                    !toggle && css['header__headerContent-container-active'],
+                    css['header__headerContent-container'],
+                    css['header__headerContent-container-right']
+                )}
+            >
+                {isUpdateTask ? (
+                    <HeaderContent
+                        title="Редактирование задачи"
+                        text={`
               Тут вы можете редактировать свою задачу.
             `}
-          />
-        ) : (
-          <HeaderContent
-            title="Создать задачу"
-            text={`
+                    />
+                ) : (
+                    <HeaderContent
+                        title="Создать задачу"
+                        text={`
             Тут вы можете создать свою задачу.
           `}
-          />
-        )}
-      </div>
-    </div>
-  );
+                    />
+                )}
+            </div>
+        </div>
+    );
 };

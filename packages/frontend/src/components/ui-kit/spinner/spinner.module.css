@@ -9,7 +9,7 @@
     transform-origin: 40px 40px;
 }
 .lds__roller div:after {
-    content: " ";
+    content: ' ';
     display: block;
     position: absolute;
     width: 7px;
@@ -18,16 +18,16 @@
     margin: -4px 0 0 -4px;
 }
 
-.lds__roller--default div:after{
-    background: #001AFF;
+.lds__roller--default div:after {
+    background: #001aff;
 }
 
-.lds__roller--yellow div:after{
-    background: #FFD600;
+.lds__roller--yellow div:after {
+    background: #ffd600;
 }
 
-.lds__roller--lightBrown div:after{
-    background: #FF8A00;
+.lds__roller--lightBrown div:after {
+    background: #ff8a00;
 }
 
 .lds__roller div:nth-child(1) {

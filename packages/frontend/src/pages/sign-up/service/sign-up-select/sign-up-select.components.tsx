@@ -15,36 +15,42 @@ import { RadioContainerFormField } from '@components/form/radio-container-form-f
 import { InputFormField } from '@components/form/input-form-field/input-form-field.component';
 
 const SignUpSelect: FC<ISignUpSelect> = ({ onSubmit, baseForm }) => {
-  const toast = useToast();
-  const handleOnSubmit = (values: TSignUpSelectForm) => {
-    const { email, role } = values;
+    const toast = useToast();
+    const handleOnSubmit = (values: TSignUpSelectForm) => {
+        const { email, role } = values;
 
-    if (!email || !role) {
-      toast.push({ title: 'Форма не заполнена до конца', theme: 'error' });
-      return;
-    }
-    onSubmit({ email: email, role: role });
-  };
+        if (!email || !role) {
+            toast.push({ title: 'Форма не заполнена до конца', theme: 'error' });
+            return;
+        }
+        onSubmit({ email: email, role: role });
+    };
 
-  return (
-    <Form onSubmit={handleOnSubmit} initialValues={baseForm}>
-      {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit} className={css['sign-up-select']}>
-          <RadioContainerFormField name="role">
-            {SELECT_OPTIONS.map(({ title, content, id }) => (
-              <Radio title={title} value={id} key={title}>
-                {content}
-              </Radio>
-            ))}
-          </RadioContainerFormField>
-          <InputFormField stretch placeholder="Электронная почта" name="email" type="email" required />
-          <Button stretch theme="accent" type="submit">
-            Продолжить
-          </Button>
-        </form>
-      )}
-    </Form>
-  );
+    return (
+        <Form onSubmit={handleOnSubmit} initialValues={baseForm}>
+            {({ handleSubmit }) => (
+                <form onSubmit={handleSubmit} className={css['sign-up-select']}>
+                    <RadioContainerFormField name="role">
+                        {SELECT_OPTIONS.map(({ title, content, id }) => (
+                            <Radio title={title} value={id} key={title}>
+                                {content}
+                            </Radio>
+                        ))}
+                    </RadioContainerFormField>
+                    <InputFormField
+                        stretch
+                        placeholder="Электронная почта"
+                        name="email"
+                        type="email"
+                        required
+                    />
+                    <Button stretch theme="accent" type="submit">
+                        Продолжить
+                    </Button>
+                </form>
+            )}
+        </Form>
+    );
 };
 
 export default SignUpSelect;
