@@ -133,3 +133,4 @@ rushx start || npm start
 
 [kyzinatra](https://github.com/kyzinatra)
 [yandrinsky](https://github.com/yandrinsky)
+[MichaelZhegalin](https://github.com/MichaelZhegalin)
