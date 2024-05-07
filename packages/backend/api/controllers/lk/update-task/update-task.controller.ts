@@ -6,7 +6,7 @@ import { removeFile } from '../../../../domain/utils/remove-file';
 import { saveFile } from '../../../../domain/utils/save-file';
 
 export const updateTaskController: TController<IUpdateTaskDTO> = async (req, resp) => {
-    const { name, settings, description, id } = req.body;
+    const { name, settings, description, isAvailable, id } = req.body;
     const preview = req.files?.preview;
 
     const task = await Task.findOne({ _id: id });
@@ -21,6 +21,10 @@ export const updateTaskController: TController<IUpdateTaskDTO> = async (req, res
 
     if (description) {
         task!.description = description;
+    }
+
+    if (isAvailable) {
+        task!.isAvailable = isAvailable;
     }
 
     if (preview) {
