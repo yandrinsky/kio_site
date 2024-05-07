@@ -1,8 +1,7 @@
-.field__container {
+.container {
     display: flex;
     flex-direction: column;
     min-width: 700px;
-    height: 215px;
     width: 100%;
 
     border: 1px solid var(--accent-light-color);
@@ -10,27 +9,27 @@
     overflow: hidden;
 }
 
-.field__content {
+.content {
     display: flex;
     justify-content: space-between;
     padding-right: 30px;
 }
 
-.field__header {
+.header {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 20px;
 }
 
-.field__header--h3 {
+.header--h3 {
     margin: 0;
 
     font-weight: lighter;
     font-size: 1.4rem;
 }
 
-.field__header--h5 {
+.header--h5 {
     margin: 0;
 
     font-weight: lighter;
@@ -38,37 +37,42 @@
     color: var(--blur-text-color);
 }
 
-.field__main {
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 0 0 20px 30px;
+}
+
+.loader-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px 20px 30px;
+    height: 50px;
+    width: 100%;
+    padding-left: 5px;
+
+    border: 1px solid var(--accent-light-color);
+    border-radius: 8px;
 }
 
-.field__info-text {
+.loader-container__info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.info-text {
     font-size: 0.9rem;
     color: var(--blur-text-color);
 }
 
-.field__img-container {
-    position: relative;
-
-    display: flex;
-    justify-content: flex-end;
-    width: 200px;
-    height: 200px;
-    padding: 15px 0 10px 0;
-    margin-top: 5px;
-
-    cursor: pointer;
-    transition: 200ms ease-in;
-}
-
-.field__img-container:hover {
+.img-container:hover {
     background-color: whitesmoke;
 }
 
-.field__input-file {
+.input-file {
     position: absolute;
     top: 0;
     left: 0;
@@ -83,11 +87,39 @@
     }
 }
 
-.field__img {
-    height: 100%;
-    width: 200px;
+.loader-container__img-container {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+
+    cursor: pointer;
+    transition: 200ms ease-in;
+}
+
+.loader-container__img-container:hover {
+    background-color: whitesmoke;
+}
+
+.loader-container__img {
+    height: 30px;
+    width: 30px;
 
     border-radius: var(--border-radius);
     overflow: hidden;
     object-fit: cover;
+}
+
+.user-initial-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 30px;
+    min-height: 55px;
+
+    background-color: var(--accent-light-color);
+    border-top: 1px solid var(--border-light-color);
 }
