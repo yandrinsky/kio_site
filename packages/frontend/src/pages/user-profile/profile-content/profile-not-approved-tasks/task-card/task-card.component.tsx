@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import css from './task-card.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { ITaskCard } from './task-card';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
 import { useApproveTaskMutation } from '@api/routes/approve-task';
 import { BASE_URL } from '@api/constants/base';
+import { ApproveTaskModal } from '../approve-task-modal/approve-task-modal-modal.component';
 
 export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
     const { data: taskList } = useGetCreatedTasksListRequest();
     const task = taskList?.filter(task => task.id === taskId)[0];
 
     const { mutate } = useApproveTaskMutation();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <>
@@ -36,14 +39,7 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
                         <div className={css['task-card__buttons-container']}>
                             <div className={css['task-card__buttons']}>
                                 <Button theme="accent">Начать</Button>
-                                <Button
-                                    onClick={() => {
-                                        setIsOpen(false);
-                                        mutate({ taskId: taskId });
-                                    }}
-                                >
-                                    Подтвердить
-                                </Button>
+                                <Button onClick={() => setIsModalOpen(true)}>Утвердить</Button>
                                 <Button theme="colored-red" onClick={() => setIsOpen(false)}>
                                     Закрыть
                                 </Button>
@@ -57,6 +53,14 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
                     </div>
                 </div>
             </div>
+
+            <ApproveTaskModal
+                isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
+                taskId={taskId}
+                approveTaskMutation={mutate}
+            />
+
             <div className={css['task-card__hidden']} onClick={() => setIsOpen(false)} />
         </>
     );

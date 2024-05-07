@@ -10,6 +10,7 @@ import { useUpdateTask } from './update-task.hook';
 import { BASE_URL } from '@api/constants/base';
 import { getValidationResult, handleFileChange, handleToggleChange } from './update-task.utils';
 import { Toggle } from '@components/ui-kit/toggle/toggle.component';
+import { UpdateTaskModal } from './update-task-modal/update-task-modal.component';
 
 export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskId }) => {
     const {
@@ -27,7 +28,9 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
         setIsAvailable,
         preview,
         settings,
-        setSettings
+        setSettings,
+        isOpen,
+        setIsOpen
     } = useUpdateTask(updateTaskId);
 
     return (
@@ -92,9 +95,7 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
 
             {userRole === 'Admin' && (
                 <div className={css['available-task-container']}>
-                    <h3 className={css['available-task-container__header--h3']}>
-                        Доступность задачи для прохождения
-                    </h3>
+                    <h3 className={css['header--h3']}>Доступность задачи для прохождения</h3>
 
                     <Toggle
                         checked={isAvailable}
@@ -114,15 +115,17 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
                 Закончить редактирование
             </Button>
 
-            <Button
-                onClick={() => {
-                    deleteTaskMutation({ taskId: updateTaskId });
-                    setUpdateTaskId(undefined);
-                }}
-                theme="colored-red"
-            >
+            <Button onClick={() => setIsOpen(true)} theme="colored-red">
                 Удалить задачу
             </Button>
+
+            <UpdateTaskModal
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                updateTaskId={updateTaskId}
+                deleteTaskMutation={deleteTaskMutation}
+                setUpdateTaskId={setUpdateTaskId}
+            />
         </div>
     );
 };

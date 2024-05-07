@@ -20,6 +20,7 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
     const [description, setDescription] = useState(updatedTask?.description ?? '');
     const [settings, setSettings] = useState(JSON.stringify(updatedTask?.settings));
     const [isAvailable, setIsAvailable] = useState(updatedTask?.isAvailable ?? false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const preview = updatedTask?.preview ?? '';
 
@@ -38,6 +39,8 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
         setIsAvailable,
         preview,
         settings,
-        setSettings
+        setSettings,
+        isOpen,
+        setIsOpen
     };
 };

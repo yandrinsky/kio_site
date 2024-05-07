@@ -36,6 +36,8 @@ export type IUseUpdateTask = (updateTaskId: string | undefined) => {
   preview: string;
   settings: string;
   setSettings: React.Dispatch<React.SetStateAction<string>>;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type IHandleFileChange = (props: {
