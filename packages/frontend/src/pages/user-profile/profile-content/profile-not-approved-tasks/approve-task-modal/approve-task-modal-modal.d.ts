@@ -5,6 +5,7 @@ import { ICLIENT_ERROR } from '../../../../../../../backend/domain/errors/client
 export interface IApproveTaskModal {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsCardOpen?: React.Dispatch<React.SetStateAction<boolean>>;
     taskId: string;
     approveTaskMutation: UseMutateFunction<IApproveTaskResponse, ICLIENT_ERROR, IApproveTaskDTO, unknown>;
 }

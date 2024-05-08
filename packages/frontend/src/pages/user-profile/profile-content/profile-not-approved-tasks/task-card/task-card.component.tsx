@@ -59,6 +59,7 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
                 setIsOpen={setIsModalOpen}
                 taskId={taskId}
                 approveTaskMutation={mutate}
+                setIsCardOpen={setIsOpen}
             />
 
             <div className={css['task-card__hidden']} onClick={() => setIsOpen(false)} />

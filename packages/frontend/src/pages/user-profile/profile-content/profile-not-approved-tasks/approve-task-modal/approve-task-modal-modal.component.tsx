@@ -8,7 +8,8 @@ export const ApproveTaskModal: React.FC<IApproveTaskModal> = ({
     isOpen,
     setIsOpen,
     taskId,
-    approveTaskMutation
+    approveTaskMutation,
+    setIsCardOpen
 }) => {
     return (
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
@@ -27,6 +28,7 @@ export const ApproveTaskModal: React.FC<IApproveTaskModal> = ({
                         onClick={() => {
                             approveTaskMutation({ taskId });
                             setIsOpen(false);
+                            setIsCardOpen?.(false);
                         }}
                         theme="accent"
                     >
