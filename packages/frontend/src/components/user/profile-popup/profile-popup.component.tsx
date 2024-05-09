@@ -48,22 +48,6 @@ export const ProfilePopup = () => {
             <Hr />
             <ul className={css.popup__list}>
                 <li className={css.popup__item}>
-                    <Link to={ROUTES.HELP_ROUTE} theme="block-hover">
-                        Поддрежка
-                    </Link>
-                </li>
-                <li className={css['popup__nolink-item']}>
-                    <p>Тема сайта</p>
-                    <Select isInPopup value={theme} onChange={title => setTheme(title)}>
-                        <Option name="light">Светлая</Option>
-                        <Option name="dark">Темная</Option>
-                        <Option name="system">Системная</Option>
-                    </Select>
-                </li>
-            </ul>
-            <Hr />
-            <ul className={css.popup__list}>
-                <li className={css.popup__item}>
                     <Link to={ROUTES.DEFAULT_ROUTE} theme="block-hover">
                         Домашняя страница
                     </Link>
@@ -74,10 +58,6 @@ export const ProfilePopup = () => {
                     </Link>
                 </li>
             </ul>
-
-            <Button className={css.popup__subscribe} theme="accent" size="long">
-                Оплатить подписку
-            </Button>
         </section>
     );
 };

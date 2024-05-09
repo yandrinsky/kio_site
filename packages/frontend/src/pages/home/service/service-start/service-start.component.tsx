@@ -1,19 +1,27 @@
 import css from './service-start.module.css';
 import { ROUTES } from '@constants/routes';
 import { Link } from '@components/ui-kit/link/link.component';
+import { useMeRequest } from '@api/index';
 
 export const ServiceStart = () => {
-    // TODO: Как  я пойму как сделать так, чтобы это выглядело не как дохлая псина я поправлю. Пока такой дизайн.
+    const { isError } = useMeRequest();
+
     return (
         <section className={css.start}>
             <p className={css.start__title}>Начни свой путь вместе с нами</p>
             <div className={css.start__links}>
-                <Link className={css.start__link} to={ROUTES.EXAMPLES_ROUTE} theme="accent" size="xxlong">
-                    Примеры задач прошлых лет
+                <Link className={css.start__link} to={ROUTES.TASKS_ROUTE} theme="accent" size="xxlong">
+                    К задачам
                 </Link>
-                <Link className={css.start__link} to={ROUTES.SIGN_UP_ROUTE} theme="accent" size="xxlong">
-                    Зарегестироваться на конкурс
-                </Link>
+                {!isError ? (
+                    <Link className={css.start__link} to={ROUTES.PROFILE_ROUTE} theme="accent" size="xxlong">
+                        К профилю
+                    </Link>
+                ) : (
+                    <Link className={css.start__link} to={ROUTES.SIGN_UP_ROUTE} theme="accent" size="xxlong">
+                        Зарегестироваться на конкурс
+                    </Link>
+                )}
             </div>
         </section>
     );
