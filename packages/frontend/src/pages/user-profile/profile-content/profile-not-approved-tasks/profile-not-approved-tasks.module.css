@@ -35,6 +35,8 @@
 }
 
 .text {
+    display: flex;
+    gap: 5px;
     padding: 6px;
     margin-left: 30px;
 
@@ -78,6 +80,21 @@
     width: 450px;
 
     border-radius: var(--border-radius);
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.task-creator-avatar-container {
+    display: flex;
+    align-items: center;
+    width: 16px;
+}
+
+.task-creator-avatar {
+    height: 16px;
+    width: 16px;
+
+    border-radius: 50%;
     overflow: hidden;
     object-fit: cover;
 }

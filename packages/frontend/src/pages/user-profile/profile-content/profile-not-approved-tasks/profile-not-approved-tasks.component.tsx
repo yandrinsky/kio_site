@@ -40,6 +40,17 @@ export const ProfileNotApprovedTasks = () => {
                                             {task.creator.surname} {task.creator.name}{' '}
                                             {task.creator.patronymic}
                                         </span>
+                                        <div className={css['task-creator-avatar-container']}>
+                                            <img
+                                                className={css['task-creator-avatar']}
+                                                src={
+                                                    task.creator.avatar
+                                                        ? BASE_URL + '/' + task.creator.avatar
+                                                        : '/default-avatar.svg'
+                                                }
+                                                alt="иконка задачи"
+                                            />
+                                        </div>
                                     </div>
                                     <div className={css['text']}>Email: {task.creator.email}</div>
                                     <div className={css['text']}>

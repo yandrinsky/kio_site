@@ -26,6 +26,7 @@ export const useSetAvatarMutation = () => {
         retry: 1,
         onSuccess: () => {
             client.invalidateQueries([QUERY_KEYS.ME]);
+            client.invalidateQueries([QUERY_KEYS.GET_NOT_APPROVED_TASKS_LIST]);
         }
     });
 };
