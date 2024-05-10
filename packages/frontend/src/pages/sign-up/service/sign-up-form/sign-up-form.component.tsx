@@ -48,8 +48,7 @@ const SignUpForm: FC<ISignUpFormProps> = ({ onSubmit, goBack, isLoading }) => {
         <Form onSubmit={handleOnSubmit} initialValues={initialForm}>
             {({ handleSubmit, submitErrors, dirtySinceLastSubmit, ...props }) => (
                 <form onSubmit={handleSubmit} className={css['sign-up-form']}>
-                    <UserConnections>Зарегистрироваться через социальные сети</UserConnections>
-                    <h2>Или создайте вручную</h2>
+                    <h2>Регистрация</h2>
                     <InputFormField
                         required
                         placeholder="Ваше ФИО"

@@ -34,11 +34,6 @@ export const Breadcrumbs: FC<IBreadcrumbs> = memo(({ withHelp }) => {
                     </React.Fragment>
                 ))}
             </div>
-            {withHelp && (
-                <Badge src="/help.svg" to="/help">
-                    Помощь
-                </Badge>
-            )}
         </div>
     );
 });

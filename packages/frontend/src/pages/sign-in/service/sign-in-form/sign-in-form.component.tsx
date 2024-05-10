@@ -54,9 +54,6 @@ export const SignInForm = () => {
                         </Button>
                     </div>
                     <div className={css.form__nav}>
-                        <Link to={ROUTES.FORGOT_PASSWORD_ROUTE} theme="underline">
-                            Забыл Пароль
-                        </Link>
                         <Link to={ROUTES.SIGN_UP_ROUTE} theme="underline">
                             У меня еще нет аккаунта
                         </Link>

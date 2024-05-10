@@ -8,8 +8,7 @@ export const SignIn = () => {
     return (
         <Layout protectedFrom="authorized" withHelp>
             <main className={css['sign-in']}>
-                <UserConnections>Войти через социальные сети</UserConnections>
-                <h2 className={css['sign-in__sub-title']}>Или через личный аккаунт</h2>
+                <h2 className={css['sign-in__sub-title']}>Войдите в личный аккаунт</h2>
                 <SignInForm />
             </main>
         </Layout>
