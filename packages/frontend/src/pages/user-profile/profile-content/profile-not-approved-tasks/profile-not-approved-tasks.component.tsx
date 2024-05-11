@@ -26,7 +26,7 @@ export const ProfileNotApprovedTasks = () => {
         `}
             />
 
-            <div>
+            <div className={css['task-list']}>
                 {isCardOpen && <TaskCard taskId={approvedTaskId ?? ''} setIsOpen={setIsCardOpen} />}
                 {taskList?.map(task => (
                     <div key={task.id} className={css['container']}>

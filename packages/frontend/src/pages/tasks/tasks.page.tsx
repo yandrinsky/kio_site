@@ -27,13 +27,24 @@ export const Tasks: React.FC = () => {
                                 className={clx(css.container, !task.isAvailable && css['not-available'])}
                             >
                                 <div className={css['content']}>
-                                    <div>
-                                        <div className={css['header']}>{task.name}</div>
-                                        {!task.isAvailable && <div>Задача недоступна</div>}
-                                        {!task.isAvailable && meData?.role === 'Admin' && (
-                                            <div>(Но так как вы Администратор, то вам доступна)</div>
-                                        )}
-                                        <div className={css['button-wrapper']}>
+                                    <div className={css['task-info']}>
+                                        <div>
+                                            <div className={css['header']}>{task.name}</div>
+                                            {!task.isAvailable && (
+                                                <div className={css['text']}>
+                                                    <span>Задача недоступна</span>
+                                                </div>
+                                            )}
+                                            {!task.isAvailable && meData?.role === 'Admin' && (
+                                                <div className={css['text']}>
+                                                    <span>
+                                                        (Но так как вы Администратор, то вам доступна)
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className={css['buttons']}>
                                             <Button
                                                 theme="accent"
                                                 onClick={() => {
@@ -48,18 +59,22 @@ export const Tasks: React.FC = () => {
                                     </div>
 
                                     {task.preview ? (
-                                        <div className={css['img-container']}>
-                                            <img
-                                                className={css['img']}
-                                                src={BASE_URL + '/' + task.preview}
-                                                alt="иконка задачи"
-                                            />
+                                        <div>
+                                            <div className={css['img-container']}>
+                                                <img
+                                                    className={css['img']}
+                                                    src={BASE_URL + '/' + task.preview}
+                                                    alt="иконка задачи"
+                                                />
+                                            </div>
                                         </div>
                                     ) : (
-                                        <div className={css['without-img-container']}>
-                                            <span className={css['header--h5']}>
-                                                У этой задачи нет иконки
-                                            </span>
+                                        <div>
+                                            <div className={css['without-img-container']}>
+                                                <span className={css['header--h5']}>
+                                                    У этой задачи нет иконки
+                                                </span>
+                                            </div>
                                         </div>
                                     )}
                                 </div>
