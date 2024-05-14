@@ -20,9 +20,10 @@ export const ProfileTasks = () => {
                     {taskList.map(task => (
                         <div key={task.id} className={css['container']}>
                             <div className={css['content']}>
-                                <div>
+                                <div className={css['task-info']}>
                                     <div className={css['header']}>{task.name}</div>
-                                    <div className={css['button-wrapper']}>
+
+                                    <div className={css['buttons']}>
                                         <Button
                                             theme="accent"
                                             onClick={() => {
@@ -36,16 +37,22 @@ export const ProfileTasks = () => {
                                 </div>
 
                                 {task.preview ? (
-                                    <div className={css['img-container']}>
-                                        <img
-                                            className={css['img']}
-                                            src={BASE_URL + '/' + task.preview}
-                                            alt="иконка задачи"
-                                        />
+                                    <div>
+                                        <div className={css['img-container']}>
+                                            <img
+                                                className={css['img']}
+                                                src={BASE_URL + '/' + task.preview}
+                                                alt="иконка задачи"
+                                            />
+                                        </div>
                                     </div>
                                 ) : (
-                                    <div className={css['without-img-container']}>
-                                        <span className={css['header--h5']}>У этой задачи нет иконки</span>
+                                    <div>
+                                        <div className={css['without-img-container']}>
+                                            <span className={css['header--h5']}>
+                                                У этой задачи нет иконки
+                                            </span>
+                                        </div>
                                     </div>
                                 )}
                             </div>

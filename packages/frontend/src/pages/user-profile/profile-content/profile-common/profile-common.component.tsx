@@ -26,7 +26,6 @@ export const ProfileCommon = () => {
                 footerText="Используется для верификации пользователя"
                 mainText={data?.id}
             />
-            <UserDeleteField title="Удалить мой аккаунт" />
         </div>
     );
 };

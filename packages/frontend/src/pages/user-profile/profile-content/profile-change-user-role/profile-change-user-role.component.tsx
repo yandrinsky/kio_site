@@ -19,7 +19,7 @@ export const ProfileChangeUserRole: React.FC = () => {
 
     const [role, setRole] = useState<string[]>();
 
-    useEffect(() => setRole(userList?.map(() => 'Admin')), [userList]);
+    useEffect(() => setRole(userList?.map(user => user.role)), [userList]);
 
     return (
         <div className={css.page}>
