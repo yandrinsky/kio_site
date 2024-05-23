@@ -1,5 +1,3 @@
-import { FormEvent } from 'react';
-
 import { ROUTES } from '@constants/routes';
 
 import { Button } from '@components/ui-kit/button/button.component';
