@@ -11,7 +11,7 @@ export const uploadTaskSourceValidator: TValidator<IUploadTaskSourceDTO> = async
 
     const projectCode = req.files?.project as UploadedFile;
     const stateChecker = req.files?.stateChecker as UploadedFile;
-    const resultChecker = req.files?.resultChecker as UploadedFile;
+    const resultChecker = req.files?.getResult as UploadedFile;
 
     if (role !== ERoles.Admin && role !== ERoles.Creator) {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
@@ -28,22 +28,27 @@ export const uploadTaskSourceValidator: TValidator<IUploadTaskSourceDTO> = async
     }
 
     if (!projectCode || Array.isArray(projectCode)) {
+        console.log('here1');
         return CLIENT_ERRORS.BAD_DTO;
     }
 
     if (!stateChecker || Array.isArray(stateChecker)) {
+        console.log('here2');
         return CLIENT_ERRORS.BAD_DTO;
     }
 
     if (!resultChecker || Array.isArray(resultChecker)) {
+        console.log('here3');
         return CLIENT_ERRORS.BAD_DTO;
     }
 
     if (stateChecker.name.split('.').pop() !== 'js') {
+        console.log('here4');
         return CLIENT_ERRORS.BAD_DTO;
     }
 
     if (resultChecker.name.split('.').pop() !== 'js') {
+        console.log('here5');
         return CLIENT_ERRORS.BAD_DTO;
     }
 };

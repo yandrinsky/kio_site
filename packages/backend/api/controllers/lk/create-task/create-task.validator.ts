@@ -11,6 +11,12 @@ export const createTaskValidator: TValidator<ICreateTaskDTO> = async req => {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 
+    try {
+        req.body.settings && JSON.parse(req.body.settings);
+    } catch (e) {
+        return CLIENT_ERRORS.BAD_JSON;
+    }
+
     const task = await Task.exists({ name: req.body.name });
 
     if (task) {
