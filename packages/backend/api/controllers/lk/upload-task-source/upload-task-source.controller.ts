@@ -4,12 +4,14 @@ import { UploadedFile } from 'express-fileupload';
 import { toSaveFileDir } from '../../../../domain/utils/save-file';
 import { SERVER_ERRORS } from '../../../../domain/errors';
 import { unzip } from '../../../../domain/utils/unzip/unzip';
+import { Task } from '../../../../bd/schemas/task.schema';
 
 export const uploadTaskSourceController: TController<IUploadTaskSourceDTO> = async (req, resp) => {
     const { taskId } = req.body;
     const projectCode = req.files?.project as UploadedFile;
     const stateChecker = req.files?.stateChecker as UploadedFile;
-    const getResult = req.files?.resultChecker as UploadedFile;
+    const getResult = req.files?.getResult as UploadedFile;
+    const task = await Task.findOne({ _id: taskId });
 
     await unzip({
         data: projectCode.data,
@@ -29,6 +31,19 @@ export const uploadTaskSourceController: TController<IUploadTaskSourceDTO> = asy
         method: 'POST',
         body: formData
     });
+
+    fetch('http://host.docker.internal:3030/BUILD_TASK_QUERY', {
+        method: 'POST',
+        body: JSON.stringify({ taskId }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(json => {
+            task!.url = json.port;
+            task!.save();
+        });
 
     const response: IUploadTaskSourceResponse = { status: 'ok' };
     return resp.status(200).json(response);
