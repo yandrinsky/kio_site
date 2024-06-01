@@ -6,16 +6,27 @@ import { TaskCard } from '../task-card/task-card.component';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
 import { BASE_URL } from '@api/constants/base';
 import { clx } from '@utils/clx';
+import { CreatingTaskModal } from '../creating-task-modal/creating-task-modal.component';
+import { useMeRequest } from '@api/index';
 
 export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
     const { data: taskList } = useGetCreatedTasksListRequest();
+    const { data } = useMeRequest();
 
     const [isOpen, setIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [taskId, setTaskId] = useState<string>();
 
     return (
         <div className={css['created-task-list']}>
-            {isOpen && <TaskCard taskId={taskId ?? ''} setIsOpen={setIsOpen} updateTask={updateTask} />}
+            {isOpen && (
+                <TaskCard
+                    taskId={taskId ?? ''}
+                    setIsOpen={setIsOpen}
+                    updateTask={updateTask}
+                    userRole={data?.role}
+                />
+            )}
             {taskList?.length ? (
                 taskList.map(task => (
                     <div key={task.id} className={css['created-task-list__container']}>
@@ -70,7 +81,13 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
                                     >
                                         Открыть
                                     </Button>
-                                    <Button onClick={() => updateTask(task.id)}>Редактировать</Button>
+                                    <Button
+                                        onClick={() => {
+                                            task.isApproved ? setIsModalOpen(true) : updateTask(task.id);
+                                        }}
+                                    >
+                                        Редактировать
+                                    </Button>
                                 </div>
                             </div>
 
@@ -90,6 +107,14 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
                                 </div>
                             )}
                         </div>
+
+                        <CreatingTaskModal
+                            isOpen={isModalOpen}
+                            setIsOpen={setIsModalOpen}
+                            userRole={data?.role}
+                            updateTask={updateTask}
+                            taskId={task.id}
+                        />
                     </div>
                 ))
             ) : (

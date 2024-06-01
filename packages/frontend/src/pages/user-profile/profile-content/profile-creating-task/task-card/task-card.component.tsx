@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import css from './task-card.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { ITaskCard } from './task-card';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
 import { BASE_HOSTNAME, BASE_URL } from '@api/constants/base';
 import { useStartTaskMutation } from '@api/routes/start-task';
+import { CreatingTaskModal } from '../creating-task-modal/creating-task-modal.component';
 
-export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen }) => {
+export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen, userRole }) => {
     const { data: taskList } = useGetCreatedTasksListRequest();
     const { mutate, data } = useStartTaskMutation();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const task = taskList?.filter(task => task.id === taskId)[0];
 
     useEffect(() => {
         if (data?.url) {
-            console.log('here!!');
             window.location.href = BASE_HOSTNAME + ':' + data?.url + '?token=' + data?.token;
         }
     }, [data?.url]);
@@ -45,7 +47,13 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen })
                                 <Button theme="accent" onClick={() => mutate({ taskId: task?.id ?? '' })}>
                                     Начать
                                 </Button>
-                                <Button onClick={() => updateTask(taskId)}>Редактировать</Button>
+                                <Button
+                                    onClick={() => {
+                                        task?.isApproved ? setIsModalOpen(true) : updateTask(taskId);
+                                    }}
+                                >
+                                    Редактировать
+                                </Button>
                                 <Button theme="colored-red" onClick={() => setIsOpen(false)}>
                                     Закрыть
                                 </Button>
@@ -59,6 +67,15 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen })
                     </div>
                 </div>
             </div>
+
+            <CreatingTaskModal
+                isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
+                userRole={userRole}
+                updateTask={updateTask}
+                taskId={taskId}
+            />
+
             <div className={css['task-card__hidden']} onClick={() => setIsOpen(false)} />
         </>
     );
