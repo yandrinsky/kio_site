@@ -36,7 +36,7 @@ export const ProfileChangeUserRole: React.FC = () => {
             />
             <div className={css['user-list']}>
                 {userList?.length ? (
-                    userList.map((user, index) => (
+                    userList.map((user, userNumber) => (
                         <div key={user.id} className={css['container']}>
                             <div className={css['content']}>
                                 <div>
@@ -60,9 +60,15 @@ export const ProfileChangeUserRole: React.FC = () => {
                                         <span className={clx(css['header--h5'], css['select-container'])}>
                                             Роль:
                                             <Select
-                                                value={role?.[index] ?? ''}
+                                                value={role?.[userNumber] ?? ''}
                                                 disabled={user.id === data?.id}
-                                                onChange={role => setRole(state => [...(state ?? []), role])}
+                                                onChange={role =>
+                                                    setRole(state =>
+                                                        state?.map((el, index) =>
+                                                            index === userNumber ? role : el
+                                                        )
+                                                    )
+                                                }
                                             >
                                                 <Option name="Admin">Администратор</Option>
                                                 <Option name="Creator">Создатель</Option>
@@ -79,7 +85,7 @@ export const ProfileChangeUserRole: React.FC = () => {
                                                 theme="accent"
                                                 onClick={() =>
                                                     changeRoleMutation({
-                                                        role: role?.[index] as ERoles,
+                                                        role: role?.[userNumber] as ERoles,
                                                         userId: user.id
                                                     })
                                                 }
