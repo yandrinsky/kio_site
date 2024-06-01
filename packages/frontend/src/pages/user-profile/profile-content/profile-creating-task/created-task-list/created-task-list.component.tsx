@@ -47,6 +47,17 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
                                             ? 'Задача доступна для решения'
                                             : 'Задача недоступна для решения'}
                                     </span>
+
+                                    <span
+                                        className={clx(
+                                            task.url
+                                                ? css['task-status-container__item--green']
+                                                : css['task-status-container__item--red'],
+                                            css['created-task-list__header--h5']
+                                        )}
+                                    >
+                                        {task.url ? 'Задача запущена' : 'Задача не запущена'}
+                                    </span>
                                 </div>
 
                                 <div className={css['created-task-list__buttons']}>

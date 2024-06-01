@@ -24,7 +24,7 @@ export const getK8sConfig = () => {
 export const getNewPort = () => {
     const config = getK8sConfig();
 
-    const lastPort = config?.items?.slice(-1)[0].spec.ports[0]?.port;
+    const lastPort = config?.items?.slice(-1)[0].spec?.ports?.[0]?.port;
     return lastPort ? lastPort + 1 : 3060;
 };
 
