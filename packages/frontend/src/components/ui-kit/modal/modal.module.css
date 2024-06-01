@@ -1,5 +1,9 @@
 .modal {
     overscroll-behavior: contain;
+
+    border: 1px solid var(--accent-light-color);
+    background-color: #FAFAFA;
+    border-radius: 8px;
 }
 
 .modal::backdrop {

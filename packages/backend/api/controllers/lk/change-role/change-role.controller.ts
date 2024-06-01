@@ -8,12 +8,8 @@ export const changeRoleController: TController<IChangeRoleDto> = async (req, res
 
     const user = await User.findOne({ _id: userId });
 
-    if (!user) {
-        return resp.status(CLIENT_ERRORS.USER_DOESNT_EXISTS.code).json(CLIENT_ERRORS.USER_DOESNT_EXISTS);
-    }
-
-    user.claims.role = role;
-    await user.save();
+    user!.claims.role = role;
+    await user!.save();
 
     const response: IChangeRoleResponse = { status: 'ok' };
 

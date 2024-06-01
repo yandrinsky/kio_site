@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useState } from 'react';
-import { HeaderComponent } from '../header/header.component';
+import { Header } from '../header/header.component';
 import { Footer } from '../footer/footer.component';
 import { Navigate } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
@@ -35,7 +35,7 @@ export const Layout: FC<PropsWithChildren<ILayout>> = ({
 
     return (
         <>
-            <HeaderComponent withNav={withNav} withHelp={withHelp} />
+            <Header withNav={withNav} withHelp={withHelp} />
             {children}
             {withFooter && <Footer />}
             <Toast />

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-rush update
-cd packages/backend
+cd packages/frontend
 npm install
 cd ../..
-docker-compose -f frontend.docker-compose.yaml up
+docker-compose -f backend.docker-compose.yaml up

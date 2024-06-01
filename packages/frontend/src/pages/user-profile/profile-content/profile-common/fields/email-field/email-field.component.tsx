@@ -1,19 +1,16 @@
 import { useMeRequest } from '@api/index';
-import { UserInputField } from '@components/user-profile-fields/user-input-field/user-input-field.component';
 import React from 'react';
-import { getValidationResult } from './email-field.utils';
+import { UserInfoField } from '@components/user-profile-fields/user-info-field/user-info-field.component';
 
 export const EmailField: React.FC = () => {
     const { data } = useMeRequest();
 
     return (
-        <UserInputField
+        <UserInfoField
             title="Ваш email адрес"
             subtitle="Это ваш email, с помощью которого вы входите в kio"
-            footerText="Мы отправим письмо на эту почту для проверки"
-            value={data?.email}
-            validate={value => getValidationResult(value)}
-            onSave={data => console.log('onSave', data)}
+            footerText="Используется для обратной связи с пользователем"
+            mainText={data?.email}
         />
     );
 };

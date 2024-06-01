@@ -23,6 +23,8 @@ export const useSignInMutation = () => {
         retry: 1,
         onSuccess: () => {
             client.invalidateQueries([QUERY_KEYS.ME]);
+            client.invalidateQueries([QUERY_KEYS.GET_CREATED_TASKS_LIST]);
+            client.invalidateQueries([QUERY_KEYS.GET_MY_TASKS_LIST]);
         }
     });
 };

@@ -19,7 +19,7 @@ export const ProfileChangeUserRole: React.FC = () => {
 
     const [role, setRole] = useState<string[]>();
 
-    useEffect(() => setRole(userList?.map(() => 'Admin')), [userList]);
+    useEffect(() => setRole(userList?.map(user => user.role)), [userList]);
 
     return (
         <div className={css.page}>
@@ -92,21 +92,17 @@ export const ProfileChangeUserRole: React.FC = () => {
                                     </div>
                                 </div>
 
-                                {user.avatarUrl ? (
-                                    <div className={css['img-container']}>
-                                        <img
-                                            className={css['img']}
-                                            src={BASE_URL + '/' + user.avatarUrl}
-                                            alt="иконка задачи"
-                                        />
-                                    </div>
-                                ) : (
-                                    <div className={css['without-img-container']}>
-                                        <span className={css['header--h5']}>
-                                            У этого пользователя нет иконки
-                                        </span>
-                                    </div>
-                                )}
+                                <div className={css['img-container']}>
+                                    <img
+                                        className={css['img']}
+                                        src={
+                                            user.avatarUrl
+                                                ? BASE_URL + '/' + user.avatarUrl
+                                                : '/default-avatar.svg'
+                                        }
+                                        alt="иконка задачи"
+                                    />
+                                </div>
                             </div>
                         </div>
                     ))

@@ -9,8 +9,11 @@ import { IUploadTaskSourceDTO, IUploadTaskSourceResponse } from '../../../../bac
 const UPLOAD_TASK_SOURCE_URL = `${BASE_URL}/UPLOAD_TASK_SOURCE_QUERY`;
 
 export async function setUploadTaskSourceRequest(body: IUploadTaskSourceDTO) {
+    const formData = new FormData();
+    Object.entries(body).forEach(([key, value]) => formData.append(key, value));
+
     return await makeRequest<IUploadTaskSourceResponse>(UPLOAD_TASK_SOURCE_URL, {
-        body
+        body: formData
     });
 }
 

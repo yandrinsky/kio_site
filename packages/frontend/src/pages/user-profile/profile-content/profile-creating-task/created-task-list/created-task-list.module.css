@@ -53,6 +53,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    height: 275px;
     width: 450px;
     padding: 20px 0 15px 0;
 }
@@ -70,10 +71,25 @@
 }
 
 .created-task-list__img {
-    height: 128px;
+    height: 100%;
     width: 450px;
 
     border-radius: var(--border-radius);
     overflow: hidden;
     object-fit: cover;
+}
+
+.task-status-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 30px;
+}
+
+.task-status-container__item--green {
+    color: green;
+}
+
+.task-status-container__item--red {
+    color: red;
 }

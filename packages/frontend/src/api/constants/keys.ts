@@ -13,6 +13,8 @@ export const QUERY_KEYS = {
     UPDATE_TASK: 'update-task',
     APPROVE_TASK: 'approve-task',
     UPLOAD_TASK_SOURCE: 'upload-task-source',
-    SEARCH_USER: 'search-user',
-    CHANGE_ROLE: 'change-role'
+    GET_MY_TASKS_LIST: 'get-my-tasks-list',
+    GET_TASKS_LIST: 'get-tasks-list',
+    START_TASK: 'start-task',
+    SEARCH_USER: 'search-user'
 };

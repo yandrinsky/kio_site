@@ -4,9 +4,11 @@ import { useUploadTaskSourceMutation } from '@api/routes/upload-task-source';
 import { useState } from 'react';
 import { IUseUpdateTask } from './update-task';
 import { useDeleteTaskMutation } from '@api/routes/delete-task';
+import { useMeRequest } from '@api/index';
 
 export const useUpdateTask: IUseUpdateTask = updateTaskId => {
     const { mutate: updateTaskMutation } = useUpdateTaskMutation();
+    const { data } = useMeRequest();
     const { mutate: deleteTaskMutation } = useDeleteTaskMutation();
 
     const { data: taskList } = useGetCreatedTasksListRequest();
@@ -16,9 +18,14 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
 
     const [taskName, setTaskName] = useState(updatedTask?.name ?? '');
     const [description, setDescription] = useState(updatedTask?.description ?? '');
+    const [settings, setSettings] = useState(JSON.stringify(updatedTask?.settings));
+    const [isAvailable, setIsAvailable] = useState(updatedTask?.isAvailable ?? false);
+    const [isOpen, setIsOpen] = useState(false);
+
     const preview = updatedTask?.preview ?? '';
 
     return {
+        userRole: data?.role,
         updateTaskMutation,
         deleteTaskMutation,
         uploadTaskSourceMutation,
@@ -28,6 +35,12 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
         setTaskName,
         description,
         setDescription,
-        preview
+        isAvailable,
+        setIsAvailable,
+        preview,
+        settings,
+        setSettings,
+        isOpen,
+        setIsOpen
     };
 };

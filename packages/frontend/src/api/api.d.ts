@@ -9,7 +9,7 @@ import type {
 import { IUserBD } from '../../../backend/bd/types/user-bd.interface';
 import { ICLIENT_ERROR, EErrorNames } from '../../../backend/domain/errors/client-errors';
 
-export type { IUserBD, IMeResponse, ISignInResponse, ISignInDto, ISignUpDto, ISignUpResponse, EErrorNames};
+export type { IUserBD, IMeResponse, ISignInResponse, ISignInDto, ISignUpDto, ISignUpResponse, EErrorNames };
 export type TIsLogin =
   | {
       isLogin: false;
@@ -17,7 +17,6 @@ export type TIsLogin =
   | ({ isLogin: true } & IMeResponse);
 
 export type TError = ICLIENT_ERROR;
-
 
 export type TUseAppMutation = <TData = unknown, TError = unknown, TVariables = void, TContext = unknown>(
   options: UseMutationOptions<TData, TError, TVariables, TContext>,

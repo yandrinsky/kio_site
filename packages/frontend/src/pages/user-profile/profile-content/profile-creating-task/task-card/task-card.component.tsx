@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import css from './task-card.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { ITaskCard } from './task-card';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
-import { BASE_URL } from '@api/constants/base';
+import { BASE_HOSTNAME, BASE_URL } from '@api/constants/base';
+import { useStartTaskMutation } from '@api/routes/start-task';
 
 export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen }) => {
     const { data: taskList } = useGetCreatedTasksListRequest();
+    const { mutate, data } = useStartTaskMutation();
+
     const task = taskList?.filter(task => task.id === taskId)[0];
+
+    useEffect(() => {
+        if (data?.url) {
+            console.log('here!!');
+            window.location.href = BASE_HOSTNAME + ':' + data?.url + '?token=' + data?.token;
+        }
+    }, [data?.url]);
 
     return (
         <>
@@ -32,7 +42,9 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, updateTask, setIsOpen })
 
                         <div className={css['task-card__buttons-container']}>
                             <div className={css['task-card__buttons']}>
-                                <Button theme="accent">Начать</Button>
+                                <Button theme="accent" onClick={() => mutate({ taskId: task?.id ?? '' })}>
+                                    Начать
+                                </Button>
                                 <Button onClick={() => updateTask(taskId)}>Редактировать</Button>
                                 <Button theme="colored-red" onClick={() => setIsOpen(false)}>
                                     Закрыть

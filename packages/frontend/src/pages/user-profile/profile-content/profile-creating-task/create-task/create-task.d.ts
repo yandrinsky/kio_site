@@ -30,6 +30,7 @@ export type IUseCreateTask = () => {
   isRequiredFieldsFilled: boolean;
   isUploadTaskSourceVisible: boolean;
   settings: string;
+  setSettings: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type IHandleFileChange = (props: {
@@ -46,3 +47,8 @@ export type IHandleOnSubmit = (props: {
   settings: string;
   previewFile: File | undefined;
 }) => void;
+
+export type IGetValidationResult = (props: {
+  value: string;
+  type: 'description' | 'taskName' | 'settings';
+}) => boolean | string;

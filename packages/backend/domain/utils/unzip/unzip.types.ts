@@ -3,4 +3,5 @@ export type IUnzip = (data: {
     onError?: (err: Error) => void;
     path: string;
     data: Buffer;
+    name?: string;
 }) => Promise<void>;
