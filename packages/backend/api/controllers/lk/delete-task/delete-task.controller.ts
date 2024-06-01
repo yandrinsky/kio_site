@@ -56,7 +56,6 @@ export const deleteTaskController: TController<IDeleteTaskDTO> = async (req, res
 
     task!.deleteOne();
 
-    //Удалить папку с файлами
     const response: IDeleteTaskResponse = { status: 'ok' };
 
     resp.status(200).json(response);

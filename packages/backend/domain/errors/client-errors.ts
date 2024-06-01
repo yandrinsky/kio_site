@@ -16,6 +16,7 @@ export type EErrorNames =
     | 'TRY_DOESNT_EXIST'
     | 'FRAME_DOESNT_EXIST'
     | 'SOLUTION_ALREADY_EXIST'
+    | 'TASK_DOESNT_APPROVED'
     | 'NAME_IS_ALREADY_USED'
     | 'TASK_DOESNT_APPROVED'
     | 'BAD_JSON';

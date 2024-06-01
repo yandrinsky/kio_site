@@ -1,5 +1,5 @@
 export type IGetMyTasksListResponse = {
     id: string;
     name: string;
-    preview;
+    preview: string;
 }[];

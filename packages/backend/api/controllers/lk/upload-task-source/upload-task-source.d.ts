@@ -4,6 +4,6 @@ export interface IUploadTaskSourceDTO {
     taskId: string;
     project: File;
     stateChecker: File;
-    resultChecker: File;
+    getResult: File;
 }
 export interface IUploadTaskSourceResponse extends ISuccessResponse {}

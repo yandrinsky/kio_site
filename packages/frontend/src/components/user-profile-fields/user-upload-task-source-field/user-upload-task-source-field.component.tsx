@@ -146,7 +146,7 @@ export const UserUploadTaskSourceField: FC<IUserUploadTaskSourceField> = ({
                             taskId,
                             project: moduleArchive!,
                             stateChecker: stateChecker!,
-                            resultChecker: resultChecker!
+                            getResult: resultChecker!
                         });
                     }}
                 >
