@@ -16,5 +16,6 @@ export const QUERY_KEYS = {
     GET_MY_TASKS_LIST: 'get-my-tasks-list',
     GET_TASKS_LIST: 'get-tasks-list',
     START_TASK: 'start-task',
-    SEARCH_USER: 'search-user'
+    SEARCH_USER: 'search-user',
+    CHANGE_ROLE: 'change-role'
 };

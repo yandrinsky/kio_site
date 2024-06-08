@@ -1,0 +1,35 @@
+.modal-children {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    width: 300px;
+}
+
+.modal-children-text {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.header--h3 {
+    margin: 0;
+
+    font-weight: lighter;
+    font-size: 1.4rem;
+}
+
+.info-text {
+    font-size: 0.9rem;
+    color: var(--blur-text-color);
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
