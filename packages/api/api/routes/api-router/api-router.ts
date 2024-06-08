@@ -13,6 +13,7 @@ import {
 } from '../../controllers';
 import { controllerErrorBounding } from '../../../domain/errors';
 import { loginController } from '../../controllers/api/login';
+import { getSettingsController } from '../../controllers/api/get-settings';
 
 const apiRouter = Router();
 
@@ -67,6 +68,12 @@ apiRouter.post(
         check('frameId').isString()
     ]),
     controllerErrorBounding(switchHeadFrameController)
+);
+
+apiRouter.post(
+    QUERY_KEYS.GET_SETTINGS,
+    validationMiddleware([check('taskId').isString()]),
+    controllerErrorBounding(getSettingsController)
 );
 
 apiRouter.post(
