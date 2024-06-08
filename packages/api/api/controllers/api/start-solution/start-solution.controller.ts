@@ -32,8 +32,6 @@ export const startSolutionController: TController<IStartSolutionDto> = async (re
         return resp.status(CLIENT_ERRORS.LACK_OF_RIGHTS.code).json(CLIENT_ERRORS.LACK_OF_RIGHTS);
     }
 
-    console.log('startSolutionController', solution);
-
     if (solution) {
         return resp
             .status(CLIENT_ERRORS.SOLUTION_ALREADY_EXIST.code)

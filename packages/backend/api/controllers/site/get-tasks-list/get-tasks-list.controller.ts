@@ -10,7 +10,7 @@ export const getTasksListController: TController<null> = async (req, resp) => {
     try {
         mutablePromiseRes = await Promise.all([
             Solution.find({ ownerId: req.user?._id }).select('taskId'),
-            Task.find()
+            Task.find({ isAvailable: true })
         ]);
     } catch (e) {
         return resp.status(SERVER_ERRORS.BD_ERROR.code).json(SERVER_ERRORS.BD_ERROR);
@@ -18,18 +18,13 @@ export const getTasksListController: TController<null> = async (req, resp) => {
 
     const [solutions, tasks] = mutablePromiseRes;
 
-    const response: IGetTasksListResponse = tasks
-        .map(
-            task =>
-                task.isApproved && {
-                    id: task.id,
-                    name: task.name,
-                    preview: task.preview,
-                    isAvailable: task.isAvailable,
-                    participateIn: Boolean(solutions.find(el => el.taskId === task.id))
-                }
-        )
-        .filter(Boolean) as IGetTasksListResponse;
+    const response: IGetTasksListResponse = tasks.map(task => ({
+        id: task.id,
+        name: task.name,
+        preview: task.preview,
+        isAvailable: task.isAvailable,
+        participateIn: Boolean(solutions.find(el => el.taskId === task.id))
+    }));
 
     resp.status(200).json(response);
 };

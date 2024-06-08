@@ -16,8 +16,6 @@ import path from 'path';
 export const buildTaskController: TController<IBuildTaskDto> = async (req, resp) => {
     const { taskId } = req.body;
 
-    console.log('req.body', req.body);
-    console.log('buildStart');
     let k8sConfig = getK8sConfig();
     const port = getNewPort();
 

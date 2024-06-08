@@ -6,13 +6,13 @@ import { Task } from '../../../../bd/schemas/task.schema';
 
 export const getTaskValidator: TValidator<IGetTaskDto> = async req => {
     const role = req.user?.claims.role;
-    const task = await Task.findOne({ _id: req.body.taskId });
+    const task = await Task.findOne({ _id: req.body.taskId }).select('isAvailable creatorId');
 
     if (!task) {
         return CLIENT_ERRORS.TASK_DOESNT_EXIST;
     }
 
-    if (!task.isApproved && role !== ERoles.Admin && task.creatorId !== req.user?._id) {
+    if (!task.isAvailable && role !== ERoles.Admin && task.creatorId !== req.user?._id) {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 };

@@ -22,19 +22,21 @@ export const newTryController: TController<INewTryDto> = async (req, resp) => {
 
     const initialFrame = await new Frame({
         comment: 'Initial empty frame'
-    }).save();
+    });
 
     const newTry = await new Try({
         framesTree: { parent: null, children: [], data: { _id: initialFrame._id } },
         headFrameId: initialFrame._id,
         name: name ?? 'Initial'
-    }).save();
+    });
 
     solution.tries.push(newTry._id);
     solution.currentTryId = newTry._id;
     solution.markModified('tries');
 
     await solution.save();
+    await initialFrame.save();
+    await newTry.save();
 
     const response: INewTryResponse = { tryId: newTry._id };
 
