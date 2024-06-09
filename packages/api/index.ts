@@ -12,7 +12,16 @@ const app = express();
 const port = process.env.PORT ?? 3001;
 const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOSTNAME}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}?authSource=admin`;
 
-app.use(cors({ origin: '*' }));
+const corsOptions: cors.CorsOptions = {
+    origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+        callback(null, true);
+    },
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(cookieParser('secret'));
 app.use(express.urlencoded({ extended: true }));

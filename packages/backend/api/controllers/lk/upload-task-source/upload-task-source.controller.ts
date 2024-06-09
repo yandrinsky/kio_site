@@ -5,6 +5,7 @@ import { toSaveFileDir } from '../../../../domain/utils/save-file';
 import { SERVER_ERRORS } from '../../../../domain/errors';
 import { unzip } from '../../../../domain/utils/unzip/unzip';
 import { Task } from '../../../../bd/schemas/task.schema';
+import path from 'path';
 
 export const uploadTaskSourceController: TController<IUploadTaskSourceDTO> = async (req, resp) => {
     const { taskId } = req.body;
@@ -15,7 +16,7 @@ export const uploadTaskSourceController: TController<IUploadTaskSourceDTO> = asy
 
     await unzip({
         data: projectCode.data,
-        path: toSaveFileDir + '/' + taskId + '/task-source/',
+        path: path.join(toSaveFileDir, taskId, 'task-source'),
         onError: () => resp.status(SERVER_ERRORS.UNZIP_ERROR.code).json(SERVER_ERRORS.UNZIP_ERROR)
     });
 
@@ -27,23 +28,31 @@ export const uploadTaskSourceController: TController<IUploadTaskSourceDTO> = asy
     formData.append('getResult', getResultBlob);
     formData.append('taskId', taskId);
 
-    await fetch('http://verification:3020/UPLOAD_TASK_VERIFICATIONS_QUERY', {
-        method: 'POST',
-        body: formData
-    });
-
-    fetch('http://host.docker.internal:3030/BUILD_TASK_QUERY', {
-        method: 'POST',
-        body: JSON.stringify({ taskId }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(json => {
-            task!.url = json.port;
-            task!.save();
+    try {
+        await fetch('http://verification:3020/UPLOAD_TASK_VERIFICATIONS_QUERY', {
+            method: 'POST',
+            body: formData
         });
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+        fetch('http://host.docker.internal:3030/BUILD_TASK_QUERY', {
+            method: 'POST',
+            body: JSON.stringify({ taskId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(json => {
+                task!.url = json.port;
+                task!.save();
+            });
+    } catch (e) {
+        console.log(e);
+    }
 
     const response: IUploadTaskSourceResponse = { status: 'ok' };
     return resp.status(200).json(response);
