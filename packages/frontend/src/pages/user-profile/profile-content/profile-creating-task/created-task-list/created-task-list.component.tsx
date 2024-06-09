@@ -83,6 +83,7 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
                                     </Button>
                                     <Button
                                         onClick={() => {
+                                            setTaskId(task.id);
                                             task.isApproved ? setIsModalOpen(true) : updateTask(task.id);
                                         }}
                                     >
@@ -113,7 +114,7 @@ export const CreatedTaskList: React.FC<ICreatedTaskList> = ({ updateTask }) => {
                             setIsOpen={setIsModalOpen}
                             userRole={data?.role}
                             updateTask={updateTask}
-                            taskId={task.id}
+                            taskId={String(taskId)}
                         />
                     </div>
                 ))
