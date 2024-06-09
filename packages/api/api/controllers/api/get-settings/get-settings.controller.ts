@@ -1,14 +1,12 @@
-import { IGetSettingsResponse, IGetSettingsDto } from './get-settings';
+import { IGetSettingsResponse } from './get-settings';
 import { CLIENT_ERRORS, SERVER_ERRORS } from '../../../../domain/errors';
 import { TController } from '../../../../domain/types';
 import { Task } from '../../../../bd/schemas/task.schema';
-export const getSettingsController: TController<IGetSettingsDto> = async (req, resp) => {
-    const { taskId } = req.body;
-
+export const getSettingsController: TController<null> = async (req, resp) => {
     let task;
 
     try {
-        task = await Task.findOne({ _id: taskId });
+        task = await Task.findOne({ _id: req?.taskId });
     } catch (e) {
         return resp.status(SERVER_ERRORS.BD_ERROR.code).json(SERVER_ERRORS.BD_ERROR);
     }

@@ -1,15 +1,13 @@
 import { Frame, IFrame } from '../../../../bd';
-import { IGetCurrentSolutionDto, IGetCurrentSolutionResponse } from './get-current-solution';
+import { IGetCurrentSolutionResponse } from './get-current-solution';
 import { CLIENT_ERRORS, SERVER_ERRORS } from '../../../../domain/errors';
 import { TController } from '../../../../domain/types';
 import { Solution, Try } from '../../../../bd';
-export const getCurrentSolutionController: TController<IGetCurrentSolutionDto> = async (req, resp) => {
-    const { taskId } = req.body;
-
+export const getCurrentSolutionController: TController<null> = async (req, resp) => {
     let solution;
 
     try {
-        solution = await Solution.findOne({ ownerId: req.user?._id, taskId });
+        solution = await Solution.findOne({ ownerId: req.user?._id, taskId: req?.taskId });
     } catch (e) {
         return resp.status(SERVER_ERRORS.BD_ERROR.code).json(SERVER_ERRORS.BD_ERROR);
     }

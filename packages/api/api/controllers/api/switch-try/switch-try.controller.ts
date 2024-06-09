@@ -4,13 +4,13 @@ import { TController } from '../../../../domain/types';
 import { Solution, Try, Frame, IFrame } from '../../../../bd';
 
 export const switchTryController: TController<ISwitchTryDto> = async (req, resp) => {
-    const { taskId, tryId } = req.body;
+    const { tryId } = req.body;
 
     let mutablePromiseRes;
 
     try {
         mutablePromiseRes = await Promise.all([
-            Solution.findOne({ ownerId: req.user?._id, taskId }),
+            Solution.findOne({ ownerId: req.user?._id, taskId: req.taskId }),
             Try.findOne({ _id: tryId })
         ]);
     } catch (e) {

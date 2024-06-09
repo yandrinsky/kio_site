@@ -5,13 +5,13 @@ import { Solution, Try, Frame, CommitVerificationQueue } from '../../../../bd';
 import { treeForwardTraversal } from '../../../../domain/utils';
 
 export const commitController: TController<ICommitDto> = async (req, resp) => {
-    const { taskId, parentId, tryId, comment, state, result } = req.body;
+    const { parentId, tryId, comment, state, result } = req.body;
 
     let res;
 
     try {
         res = await Promise.all([
-            Solution.findOne({ ownerId: req.user?._id, taskId }),
+            Solution.findOne({ ownerId: req.user?._id, taskId: req.taskId }),
             Try.findOne({ _id: tryId }),
             Frame.findOne({ _id: parentId }, '-state -result')
         ]);
@@ -47,7 +47,7 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
     currentTry.markModified('framesTree');
 
     const CommitQueueItem = new CommitVerificationQueue({
-        taskId,
+        taskId: req.taskId,
         tryId,
         commitId: newFrame._id
     });

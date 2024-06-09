@@ -1,19 +1,17 @@
-import { IStartSolutionResponse, IStartSolutionDto } from './start-solution';
+import { IStartSolutionResponse } from './start-solution';
 import { CLIENT_ERRORS, SERVER_ERRORS } from '../../../../domain/errors';
 import { TController } from '../../../../domain/types';
-import { Solution, Try, Frame, ERoles } from '../../../../bd';
+import { Solution, Try, Frame } from '../../../../bd';
 import { Task } from '../../../../bd/schemas/task.schema';
 import { SETTINGS } from '../../../../settings';
 
-export const startSolutionController: TController<IStartSolutionDto> = async (req, resp) => {
-    const { taskId } = req.body;
-
+export const startSolutionController: TController<null> = async (req, resp) => {
     let mutablePromiseRes;
 
     try {
         mutablePromiseRes = await Promise.all([
-            Solution.findOne({ ownerId: req.user?._id, taskId }),
-            Task.findOne({ _id: taskId }).select('isAvailable')
+            Solution.findOne({ ownerId: req.user?._id, taskId: req.taskId }),
+            Task.findOne({ _id: req.taskId }).select('isAvailable')
         ]);
     } catch (e) {
         return resp.status(SERVER_ERRORS.BD_ERROR.code).json(SERVER_ERRORS.BD_ERROR);
@@ -49,7 +47,7 @@ export const startSolutionController: TController<IStartSolutionDto> = async (re
     });
 
     const newSolution = new Solution({
-        taskId,
+        taskId: req.taskId,
         ownerId: req.user?._id,
         tries: [initialTry._id],
         currentTryId: initialTry._id

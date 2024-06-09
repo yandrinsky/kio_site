@@ -5,13 +5,13 @@ import { Solution, Try, Frame } from '../../../../bd';
 import { treeForwardTraversal } from '../../../../domain/utils';
 
 export const switchHeadFrameController: TController<ISwitchHeadFrameDto> = async (req, resp) => {
-    const { taskId, tryId, frameId } = req.body;
+    const { tryId, frameId } = req.body;
 
     let mutablePromiseRes;
 
     try {
         mutablePromiseRes = await Promise.all([
-            Solution.findOne({ ownerId: req.user?._id, taskId }, 'tries'),
+            Solution.findOne({ ownerId: req.user?._id, taskId: req.taskId }, 'tries'),
             Try.findOne({ _id: tryId }, 'headFrameId framesTree'),
             Frame.findOne({ _id: frameId })
         ]);

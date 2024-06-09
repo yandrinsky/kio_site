@@ -4,12 +4,12 @@ import { TController } from '../../../../domain/types';
 import { Solution, Try, Frame } from '../../../../bd';
 
 export const newTryController: TController<INewTryDto> = async (req, resp) => {
-    const { taskId, name } = req.body;
+    const { name } = req.body;
 
     let solution;
 
     try {
-        solution = await Solution.findOne({ ownerId: req.user?._id, taskId });
+        solution = await Solution.findOne({ ownerId: req.user?._id, taskId: req.taskId });
     } catch (e) {
         return resp.status(SERVER_ERRORS.BD_ERROR.code).json(SERVER_ERRORS.BD_ERROR);
     }

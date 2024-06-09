@@ -1,11 +1,9 @@
 import { Response } from 'express';
 
 export type ISetAuthTokens = ({
-    access_token,
-    refresh_token,
+    data,
     resp
 }: {
-    access_token?: string;
-    refresh_token?: string;
+    data: { access_token: string; refresh_token: string; taskId: string };
     resp: Response;
 }) => Response;

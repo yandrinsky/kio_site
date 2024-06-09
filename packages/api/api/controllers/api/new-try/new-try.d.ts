@@ -1,5 +1,4 @@
 export interface INewTryDto {
-    taskId: string;
     name?: string;
 }
 

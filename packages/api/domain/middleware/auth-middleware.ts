@@ -28,6 +28,7 @@ export const authMiddleware = async <T>(
 
     const accessToken = req.signedCookies[TOKEN_COLLECTION.ACCESS_TOKEN];
     const refreshToken = req.signedCookies[TOKEN_COLLECTION.REFRESH_TOKEN];
+    const taskId = req.signedCookies[TOKEN_COLLECTION.TASK_ID];
 
     if (!accessToken && !refreshToken) {
         resp.status(CLIENT_ERRORS.UNAUTHORIZED.code).json(CLIENT_ERRORS.UNAUTHORIZED);
@@ -48,8 +49,11 @@ export const authMiddleware = async <T>(
             return;
         } else {
             setAuthTokens({
-                refresh_token: refreshResult.refresh_token,
-                access_token: refreshResult.access_token,
+                data: {
+                    refresh_token: refreshResult.refresh_token,
+                    access_token: refreshResult.access_token,
+                    taskId: taskId
+                },
                 resp
             });
 
@@ -70,7 +74,7 @@ export const authMiddleware = async <T>(
         return;
     }
 
-    if (!user) {
+    if (!user || !taskId) {
         resp.clearCookie(TOKEN_COLLECTION.REFRESH_TOKEN);
         resp.clearCookie(TOKEN_COLLECTION.ACCESS_TOKEN);
         resp.status(CLIENT_ERRORS.USER_DOESNT_EXISTS.code).json(CLIENT_ERRORS.USER_DOESNT_EXISTS);
@@ -79,6 +83,7 @@ export const authMiddleware = async <T>(
     }
 
     req.user = user;
+    req.taskId = taskId;
 
     next();
 };

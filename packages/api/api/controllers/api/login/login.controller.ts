@@ -9,8 +9,10 @@ import { decrypt } from '../../../../domain/utils/crypto/crypto';
 export const loginController: TController<ILoginDto> = async (req, resp) => {
     const { token } = req.body;
 
+    const decryptedToken = JSON.parse(decrypt(token));
+
     const refreshResult = await keycloakApi['refresh-user-access-token']({
-        refresh_token: JSON.parse(decrypt(token))?.refreshToken
+        refresh_token: decryptedToken?.refreshToken
     });
 
     if (refreshResult.error) {
@@ -20,7 +22,14 @@ export const loginController: TController<ILoginDto> = async (req, resp) => {
         return resp.status(CLIENT_ERRORS.BAD_TOKEN.code).json(CLIENT_ERRORS.BAD_TOKEN);
     }
 
-    setAuthTokens({ ...refreshResult, resp });
+    setAuthTokens({
+        data: {
+            refresh_token: refreshResult.refresh_token,
+            access_token: refreshResult.access_token,
+            taskId: decryptedToken.taskId
+        },
+        resp
+    });
 
     const response: ILoginResponse = { status: 'ok' };
 

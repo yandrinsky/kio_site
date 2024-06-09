@@ -9,7 +9,12 @@ export const startTaskController: TController<IStartTaskDto> = async (req, resp)
 
     const response: IStartTaskResponse = {
         url: task!.url,
-        token: encrypt(JSON.stringify({ refreshToken: req.signedCookies[TOKEN_COLLECTION.REFRESH_TOKEN] }))
+        token: encrypt(
+            JSON.stringify({
+                refreshToken: req.signedCookies[TOKEN_COLLECTION.REFRESH_TOKEN],
+                taskId: req.body.taskId
+            })
+        )
     };
 
     resp.status(200).json(response);

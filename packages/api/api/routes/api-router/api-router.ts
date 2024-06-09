@@ -20,7 +20,7 @@ const apiRouter = Router();
 apiRouter.post(
     QUERY_KEYS.GET_CURRENT_SOLUTION,
 
-    validationMiddleware([check('taskId').isString()]),
+    validationMiddleware([]),
 
     controllerErrorBounding(getCurrentSolutionController)
 );
@@ -28,7 +28,7 @@ apiRouter.post(
 apiRouter.post(
     QUERY_KEYS.START_SOLUTION,
 
-    validationMiddleware([check('taskId').isString()]),
+    validationMiddleware([]),
 
     controllerErrorBounding(startSolutionController)
 );
@@ -37,7 +37,6 @@ apiRouter.post(
     QUERY_KEYS.COMMIT,
 
     validationMiddleware([
-        check('taskId').isString(),
         check('tryId').isString(),
         check('parentId').isString(),
         check('state').isObject(),
@@ -50,29 +49,25 @@ apiRouter.post(
 
 apiRouter.post(
     QUERY_KEYS.NEW_TRY,
-    validationMiddleware([check('taskId').isString(), check('name').isString().optional()]),
+    validationMiddleware([check('name').isString().optional()]),
     controllerErrorBounding(newTryController)
 );
 
 apiRouter.post(
     QUERY_KEYS.SWITCH_TRY,
-    validationMiddleware([check('taskId').isString(), check('tryId').isString()]),
+    validationMiddleware([check('tryId').isString()]),
     controllerErrorBounding(switchTryController)
 );
 
 apiRouter.post(
     QUERY_KEYS.SWITCH_HEAD_FRAME,
-    validationMiddleware([
-        check('taskId').isString(),
-        check('tryId').isString(),
-        check('frameId').isString()
-    ]),
+    validationMiddleware([check('tryId').isString(), check('frameId').isString()]),
     controllerErrorBounding(switchHeadFrameController)
 );
 
 apiRouter.post(
     QUERY_KEYS.GET_SETTINGS,
-    validationMiddleware([check('taskId').isString()]),
+    validationMiddleware([]),
     controllerErrorBounding(getSettingsController)
 );
 
