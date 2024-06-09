@@ -1,2 +1,2 @@
 export { getSettingsController } from './get-settings.controller';
-export { IGetSettingsDto, IGetSettingsResponse } from './get-settings';
+export { IGetSettingsResponse } from './get-settings';
