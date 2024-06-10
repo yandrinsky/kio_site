@@ -23,6 +23,7 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
     const [isOpen, setIsOpen] = useState(false);
 
     const preview = updatedTask?.preview ?? '';
+    const isApproved = Boolean(updatedTask?.isApproved);
 
     return {
         userRole: data?.role,
@@ -37,6 +38,7 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
         setDescription,
         isAvailable,
         setIsAvailable,
+        isApproved,
         preview,
         settings,
         setSettings,
