@@ -3,8 +3,6 @@ export {
     ISwitchTryDto,
     INewTryDto,
     ICommitDto,
-    IStartSolutionDto,
-    IGetCurrentSolutionDto,
     ISwitchTryResponse,
     INewTryResponse,
     ICommitResponse,

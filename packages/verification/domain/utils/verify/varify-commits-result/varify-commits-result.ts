@@ -4,6 +4,7 @@ import fs from 'fs';
 import { toSaveFileDir } from '../../save-file';
 import ivm from 'isolated-vm';
 import { deepEqual } from '../../deep-equal';
+import { Task } from '../../../../bd/schemas/task.schema';
 
 export const verifyCommitsResult = async () => {
     const commits = await CommitVerificationQueue.find({ isResultVerified: null }).limit(10);
@@ -12,6 +13,7 @@ export const verifyCommitsResult = async () => {
     for (let i = 0; i < commits.length; i++) {
         const { taskId, commitId } = commits[i];
         const commit = await Frame.findOne({ _id: commitId });
+        const task = await Task.findOne({ _id: taskId });
 
         if (!commit) {
             commits[i].deleteOne();
@@ -37,6 +39,7 @@ export const verifyCommitsResult = async () => {
             jail.setSync('deepEqual', deepEqual);
 
             jail.setSync('state', new ivm.ExternalCopy(commit!.state).copyInto());
+            jail.setSync('settings', new ivm.ExternalCopy(task!.settings).copyInto());
             jail.setSync('userResult', new ivm.ExternalCopy(commit!.result).copyInto());
 
             let data: boolean = false;
@@ -45,7 +48,7 @@ export const verifyCommitsResult = async () => {
                 const hostile = isolate.compileScriptSync(`
                     ${codes[taskId]}
                     
-                    const ourResult = getResult(state);
+                    const ourResult = getResult(state, settings);
                     deepEqual(ourResult, userResult);
                 `);
 
