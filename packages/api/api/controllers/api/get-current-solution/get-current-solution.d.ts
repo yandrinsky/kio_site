@@ -7,4 +7,5 @@ export interface IGetCurrentSolutionResponse {
     framesTree: ITree<{ _id: string }>;
     headFrameId: string;
     frame: IFrame;
+    bestResult: object;
 }

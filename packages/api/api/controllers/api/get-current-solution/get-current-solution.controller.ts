@@ -49,19 +49,21 @@ export const getCurrentSolutionController: TController<null> = async (req, resp)
     //currentTry.framesTree mutation
     treeForwardTraversal(currentTry.framesTree, node => {
         const isResultVerified = verificationQueue.find(el => el.commitId === node._id)?.isResultVerified;
-        console.log(typeof isResultVerified, isResultVerified);
         node.isResultVerified = isResultVerified === undefined ? true : isResultVerified;
 
         return false;
     });
 
+    const bestTry =
+        solution.bestTryId === currentTry._id ? currentTry : await Try.findOne({ _id: solution.bestTryId });
+
     const response: IGetCurrentSolutionResponse = {
+        bestResult: bestTry!.bestResult as object,
         tries,
         currentTryId: solution.currentTryId,
         headFrameId: currentTry.headFrameId,
         framesTree: currentTry.framesTree,
         frame: frame as IFrame
     };
-
     resp.status(200).json(response);
 };

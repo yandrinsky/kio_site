@@ -3,6 +3,8 @@ import { CLIENT_ERRORS, SERVER_ERRORS } from '../../../../domain/errors';
 import { TController } from '../../../../domain/types';
 import { Solution, Try, Frame, CommitVerificationQueue } from '../../../../bd';
 import { treeForwardTraversal } from '../../../../domain/utils';
+import { sortBestResult } from '../../../../domain/utils/sort-best-result';
+import { Task } from '../../../../bd/schemas/task.schema';
 
 export const commitController: TController<ICommitDto> = async (req, resp) => {
     const { parentId, tryId, comment, state, result } = req.body;
@@ -27,6 +29,12 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
             .json(CLIENT_ERRORS.SOLUTION_DOESNT_EXIST);
     }
 
+    const task = await Task.findOne({ _id: solution.taskId });
+
+    if (!task) {
+        return resp.status(CLIENT_ERRORS.TASK_DOESNT_EXIST.code).json(CLIENT_ERRORS.TASK_DOESNT_EXIST);
+    }
+
     const parentTreeNode = treeForwardTraversal(currentTry.framesTree, ({ _id }) => _id === parentId);
 
     if (!parentTreeNode) {
@@ -44,13 +52,53 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
     solution.currentTryId = tryId;
     currentTry.headFrameId = newFrame._id;
 
-    currentTry.markModified('framesTree');
-
     const CommitQueueItem = new CommitVerificationQueue({
         taskId: req.taskId,
         tryId,
         commitId: newFrame._id
     });
+
+    let isNewBestResult = false;
+
+    if (!currentTry.bestResult) {
+        isNewBestResult = true;
+    } else {
+        const results = [currentTry.bestResult, result].sort((el1, el2) =>
+            sortBestResult(el1, el2, task.settings.sortBestResults)
+        );
+
+        if (results[0] === result) {
+            isNewBestResult = true;
+        }
+    }
+
+    if (isNewBestResult) {
+        currentTry.bestResult = result;
+        currentTry.bestResultHeadFrameId = newFrame._id;
+
+        if (solution.bestTryId !== currentTry._id) {
+            if (!solution.bestTryId) {
+                solution.bestTryId = currentTry._id;
+            } else {
+                const bestTry = await Try.findOne({ _id: solution.bestTryId });
+
+                if (!bestTry) {
+                    solution.bestTryId = currentTry._id;
+                }
+
+                const results = [bestTry!.bestResult!, result].sort((el1, el2) =>
+                    sortBestResult(el1, el2, task.settings.sortBestResults)
+                );
+
+                if (results[0] === result) {
+                    solution.bestTryId = currentTry._id;
+                }
+            }
+        }
+    }
+
+    currentTry.markModified('framesTree');
+    currentTry.markModified('bestResult');
 
     await Promise.all([solution.save(), currentTry.save(), newFrame.save(), CommitQueueItem.save()]);
 

@@ -4,6 +4,7 @@ import { IUpdateTaskResponse } from './update-task';
 import { IUpdateTaskDTO } from './update-task';
 import { removeFile } from '../../../../domain/utils/remove-file';
 import { saveFile } from '../../../../domain/utils/save-file';
+import { ISortBestResultConfig } from '../../../../bd/types/task-bd.interface';
 
 export const updateTaskController: TController<IUpdateTaskDTO> = async (req, resp) => {
     const { name, settings, description, isAvailable, id } = req.body;
@@ -16,7 +17,7 @@ export const updateTaskController: TController<IUpdateTaskDTO> = async (req, res
     }
 
     if (settings) {
-        task!.settings = settings;
+        task!.settings = settings as Record<string, any> & { sortBestResults: ISortBestResultConfig };
     }
 
     if (description) {

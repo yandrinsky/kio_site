@@ -19,7 +19,7 @@ export interface IFrame {
 
 export interface ITry {
     _id: string;
-    bestResult: {} | null;
+    bestResult: object | null;
     bestResultHeadFrameId: string | null;
     headFrameId: string;
     framesTree: ITree<{ _id: string; createdAt: number; comment: string; isResultVerified?: boolean | null }>;
