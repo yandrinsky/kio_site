@@ -26,6 +26,7 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
         setDescription,
         isAvailable,
         setIsAvailable,
+        isApproved,
         preview,
         settings,
         setSettings,
@@ -101,6 +102,7 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
                         checked={isAvailable}
                         onChange={value => {
                             handleToggleChange({
+                                isApproved: isApproved,
                                 isAvailable: value,
                                 setIsAvailable: setIsAvailable,
                                 updateTaskId: updateTaskId,

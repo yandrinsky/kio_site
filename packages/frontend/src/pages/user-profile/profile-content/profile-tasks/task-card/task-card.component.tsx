@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import css from './task-card.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { ITaskCard } from './task-card';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
-import { BASE_URL } from '@api/constants/base';
+import { BASE_HOSTNAME, BASE_URL } from '@api/constants/base';
 import { useStartTaskMutation } from '@api/routes/start-task';
 
 export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
     const { data: taskList } = useGetCreatedTasksListRequest();
-    const { mutate } = useStartTaskMutation();
+    const { mutate, data } = useStartTaskMutation();
 
     const task = taskList?.filter(task => task.id === taskId)[0];
+
+    useEffect(() => {
+        if (data?.url) {
+            window.location.href = BASE_HOSTNAME + ':' + data?.url + '?token=' + data?.token;
+        }
+    }, [data?.url]);
 
     return (
         <>
@@ -32,7 +38,7 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
                         <div className={css['buttons-container']}>
                             <div className={css['buttons']}>
                                 <Button theme="accent" onClick={() => mutate({ taskId: task?.id ?? '' })}>
-                                    Продолжить
+                                    Начать
                                 </Button>
                                 <Button>Статистика</Button>
                                 <Button theme="colored-red" onClick={() => setIsOpen(false)}>

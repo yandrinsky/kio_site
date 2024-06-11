@@ -35,6 +35,7 @@ export type IUseUpdateTask = (updateTaskId: string | undefined) => {
   setIsAvailable: React.Dispatch<React.SetStateAction<boolean>>;
   preview: string;
   settings: string;
+  isApproved: boolean;
   setSettings: React.Dispatch<React.SetStateAction<string>>;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -47,6 +48,7 @@ export type IHandleFileChange = (props: {
 }) => void;
 
 export type IHandleToggleChange = (props: {
+  isApproved: boolean;
   updateTaskId: string;
   isAvailable: boolean;
   setIsAvailable: React.Dispatch<React.SetStateAction<boolean>>;

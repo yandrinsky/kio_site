@@ -30,13 +30,13 @@ export const handleFileChange: IHandleFileChange = ({ event, updateTaskId, updat
 };
 
 export const handleToggleChange: IHandleToggleChange = ({
+    isApproved,
     updateTaskId,
     isAvailable,
     setIsAvailable,
     updateTaskMutation
 }) => {
-    console.log('HERE', isAvailable);
-    setIsAvailable(isAvailable);
+    isApproved && setIsAvailable(isAvailable);
 
     updateTaskMutation({
         id: updateTaskId,
