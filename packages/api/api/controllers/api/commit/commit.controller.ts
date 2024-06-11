@@ -36,8 +36,8 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
     const newFrame = new Frame({ state, result, comment: comment ?? null });
 
     parentTreeNode.children.push({
-        parent: { data: { _id: parentTreeNode.data._id } },
-        data: { _id: newFrame._id },
+        parent: { data: { _id: parentTreeNode.data._id, createdAt: Date.now(), comment: comment ?? '' } },
+        data: { _id: newFrame._id, createdAt: Date.now(), comment: comment ?? '' },
         children: []
     });
 

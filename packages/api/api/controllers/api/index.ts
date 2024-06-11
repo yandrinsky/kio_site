@@ -4,3 +4,5 @@ export * from './commit';
 export * from './new-try';
 export * from './switch-try';
 export * from './switch-head-frame';
+export * from './get-frame';
+export * from './login';

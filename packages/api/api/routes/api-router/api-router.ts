@@ -9,10 +9,11 @@ import {
     commitController,
     newTryController,
     switchTryController,
-    switchHeadFrameController
+    switchHeadFrameController,
+    getFrameController
 } from '../../controllers';
 import { controllerErrorBounding } from '../../../domain/errors';
-import { loginController } from '../../controllers/api/login';
+import { loginController } from '../../controllers';
 import { getSettingsController } from '../../controllers/api/get-settings';
 
 const apiRouter = Router();
@@ -63,6 +64,12 @@ apiRouter.post(
     QUERY_KEYS.SWITCH_HEAD_FRAME,
     validationMiddleware([check('tryId').isString(), check('frameId').isString()]),
     controllerErrorBounding(switchHeadFrameController)
+);
+
+apiRouter.post(
+    QUERY_KEYS.GET_FRAME,
+    validationMiddleware([check('tryId').isString(), check('frameId').isString()]),
+    controllerErrorBounding(getFrameController)
 );
 
 apiRouter.post(

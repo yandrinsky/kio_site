@@ -22,7 +22,7 @@ export interface ITry {
     bestResult: {} | null;
     bestResultHeadFrameId: string | null;
     headFrameId: string;
-    framesTree: ITree<{ _id: string }>;
+    framesTree: ITree<{ _id: string; createdAt: number; comment: string; isResultVerified?: boolean | null }>;
     name: string;
     timestamp: number;
 }

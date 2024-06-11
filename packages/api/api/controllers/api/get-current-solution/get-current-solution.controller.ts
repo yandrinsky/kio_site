@@ -1,8 +1,9 @@
-import { Frame, IFrame } from '../../../../bd';
+import { CommitVerificationQueue, Frame, IFrame } from '../../../../bd';
 import { IGetCurrentSolutionResponse } from './get-current-solution';
 import { CLIENT_ERRORS, SERVER_ERRORS } from '../../../../domain/errors';
 import { TController } from '../../../../domain/types';
 import { Solution, Try } from '../../../../bd';
+import { treeForwardTraversal } from '../../../../domain/utils';
 export const getCurrentSolutionController: TController<null> = async (req, resp) => {
     let solution;
 
@@ -24,18 +25,35 @@ export const getCurrentSolutionController: TController<null> = async (req, resp)
         return resp.status(CLIENT_ERRORS.TRY_DOESNT_EXIST.code).json(CLIENT_ERRORS.TRY_DOESNT_EXIST);
     }
 
+    const commitsId: string[] = [];
+
+    treeForwardTraversal(currentTry.framesTree, ({ _id }) => {
+        commitsId.push(_id);
+        return false;
+    });
+
     let mutablePromiseRes;
 
     try {
         mutablePromiseRes = await Promise.all([
             Try.find({ _id: { $in: solution.tries } }, '_id name'),
-            Frame.findOne({ _id: currentTry.headFrameId })
+            Frame.findOne({ _id: currentTry.headFrameId }),
+            CommitVerificationQueue.find({ commitId: { $in: commitsId } })
         ]);
     } catch (e) {
         return resp.status(SERVER_ERRORS.BD_ERROR.code).json(SERVER_ERRORS.BD_ERROR);
     }
 
-    let [tries, frame] = mutablePromiseRes;
+    let [tries, frame, verificationQueue] = mutablePromiseRes;
+
+    //currentTry.framesTree mutation
+    treeForwardTraversal(currentTry.framesTree, node => {
+        const isResultVerified = verificationQueue.find(el => el.commitId === node._id)?.isResultVerified;
+        console.log(typeof isResultVerified, isResultVerified);
+        node.isResultVerified = isResultVerified === undefined ? true : isResultVerified;
+
+        return false;
+    });
 
     const response: IGetCurrentSolutionResponse = {
         tries,

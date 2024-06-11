@@ -7,7 +7,7 @@ import { deepEqual } from '../../deep-equal';
 import { Task } from '../../../../bd/schemas/task.schema';
 
 export const verifyCommitsResult = async () => {
-    const commits = await CommitVerificationQueue.find({ isResultVerified: null }).limit(10);
+    const commits = await CommitVerificationQueue.find({ isResultVerified: null }).limit(7);
     const codes: Record<string, string> = {};
 
     for (let i = 0; i < commits.length; i++) {
@@ -48,13 +48,14 @@ export const verifyCommitsResult = async () => {
                 const hostile = isolate.compileScriptSync(`
                     ${codes[taskId]}
                     
-                    const ourResult = getResult(state, settings);
+                    const ourResult = getResult({state, result: userResult, settings});
                     deepEqual(ourResult, userResult);
                 `);
 
                 data = await hostile.run(context, { timeout: 3000 });
             } catch (e) {}
 
+            console.log('data', typeof data);
             commits[i].isResultVerified = data;
             commits[i].save();
         } catch (e) {}

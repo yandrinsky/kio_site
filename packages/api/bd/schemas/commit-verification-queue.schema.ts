@@ -8,8 +8,8 @@ const commitVerificationQueueSchema = new Schema<ICommitVerificationQueue>(
         commitId: { type: String, required: true },
         taskId: { type: String, required: true },
         tryId: { type: String, required: true },
-        isResultVerified: { type: String, default: null },
-        isStateVerified: { type: String, default: null },
+        isResultVerified: { type: Boolean, default: null },
+        isStateVerified: { type: Boolean, default: null },
         comment: { type: String, default: '' },
         timestamp: { type: Number, default: Date.now }
     },
