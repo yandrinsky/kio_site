@@ -58,7 +58,7 @@ export const getCurrentSolutionController: TController<null> = async (req, resp)
         solution.bestTryId === currentTry._id ? currentTry : await Try.findOne({ _id: solution.bestTryId });
 
     const response: IGetCurrentSolutionResponse = {
-        bestResult: bestTry!.bestResult as object,
+        bestResult: bestTry?.bestResult || {},
         tries,
         currentTryId: solution.currentTryId,
         headFrameId: currentTry.headFrameId,
