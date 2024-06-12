@@ -5,7 +5,6 @@ import { toSaveFileDir } from '../../save-file';
 import ivm from 'isolated-vm';
 import { deepEqual } from '../../deep-equal';
 import { Task } from '../../../../bd/schemas/task.schema';
-
 export const verifyCommitsResult = async () => {
     const commits = await CommitVerificationQueue.find({ isResultVerified: null }).limit(7);
     const codes: Record<string, string> = {};
@@ -55,7 +54,7 @@ export const verifyCommitsResult = async () => {
                 data = await hostile.run(context, { timeout: 3000 });
             } catch (e) {}
 
-            console.log('data', typeof data);
+            console.log('verify', data);
             commits[i].isResultVerified = data;
             commits[i].save();
         } catch (e) {}

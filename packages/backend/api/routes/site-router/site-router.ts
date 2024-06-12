@@ -11,6 +11,7 @@ import {
     startTaskValidator
 } from '../../controllers';
 import { controllerErrorBounding } from '../../../domain/errors';
+import { getWinnersListController, getWinnersListValidator } from '../../controllers/site/get-winners-list';
 
 const siteRouter = Router();
 
@@ -34,6 +35,14 @@ siteRouter.post(
     validationMiddleware([check('taskId').isString()], startTaskValidator),
 
     controllerErrorBounding(startTaskController)
+);
+
+siteRouter.post(
+    QUERY_KEYS.GET_WINNERS_LIST,
+
+    validationMiddleware([check('taskId').isString()], getWinnersListValidator),
+
+    controllerErrorBounding(getWinnersListController)
 );
 
 export { siteRouter };

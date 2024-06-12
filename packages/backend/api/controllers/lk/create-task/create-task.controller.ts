@@ -2,6 +2,7 @@ import { TController } from '../../../../domain/types';
 import { ICreateTaskDTO, ICreateTaskResponse } from './create-task';
 import { Task } from '../../../../bd/schemas/task.schema';
 import { saveFile } from '../../../../domain/utils/save-file';
+import { Winners } from '../../../../bd/schemas/winners.schema';
 
 export const createTaskController: TController<ICreateTaskDTO> = async (req, resp) => {
     const { name, settings, description } = req.body;
@@ -15,11 +16,15 @@ export const createTaskController: TController<ICreateTaskDTO> = async (req, res
         creatorId: req.user?._id
     });
 
+    const winners = new Winners({
+        taskId: task._id
+    });
+
     if (preview) {
         task.preview = await saveFile({ file: preview, objectId: task._id });
     }
 
-    await task.save();
+    await Promise.all([task.save(), winners.save()]);
 
     const response: ICreateTaskResponse = { taskId: task._id };
 
