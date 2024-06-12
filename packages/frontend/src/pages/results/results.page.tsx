@@ -36,11 +36,11 @@ export const Results: React.FC = () => {
                         <div className={css['resultsItem__container']}>
                             <span>
                                 Вхождение грамматики пользователя в эталонную:{' '}
-                                {el.result.idealPercent ? el.result.idealPercent + '%' : ''}
+                                {el.result.idealPercent ? el.result.idealPercent + '%' : '-'}
                             </span>
                             <span>
                                 Вхождение эталонной грамматики в грамматику пользователя:{' '}
-                                {el.result.userGrammarPercent ? el.result.userGrammarPercent + '%' : ''}
+                                {el.result.userGrammarPercent ? el.result.userGrammarPercent + '%' : '-'}
                             </span>
                             <span>Количество правил в грамматике: {el.result.grammarLong}</span>
                             <span>
