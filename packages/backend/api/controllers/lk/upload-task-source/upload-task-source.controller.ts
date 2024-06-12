@@ -45,11 +45,12 @@ export const uploadTaskSourceController: TController<IUploadTaskSourceDTO> = asy
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => response.json())
+            .then(response => response?.json())
             .then(json => {
                 task!.url = json.port;
                 task!.save();
-            });
+            })
+            .catch(e => console.log('e'));
     } catch (e) {
         console.log(e);
     }

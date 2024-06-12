@@ -11,7 +11,8 @@ const commitVerificationQueueSchema = new Schema<ICommitVerificationQueue>(
         isResultVerified: { type: Boolean, default: null },
         isStateVerified: { type: Boolean, default: null },
         comment: { type: String, default: '' },
-        timestamp: { type: Number, default: Date.now }
+        timestamp: { type: Number, default: Date.now },
+        solutionId: { type: String, required: true }
     },
     { _id: false }
 );

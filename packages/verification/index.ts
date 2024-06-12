@@ -36,5 +36,5 @@ app.listen(port, async () => {
         fs.mkdirSync(staticDir + '/files');
     }
 
-    setInterval(verifyCommitsResult, 30000);
+    setInterval(verifyCommitsResult, 1000);
 });

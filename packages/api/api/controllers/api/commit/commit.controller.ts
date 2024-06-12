@@ -57,7 +57,8 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
     const CommitQueueItem = new CommitVerificationQueue({
         taskId: req.taskId,
         tryId,
-        commitId: newFrame._id
+        commitId: newFrame._id,
+        solutionId: solution._id
     });
 
     let isNewBestResult = false;
@@ -78,9 +79,9 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
         currentTry.bestResult = result;
         currentTry.bestResultHeadFrameId = newFrame._id;
 
-        if (solution.bestTryId !== currentTry._id) {
-            let isBestInSolution = false;
+        let isBestInSolution = false;
 
+        if (solution.bestTryId !== currentTry._id) {
             if (!solution.bestTryId) {
                 solution.bestTryId = currentTry._id;
                 isBestInSolution = true;
@@ -97,39 +98,40 @@ export const commitController: TController<ICommitDto> = async (req, resp) => {
 
                 if (results[0] === result) {
                     solution.bestTryId = currentTry._id;
+                    isBestInSolution = true;
                 }
-
-                isBestInSolution = true;
             }
+        } else {
+            isBestInSolution = true;
+        }
 
-            //todo optimize, make async
-            if (isBestInSolution) {
-                const winner = winners.winners.find(winner => winner.ownerId === req.user?._id);
+        //todo optimize, make async
+        if (isBestInSolution) {
+            const winner = winners.winners.find(winner => winner.ownerId === req.user?._id);
 
-                const path = getPathFromTreeFromEnd(currentTry.framesTree, newFrame._id);
-                const verifyFailedCommits = await CommitVerificationQueue.find({
-                    commitId: { $in: path.map(el => el.data._id) },
-                    isResultVerified: false
+            const path = getPathFromTreeFromEnd(currentTry.framesTree, newFrame._id);
+            const verifyFailedCommits = await CommitVerificationQueue.find({
+                commitId: { $in: path.map(el => el.data._id) },
+                isResultVerified: false
+            });
+
+            path.map(el => el.data._id);
+
+            if (!winner) {
+                winners.winners.push({
+                    solutionId: solution._id,
+                    ownerId: req.user?._id ?? '',
+                    bestResult: result,
+                    isVerified: !Boolean(verifyFailedCommits.length)
                 });
-
-                path.map(el => el.data._id);
-
-                if (!winner) {
-                    winners.winners.push({
-                        solutionId: solution._id,
-                        ownerId: req.user?._id ?? '',
-                        bestResult: result,
-                        isVerified: !Boolean(verifyFailedCommits.length)
-                    });
-                } else {
-                    winner.bestResult = result;
-                    winner.isVerified = !Boolean(verifyFailedCommits.length);
-                }
-
-                winners.winners.sort((win1, win2) =>
-                    sortBestResult(win1?.bestResult, win2?.bestResult, task.settings.sortBestResults)
-                );
+            } else {
+                winner.bestResult = result;
+                winner.isVerified = !Boolean(verifyFailedCommits.length);
             }
+
+            winners.winners.sort((win1, win2) =>
+                sortBestResult(win1?.bestResult, win2?.bestResult, task.settings.sortBestResults)
+            );
         }
     }
 

@@ -1,18 +1,26 @@
 import { CommitVerificationQueue } from '../../../../bd/schemas/commit-verification-queue-bd.schema';
-import { Frame } from '../../../../bd';
+import { Frame, Solution, Try } from '../../../../bd';
 import fs from 'fs';
 import { toSaveFileDir } from '../../save-file';
 import ivm from 'isolated-vm';
 import { deepEqual } from '../../deep-equal';
 import { Task } from '../../../../bd/schemas/task.schema';
+import { Winners } from '../../../../bd/schemas/winners.schema';
 export const verifyCommitsResult = async () => {
     const commits = await CommitVerificationQueue.find({ isResultVerified: null }).limit(7);
     const codes: Record<string, string> = {};
 
     for (let i = 0; i < commits.length; i++) {
-        const { taskId, commitId } = commits[i];
-        const commit = await Frame.findOne({ _id: commitId });
-        const task = await Task.findOne({ _id: taskId });
+        const { taskId, commitId, solutionId, tryId } = commits[i];
+
+        const res = await Promise.all([
+            Frame.findOne({ _id: commitId }),
+            Task.findOne({ _id: taskId }),
+            Solution.findOne({ _id: solutionId }),
+            Try.findOne({ _id: tryId })
+        ]);
+
+        const [commit, task, solution, currentTry] = res;
 
         if (!commit) {
             commits[i].deleteOne();
@@ -55,6 +63,20 @@ export const verifyCommitsResult = async () => {
             } catch (e) {}
 
             console.log('verify', data);
+
+            if (!data && currentTry?.bestResultHeadFrameId === commit?._id && solution?.bestTryId === tryId) {
+                const winners = await Winners.findOne({ taskId: solution?.taskId });
+
+                if (winners) {
+                    const winner = winners.winners.find(winner => winner.ownerId === solution.ownerId);
+                    if (winner) {
+                        winner.isVerified = false;
+                        winners.markModified('winners');
+                        await winners.save();
+                    }
+                }
+            }
+
             commits[i].isResultVerified = data;
             commits[i].save();
         } catch (e) {}

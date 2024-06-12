@@ -7,7 +7,8 @@
 
 .results__container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 60px;
     width: 100%;
     padding: 20px;

@@ -28,9 +28,11 @@ export const Results: React.FC = () => {
             </div>
 
             <div className={css['results__container']}>
-                {data?.map(el => (
+                {data?.map((el, index) => (
                     <div className={css.resultsItem}>
-                        <h3>{el.name}</h3>
+                        <h3>
+                            {index + 1}) {el.name}
+                        </h3>
                         <div className={css['resultsItem__container']}>
                             <span>
                                 Вхождение грамматики пользователя в эталонную:{' '}
@@ -45,6 +47,8 @@ export const Results: React.FC = () => {
                                 Количество нетерминальных символов в грамматике:{' '}
                                 {el.result.uniqueNonTerminals}
                             </span>
+
+                            <span>Пройдена автоматическая проверка: {el.isResultVerify ? 'Да' : 'Нет'}</span>
                         </div>
                     </div>
                 ))}

@@ -7,5 +7,6 @@ export interface ICommitVerificationQueue {
     isStateVerified: boolean | null;
     comment: string;
     timestamp: number;
+    solutionId: string;
 }
 export interface IUnverifiedCommitsList extends ICommitVerificationQueue {}
