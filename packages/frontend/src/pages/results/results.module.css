@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Ubuntu&display=swap');
+
+.page {
+    background-color: var(--primary-light-color);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.results__container {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    width: 100%;
+    padding: 20px;
+}
+
+.resultsItem h3{
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.resultsItem span{
+    font-size: 18px;
+}
+
+.resultsItem {
+    padding: 20px;
+
+    border: 1px solid var(--accent-light-color);
+    border-radius: 8px;
+}
+
+.resultsItem__container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 15px;
+}
+
+.user-profile__tab {
+    width: 100%;
+}

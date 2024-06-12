@@ -38,5 +38,12 @@ export const REACT_ROUTER = createBrowserRouter([
             return { Component: (await import('../pages/user-profile/profile.page')).UserProfile };
         },
         errorElement: <Error />
+    },
+    {
+        path: ROUTES.RESULTS_ROUTE,
+        async lazy() {
+            return { Component: (await import('../pages/results/results.page')).Results };
+        },
+        errorElement: <Error />
     }
 ]);
