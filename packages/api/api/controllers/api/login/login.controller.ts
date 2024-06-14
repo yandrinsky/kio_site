@@ -26,7 +26,8 @@ export const loginController: TController<ILoginDto> = async (req, resp) => {
         data: {
             refresh_token: refreshResult.refresh_token,
             access_token: refreshResult.access_token,
-            taskId: decryptedToken.taskId
+            taskId: decryptedToken.taskId,
+            loggedAs: decryptedToken.loggedAs
         },
         resp
     });

@@ -12,8 +12,8 @@ export const SELECT_OPTIONS = [
         id: 'Creator'
     },
     {
-        title: 'Наблюдатель',
-        content: 'Я учитель или другое заинтересованное лицо.',
-        id: 'Watcher'
+        title: 'Тестировщик',
+        content: 'Я тестирую модули перед их публикацией.',
+        id: 'Tester'
     }
 ];

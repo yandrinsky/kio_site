@@ -3,7 +3,7 @@ import type { TRoutesData } from '../types/routes';
 export const ROUTES = {
     DEFAULT_ROUTE: '/',
     TASKS_ROUTE: '/tasks',
-    PROFILE_TASKS_ROUTE: '/tasks/constructors',
+    PROFILE_TASKS_ROUTE: '/profile?profileTab=Задачи',
     CONSTRUCTORS_ROUTE: '/constructors',
     PROFILE_CONSTRUCTORS_ROUTE: '/profile/constructors',
     RESULTS_ROUTE: '/results',

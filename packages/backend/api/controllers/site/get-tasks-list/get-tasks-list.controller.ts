@@ -1,16 +1,18 @@
 import { TController } from '../../../../domain/types';
 import { Task } from '../../../../bd/schemas/task.schema';
 import { IGetTasksListResponse } from './get-tasks-list';
-import { Solution } from '../../../../bd';
+import { ERoles, Solution } from '../../../../bd';
 import { SERVER_ERRORS } from '../../../../domain/errors';
 
 export const getTasksListController: TController<null> = async (req, resp) => {
     let mutablePromiseRes;
 
+    const canWatchHiddenTasks = [ERoles.Admin, ERoles.Tester].includes(req.user?.claims.role as ERoles);
+
     try {
         mutablePromiseRes = await Promise.all([
             Solution.find({ ownerId: req.user?._id }).select('taskId'),
-            Task.find({ isAvailable: true })
+            canWatchHiddenTasks ? Task.find() : Task.find({ isAvailable: true })
         ]);
     } catch (e) {
         return resp.status(SERVER_ERRORS.BD_ERROR.code).json(SERVER_ERRORS.BD_ERROR);

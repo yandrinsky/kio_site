@@ -12,7 +12,8 @@ export const startTaskController: TController<IStartTaskDto> = async (req, resp)
         token: encrypt(
             JSON.stringify({
                 refreshToken: req.signedCookies[TOKEN_COLLECTION.REFRESH_TOKEN],
-                taskId: req.body.taskId
+                taskId: req.body.taskId,
+                loggedAs: req.body.loggedAs
             })
         )
     };

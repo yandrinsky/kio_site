@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import css from './profile.module.css';
 import { Fragment, useState } from 'react';
 import { VerticalNavbar } from '@components/ui-kit/vertical-navbar/vertical-navbar.component';
@@ -19,16 +19,16 @@ export const UserProfile: React.FC = () => {
         profileTab.profileTab ? profileTab.profileTab : profileTabs[0].name
     );
 
+    useEffect(() => {
+        setActiveTab(profileTab.profileTab);
+    }, [profileTab.profileTab]);
+
     return (
         <div className={css.page}>
             <Layout withNav />
             <ProfileHeader />
             <div className={css['user-profile__container']}>
-                {data?.role === 'Admin' ? (
-                    <VerticalNavbar items={adminNavbarItems} setIsActive={setActiveTab} />
-                ) : (
-                    <VerticalNavbar items={userNavbarItems} setIsActive={setActiveTab} />
-                )}
+                <VerticalNavbar items={navbarItems} setIsActive={setActiveTab} />
 
                 <div className={css['user-profile__tab']}>
                     {profileTabs

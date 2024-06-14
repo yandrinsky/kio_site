@@ -21,6 +21,7 @@ export const useSignUpMutation = () => {
         retry: 1,
         onSuccess: () => {
             client.invalidateQueries([QUERY_KEYS.ME]);
+            client.invalidateQueries([QUERY_KEYS.GET_TASKS_LIST]);
         }
     });
 };
