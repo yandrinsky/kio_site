@@ -38,6 +38,9 @@ export const Footer = memo(() => {
                     <Link to="https://github.com/yandrinsky" theme="underline">
                         yandrinsky
                     </Link>
+                    <Link to="https://github.com/MichaelZhegalin" theme="underline">
+                        zhegalin
+                    </Link>
                 </div>
             </div>
         </footer>
