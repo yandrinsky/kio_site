@@ -1,5 +1,6 @@
 export enum TOKEN_COLLECTION {
     REFRESH_TOKEN = 'refresh_token',
     ACCESS_TOKEN = 'access_token',
-    TASK_ID = 'taskId'
+    TASK_ID = 'taskId',
+    LOGGED_AS = 'logged_as'
 }

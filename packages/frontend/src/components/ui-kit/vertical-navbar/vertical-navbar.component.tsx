@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import css from './vertical-navbar.module.css';
 import { IVerticalNavbar } from './vertical-navbar';
@@ -9,6 +9,10 @@ export const VerticalNavbar: FC<IVerticalNavbar> = ({ items, setIsActive }) => {
     const [query, setParams] = useQueryParams();
 
     const [isActiveNavbarItem, setIsActiveNavbarItem] = useState(query.profileTab ?? 0);
+
+    useEffect(() => {
+        setIsActiveNavbarItem(query.profileTab);
+    }, [query.profileTab]);
 
     return (
         <div>

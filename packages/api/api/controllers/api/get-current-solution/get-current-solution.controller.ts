@@ -60,6 +60,8 @@ export const getCurrentSolutionController: TController<null> = async (req, resp)
     const response: IGetCurrentSolutionResponse = {
         id: solution._id,
         bestResult: bestTry?.bestResult ?? {},
+        bestTryId: bestTry?._id ?? '',
+        bestHeadFrameId: bestTry?.bestResultHeadFrameId ?? '',
         tries,
         currentTryId: solution.currentTryId,
         headFrameId: currentTry.headFrameId,

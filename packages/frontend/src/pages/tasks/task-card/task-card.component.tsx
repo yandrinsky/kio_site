@@ -8,15 +8,9 @@ import { useStartTaskMutation } from '@api/routes/start-task';
 
 export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
     const { data: taskList } = useGetCreatedTasksListRequest();
-    const { mutate, data } = useStartTaskMutation();
+    const { mutateAsync } = useStartTaskMutation();
 
     const task = taskList?.filter(task => task.id === taskId)[0];
-
-    useEffect(() => {
-        if (data?.url) {
-            window.location.href = BASE_HOSTNAME + ':' + data?.url + '?token=' + data?.token;
-        }
-    }, [data?.url]);
 
     return (
         <>
@@ -37,7 +31,14 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
 
                         <div className={css['buttons-container']}>
                             <div className={css['buttons']}>
-                                <Button theme="accent" onClick={() => mutate({ taskId: task?.id ?? '' })}>
+                                <Button
+                                    theme="accent"
+                                    onClick={async () => {
+                                        const data = await mutateAsync({ taskId: task?.id ?? '' });
+                                        window.location.href =
+                                            BASE_HOSTNAME + ':' + data?.url + '?token=' + data?.token;
+                                    }}
+                                >
                                     Начать
                                 </Button>
                                 <Button>Статистика</Button>

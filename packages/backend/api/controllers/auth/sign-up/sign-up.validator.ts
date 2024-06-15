@@ -17,7 +17,7 @@ export const signUpValidator: TValidator<ISignUpDto> = async req => {
         return CLIENT_ERRORS.BAD_NAME;
     }
 
-    if (![ERoles.User, ERoles.Creator, ERoles.Watcher].includes(role)) {
+    if (![ERoles.User, ERoles.Creator, ERoles.Tester].includes(role)) {
         return CLIENT_ERRORS.BAD_DTO;
     }
 

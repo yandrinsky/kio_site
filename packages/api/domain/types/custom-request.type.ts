@@ -5,4 +5,5 @@ export interface CustomRequest<T> extends Request {
     body: T;
     user?: (IUserBD & { _id: string }) | null;
     taskId?: string | null;
+    isLoggedAs?: boolean;
 }

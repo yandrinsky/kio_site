@@ -74,10 +74,6 @@ export const ProfilePopup = () => {
                     </Link>
                 </li>
             </ul>
-
-            <Button className={css.popup__subscribe} theme="accent" size="long">
-                Оплатить подписку
-            </Button>
         </section>
     );
 };

@@ -10,7 +10,8 @@ import {
     newTryController,
     switchTryController,
     switchHeadFrameController,
-    getFrameController
+    getFrameController,
+    commitValidator
 } from '../../controllers';
 import { controllerErrorBounding } from '../../../domain/errors';
 import { loginController } from '../../controllers';
@@ -37,13 +38,16 @@ apiRouter.post(
 apiRouter.post(
     QUERY_KEYS.COMMIT,
 
-    validationMiddleware([
-        check('tryId').isString(),
-        check('parentId').isString(),
-        check('state').isObject(),
-        check('result').isObject(),
-        check('comment').isString().optional()
-    ]),
+    validationMiddleware(
+        [
+            check('tryId').isString(),
+            check('parentId').isString(),
+            check('state').isObject(),
+            check('result').isObject(),
+            check('comment').isString().optional()
+        ],
+        commitValidator
+    ),
 
     controllerErrorBounding(commitController)
 );

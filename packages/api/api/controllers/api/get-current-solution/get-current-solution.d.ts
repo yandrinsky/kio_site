@@ -8,5 +8,7 @@ export interface IGetCurrentSolutionResponse {
     headFrameId: string;
     frame: IFrame;
     bestResult: object;
+    bestTryId: string;
+    bestHeadFrameId: string;
     id: string;
 }

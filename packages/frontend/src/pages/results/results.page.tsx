@@ -6,12 +6,17 @@ import { useGetTasksListRequest } from '@api/routes/get-tasks-list';
 import { useGetWinnersListRequest } from '@api/routes/get-winners-list';
 import { Select } from '@components/ui-kit/select/select.component';
 import { Option } from '@components/ui-kit/select/option/option.component';
+import { Button } from '@components/ui-kit/button/button.component';
+import { useStartTaskMutation } from '@api/routes/start-task';
+import { BASE_HOSTNAME } from '@api/constants/base';
 
 export const Results: React.FC = () => {
     const { data: taskList } = useGetTasksListRequest();
     const { mutate, data } = useGetWinnersListRequest();
+    const { mutateAsync: startTaskMutate } = useStartTaskMutation();
 
     const [taskId, setTaskId] = useState<string[]>();
+    const [currentTaskId, setCurrentTaskId] = useState<string>();
     useEffect(() => setTaskId(taskList?.map(task => task.id)), [taskList]);
 
     return (
@@ -20,7 +25,13 @@ export const Results: React.FC = () => {
             <ResultsHeader />
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Select value={taskId?.[0] ?? ''} onChange={taskId => mutate({ taskId: taskId })}>
+                <Select
+                    value={taskId?.[0] ?? ''}
+                    onChange={taskId => {
+                        setCurrentTaskId(taskId);
+                        mutate({ taskId: taskId });
+                    }}
+                >
                     {taskList?.map(task => (
                         <Option name={task?.id ?? 'test'}>{task?.name ?? 'test'}</Option>
                     )) ?? <Option name="fdf">gf</Option>}
@@ -50,6 +61,21 @@ export const Results: React.FC = () => {
 
                             <span>Пройдена автоматическая проверка: {el.isResultVerify ? 'Да' : 'Нет'}</span>
                         </div>
+                        <Button
+                            size="default"
+                            className={css['show-result-button']}
+                            onClick={async () => {
+                                const data = await startTaskMutate({
+                                    taskId: currentTaskId ?? '',
+                                    loggedAs: el.userId
+                                });
+
+                                window.location.href =
+                                    BASE_HOSTNAME + ':' + data?.url + '?token=' + data?.token;
+                            }}
+                        >
+                            Посмотреть решение
+                        </Button>
                     </div>
                 ))}
             </div>

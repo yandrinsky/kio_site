@@ -10,44 +10,44 @@ import { ProfileChangeUserRole } from './profile-content/profile-change-user-rol
 
 export const userNavbarItems = [
     'Общие',
-    'Социальные сети',
-    'Оплата',
+    // 'Социальные сети',
+    // 'Оплата',
     'Задачи',
     'Создание задачи',
-    'Конструкторы',
+    // 'Конструкторы',
     'Уведомления и интеграции'
 ];
 
 export const userProfileTabs = [
     { name: 'Общие', children: <ProfileCommon /> },
-    { name: 'Социальные сети', children: <ProfileSocialMedia /> },
-    { name: 'Оплата', children: <ProfilePayment /> },
+    // { name: 'Социальные сети', children: <ProfileSocialMedia /> },
+    // { name: 'Оплата', children: <ProfilePayment /> },
     { name: 'Задачи', children: <ProfileTasks /> },
-    { name: 'Создание задачи', children: <ProfileCreatingTask /> },
-    { name: 'Конструкторы', children: <ProfileConstructors /> },
-    { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
+    { name: 'Создание задачи', children: <ProfileCreatingTask /> }
+    // { name: 'Конструкторы', children: <ProfileConstructors /> },
+    // { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
 ];
 
 export const adminNavbarItems = [
     'Общие',
-    'Социальные сети',
-    'Оплата',
+    // 'Социальные сети',
+    // 'Оплата',
     'Задачи',
     'Создание задачи',
     'Неподтвержденные задачи',
-    'Изменение роли пользователей',
-    'Конструкторы',
-    'Уведомления и интеграции'
+    'Изменение роли пользователей'
+    // 'Конструкторы',
+    // 'Уведомления и интеграции'
 ];
 
 export const adminProfileTabs = [
     { name: 'Общие', children: <ProfileCommon /> },
-    { name: 'Социальные сети', children: <ProfileSocialMedia /> },
-    { name: 'Оплата', children: <ProfilePayment /> },
+    // { name: 'Социальные сети', children: <ProfileSocialMedia /> },
+    // { name: 'Оплата', children: <ProfilePayment /> },
     { name: 'Задачи', children: <ProfileTasks /> },
     { name: 'Создание задачи', children: <ProfileCreatingTask /> },
     { name: 'Неподтвержденные задачи', children: <ProfileNotApprovedTasks /> },
-    { name: 'Изменение роли пользователей', children: <ProfileChangeUserRole /> },
-    { name: 'Конструкторы', children: <ProfileConstructors /> },
-    { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
+    { name: 'Изменение роли пользователей', children: <ProfileChangeUserRole /> }
+    // { name: 'Конструкторы', children: <ProfileConstructors /> },
+    // { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
 ];

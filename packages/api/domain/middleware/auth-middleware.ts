@@ -2,7 +2,7 @@ import { CLIENT_ERRORS } from '../errors';
 import { Response, NextFunction } from 'express';
 import { QUERY_WITHOUT_AUTH } from '../../api/query-keys/query-keys';
 import { CustomRequest } from '../types';
-import { User } from '../../bd';
+import { ERoles, User } from '../../bd';
 import { IUserBD } from '../../bd';
 import { SERVER_ERRORS } from '../errors';
 import { TOKEN_COLLECTION } from '../token/token-collection';
@@ -28,6 +28,7 @@ export const authMiddleware = async <T>(
 
     const accessToken = req.signedCookies[TOKEN_COLLECTION.ACCESS_TOKEN];
     const refreshToken = req.signedCookies[TOKEN_COLLECTION.REFRESH_TOKEN];
+    const loggedAs = req.signedCookies[TOKEN_COLLECTION.LOGGED_AS];
     const taskId = req.signedCookies[TOKEN_COLLECTION.TASK_ID];
 
     if (!accessToken && !refreshToken) {
@@ -64,9 +65,15 @@ export const authMiddleware = async <T>(
     }
 
     let user: (IUserBD & { _id: string }) | null;
+    req.isLoggedAs = false;
 
     try {
         user = await User.findOne({ email: tokenInfo.email });
+
+        if (user?.claims.role === ERoles.Admin && loggedAs) {
+            user = await User.findOne({ _id: loggedAs });
+            req.isLoggedAs = true;
+        }
     } catch {
         resp.clearCookie(TOKEN_COLLECTION.REFRESH_TOKEN);
         resp.clearCookie(TOKEN_COLLECTION.ACCESS_TOKEN);
