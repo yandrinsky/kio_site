@@ -9,16 +9,22 @@ export const getWinnersListController: TController<IGetWinnersListDto> = async (
         'name surname patronymic _id'
     );
 
-    const response: IGetWinnersListResponse = winners!.winners.map(winner => {
-        const user = users.find(user => user._id === winner.ownerId);
+    const response: IGetWinnersListResponse = winners!.winners
+        .map(winner => {
+            const user = users.find(user => user._id === winner.ownerId);
 
-        return {
-            result: winner.bestResult,
-            name: `${user?.surname} ${user?.name} ${user?.patronymic}` ?? '',
-            userId: user?._id ?? '',
-            isResultVerify: winner.isVerified
-        };
-    });
+            if (winner.isBanned) {
+                return false;
+            }
+
+            return {
+                result: winner.bestResult,
+                name: `${user?.surname} ${user?.name} ${user?.patronymic}` ?? '',
+                userId: user?._id ?? '',
+                isResultVerify: winner.isVerified
+            };
+        })
+        .filter(Boolean) as IGetWinnersListResponse;
 
     resp.status(200).json(response);
 };

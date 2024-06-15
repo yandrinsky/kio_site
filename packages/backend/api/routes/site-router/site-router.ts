@@ -12,6 +12,7 @@ import {
 } from '../../controllers';
 import { controllerErrorBounding } from '../../../domain/errors';
 import { getWinnersListController, getWinnersListValidator } from '../../controllers/site/get-winners-list';
+import { banSolutionController, banSolutionValidator } from '../../controllers/site/ban-solution';
 
 const siteRouter = Router();
 
@@ -43,6 +44,14 @@ siteRouter.post(
     validationMiddleware([check('taskId').isString()], getWinnersListValidator),
 
     controllerErrorBounding(getWinnersListController)
+);
+
+siteRouter.post(
+    QUERY_KEYS.BAN_SOLUTION,
+
+    validationMiddleware([check('taskId').isString(), check('userId').isString], banSolutionValidator),
+
+    controllerErrorBounding(banSolutionController)
 );
 
 export { siteRouter };
