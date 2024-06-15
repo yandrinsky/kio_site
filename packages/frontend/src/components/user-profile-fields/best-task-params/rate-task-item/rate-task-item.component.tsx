@@ -42,9 +42,14 @@ export const RateTaskItem: React.FC<IRateTaskItem> = ({
                     :
                     <Input
                         placeholder="Важность"
-                        type="number"
                         value={rate}
-                        onChange={e => setRate(Math.abs(Number(e.target.value)))}
+                        onChange={e =>
+                            setRate(
+                                !Number.isNaN(Number(e.target.value)) && Number(e.target.value) !== 0
+                                    ? Math.abs(Number(e.target.value))
+                                    : undefined
+                            )
+                        }
                     />
                 </div>
 

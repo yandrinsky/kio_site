@@ -100,6 +100,14 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
                 }}
             />
 
+            <UserPreviewTaskField
+                title="Иконка вашей задачи"
+                subtitle="Иконку вашей задачи увидят другие пользователи"
+                mainText="Нажмите на картинку, чтобы сменить иконку"
+                img={preview ? BASE_URL + '/' + preview : preview}
+                handleFileChange={event => handleFileChange({ event, updateTaskMutation, updateTaskId })}
+            />
+
             <UserUploadTaskSourceField
                 taskId={updateTaskId}
                 uploadTaskSource={uploadTaskSourceMutation}
