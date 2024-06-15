@@ -19,5 +19,6 @@ export const QUERY_KEYS = {
     SEARCH_USER: 'search-user',
     CHANGE_ROLE: 'change-role',
     GET_WINNERS_LIST: 'get-winners',
-    GET_TASK: 'get-task'
+    GET_TASK: 'get-task',
+    BAN_SOLUTION: 'ban-solution'
 };

@@ -14,12 +14,12 @@
     padding: 20px;
 }
 
-.resultsItem h3{
+.resultsItem h3 {
     padding: 0;
     margin: 0 0 15px 0;
 }
 
-.resultsItem span{
+.resultsItem span {
     font-size: 18px;
 }
 
@@ -30,7 +30,7 @@
     border-radius: 8px;
 }
 
-.resultsItem__container{
+.resultsItem__container {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -43,4 +43,11 @@
 
 .show-result-button {
     margin-top: 10px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
