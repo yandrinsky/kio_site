@@ -40,7 +40,6 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
                                 <Button theme="accent" onClick={() => mutate({ taskId: task?.id ?? '' })}>
                                     Начать
                                 </Button>
-                                <Button>Статистика</Button>
                                 <Button theme="colored-red" onClick={() => setIsOpen(false)}>
                                     Закрыть
                                 </Button>

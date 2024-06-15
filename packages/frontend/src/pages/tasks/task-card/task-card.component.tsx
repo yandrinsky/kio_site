@@ -41,7 +41,6 @@ export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
                                 >
                                     Начать
                                 </Button>
-                                <Button>Статистика</Button>
                                 <Button theme="colored-red" onClick={() => setIsOpen(false)}>
                                     Закрыть
                                 </Button>

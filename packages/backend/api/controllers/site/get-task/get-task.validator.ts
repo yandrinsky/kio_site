@@ -12,7 +12,12 @@ export const getTaskValidator: TValidator<IGetTaskDto> = async req => {
         return CLIENT_ERRORS.TASK_DOESNT_EXIST;
     }
 
-    if (!task.isAvailable && role !== ERoles.Admin && task.creatorId !== req.user?._id) {
+    if (
+        !task.isAvailable &&
+        role !== ERoles.Admin &&
+        role !== ERoles.Tester &&
+        task.creatorId !== req.user?._id
+    ) {
         return CLIENT_ERRORS.LACK_OF_RIGHTS;
     }
 };
