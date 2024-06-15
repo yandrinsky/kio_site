@@ -2,15 +2,18 @@ import React, { useEffect } from 'react';
 import css from './task-card.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { ITaskCard } from './task-card';
-import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
 import { BASE_HOSTNAME, BASE_URL } from '@api/constants/base';
 import { useStartTaskMutation } from '@api/routes/start-task';
+import { useGetTasksListRequest } from '@api/routes/get-tasks-list';
+import { useGetTasksMutation } from '@api/routes/get-task';
 
 export const TaskCard: React.FC<ITaskCard> = ({ taskId, setIsOpen }) => {
-    const { data: taskList } = useGetCreatedTasksListRequest();
+    const { mutate, data } = useGetTasksMutation();
     const { mutateAsync } = useStartTaskMutation();
 
-    const task = taskList?.filter(task => task.id === taskId)[0];
+    useEffect(() => mutate({ taskId }), []);
+
+    const task = data;
 
     return (
         <>
