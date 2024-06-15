@@ -14,7 +14,7 @@ export const getWinnersListValidator: TValidator<IGetWinnersListDto> = async req
         return CLIENT_ERRORS.TASK_DOESNT_EXIST;
     }
 
-    if (role !== ERoles.Admin) {
-        return CLIENT_ERRORS.LACK_OF_RIGHTS;
-    }
+    // if (role !== ERoles.Admin) {
+    //     return CLIENT_ERRORS.LACK_OF_RIGHTS;
+    // }
 };
