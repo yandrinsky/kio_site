@@ -83,7 +83,7 @@ export const Results: React.FC = () => {
                             >
                                 Посмотреть решение
                             </Button>
-                            {me?.role === 'Admin' && (
+                            {!el.isResultVerify && me?.role === 'Admin' && (
                                 <Button
                                     onClick={() =>
                                         mutateBanSolution({ taskId: currentTaskId ?? '', userId: el.userId })
