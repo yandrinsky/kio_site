@@ -56,8 +56,7 @@ export const RateTaskItem: React.FC<IRateTaskItem> = ({
                 <div className={css['equals-content']}>
                     <Select
                         value={comparisonMethod}
-                        onChange={method =>
-                            method === 'description' ? setComparisonMethod('') : setComparisonMethod(method)
+                        onChange={method => setComparisonMethod(method)
                         }
                     >
                         {comparisonMethods.map(method => (

@@ -52,7 +52,7 @@ export const handleToggleChange: IHandleToggleChange = ({
 };
 
 export const transformArray = (rateTaskParams: IRateTaskParams[]) => {
-    let outputArray: ISortBestResultConfig[] = [];
+    let outputObj: ISortBestResultConfig = {};
 
     const getOrderAndType: IGetOrderAndType = ({ comparisonMethod, rate, equalItem }) => {
         const order = rate;
@@ -70,34 +70,29 @@ export const transformArray = (rateTaskParams: IRateTaskParams[]) => {
                 rate: rate!,
                 equalItem
             });
-            outputArray.push({
-                [name!]: {
-                    type,
-                    order,
-                    equals
-                }
-            });
+            outputObj[name!] = {
+                type,
+                order,
+                equals
+            };
         } else {
             const { type, order } = getOrderAndType({ comparisonMethod: comparisonMethod!, rate: rate! });
-            outputArray.push({
-                [name!]: {
-                    type,
-                    order
-                }
-            });
+            outputObj[name!] = {
+                type,
+                order
+            };
         }
     });
 
-    return outputArray;
+    return outputObj;
 };
 
-export const reverseTransformArray = (outputArray: ISortBestResultConfig[]) => {
-    return outputArray.map(item => {
-        const key = Object.keys(item)[0];
-        const value = item[key];
+export const reverseTransformArray = (outputObj: ISortBestResultConfig) => {
+    return Object.entries(outputObj ?? {})?.map(item => {
+        const value = item[1];
 
         return {
-            name: key,
+            name: item[0],
             rate: value.order,
             equalItem: value.equals,
             comparisonMethod: value.type

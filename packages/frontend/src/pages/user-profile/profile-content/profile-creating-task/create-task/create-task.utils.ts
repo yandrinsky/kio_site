@@ -59,7 +59,7 @@ export const handleOnSubmit: IHandleOnSubmit = ({
 };
 
 export const transformArray = (rateTaskParams: IRateTaskParams[]) => {
-    let outputArray: ISortBestResultConfig[] = [];
+    let outputObj: ISortBestResultConfig = {};
 
     const getOrderAndType: IGetOrderAndType = ({ comparisonMethod, rate, equalItem }) => {
         const order = rate;
@@ -77,23 +77,19 @@ export const transformArray = (rateTaskParams: IRateTaskParams[]) => {
                 rate: rate!,
                 equalItem
             });
-            outputArray.push({
-                [name!]: {
-                    type,
-                    order,
-                    equals
-                }
-            });
+            outputObj[name!] = {
+                type,
+                order,
+                equals
+            };
         } else {
             const { type, order } = getOrderAndType({ comparisonMethod: comparisonMethod!, rate: rate! });
-            outputArray.push({
-                [name!]: {
-                    type,
-                    order
-                }
-            });
+            outputObj[name!] = {
+                type,
+                order
+            };
         }
     });
 
-    return outputArray;
+    return outputObj;
 };
