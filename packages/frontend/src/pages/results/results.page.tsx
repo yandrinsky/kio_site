@@ -84,19 +84,17 @@ export const Results: React.FC = () => {
                                 >
                                     Посмотреть решение
                                 </Button>
-                                {!el.isResultVerify && (
-                                    <Button
-                                        onClick={() =>
-                                            mutateBanSolution({
-                                                taskId: currentTaskId ?? '',
-                                                userId: el.userId
-                                            })
-                                        }
-                                        theme="colored-red"
-                                    >
-                                        Заблокировать решение
-                                    </Button>
-                                )}
+                                <Button
+                                    onClick={() =>
+                                        mutateBanSolution({
+                                            taskId: currentTaskId ?? '',
+                                            userId: el.userId
+                                        })
+                                    }
+                                    theme="colored-red"
+                                >
+                                    Заблокировать решение
+                                </Button>
                             </div>
                         )}
                     </div>
