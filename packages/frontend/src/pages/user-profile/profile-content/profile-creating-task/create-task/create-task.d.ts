@@ -29,8 +29,10 @@ export type IUseCreateTask = () => {
   setPreviewFile: React.Dispatch<React.SetStateAction<File | undefined>>;
   isRequiredFieldsFilled: boolean;
   isUploadTaskSourceVisible: boolean;
-  settings: string;
+  settings: any;
   setSettings: React.Dispatch<React.SetStateAction<string>>;
+  rateTaskParams: IRateTaskParams[] | undefined,
+  setRateTaskParams: React.Dispatch<React.SetStateAction<IRateTaskParams[] | undefined>>
 };
 
 export type IHandleFileChange = (props: {
@@ -52,3 +54,21 @@ export type IGetValidationResult = (props: {
   value: string;
   type: 'description' | 'taskName' | 'settings';
 }) => boolean | string;
+
+export type IRateTaskParams = {
+  name: undefined | string,
+  rate: undefined | number,
+  equalItem?: string | number,
+  comparisonMethod: undefined | string
+}
+
+export type ISortBestResultConfig = Record<
+    string,
+    { type: string; equals?: number | string | boolean; order: number }
+>
+
+export type IGetOrderAndType = (props: {
+  comparisonMethod: string;
+  rate: number;
+  equalItem?: number | string;
+}) => { type: string; order: number; equals?: number | string };

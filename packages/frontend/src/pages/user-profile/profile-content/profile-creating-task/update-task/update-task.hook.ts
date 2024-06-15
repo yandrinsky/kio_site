@@ -2,9 +2,10 @@ import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-lis
 import { useUpdateTaskMutation } from '@api/routes/update-task';
 import { useUploadTaskSourceMutation } from '@api/routes/upload-task-source';
 import { useState } from 'react';
-import { IUseUpdateTask } from './update-task';
+import { IRateTaskParams, IUseUpdateTask } from './update-task';
 import { useDeleteTaskMutation } from '@api/routes/delete-task';
 import { useMeRequest } from '@api/index';
+import { reverseTransformArray } from './update-task.utils';
 
 export const useUpdateTask: IUseUpdateTask = updateTaskId => {
     const { mutate: updateTaskMutation } = useUpdateTaskMutation();
@@ -20,6 +21,10 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
     const [description, setDescription] = useState(updatedTask?.description ?? '');
     const [settings, setSettings] = useState(JSON.stringify(updatedTask?.settings));
     const [isAvailable, setIsAvailable] = useState(updatedTask?.isAvailable ?? false);
+    const [rateTaskParams, setRateTaskParams] = useState<undefined | IRateTaskParams[]>(
+        //@ts-ignore
+        reverseTransformArray(updatedTask?.settings.sortBestResults)
+    );
     const [isOpen, setIsOpen] = useState(false);
 
     const preview = updatedTask?.preview ?? '';
@@ -43,6 +48,8 @@ export const useUpdateTask: IUseUpdateTask = updateTaskId => {
         settings,
         setSettings,
         isOpen,
-        setIsOpen
+        setIsOpen,
+        rateTaskParams,
+        setRateTaskParams
     };
 };

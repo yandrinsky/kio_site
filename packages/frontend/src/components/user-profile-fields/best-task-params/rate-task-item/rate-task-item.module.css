@@ -1,0 +1,36 @@
+.best-task-item__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    padding: 20px 20px 20px 5px;
+
+    border: 1px solid var(--accent-light-color);
+    border-radius: 8px;
+    background-color: #FFFFFF;
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.equals-content {
+    display: flex;
+    gap: 5px;
+}
+
+.buttons {
+    display: flex;
+    gap: 5px;
+}

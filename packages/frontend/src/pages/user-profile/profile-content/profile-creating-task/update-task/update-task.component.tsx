@@ -3,14 +3,20 @@ import { UserInputField } from '@components/user-profile-fields/user-input-field
 import css from './update-task.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
 import { UserPreviewTaskField } from '@components/user-profile-fields/user-preview-task-field/user-preview-task-field.component';
-import { IUpdateTask } from './update-task';
+import { IRateTaskParams, ISortBestResultConfig, IUpdateTask } from './update-task';
 import { UserTextareaField } from '@components/user-profile-fields/user-textarea-field/user-textarea-field.component';
 import { UserUploadTaskSourceField } from '@components/user-profile-fields/user-upload-task-source-field/user-upload-task-source-field.component';
 import { useUpdateTask } from './update-task.hook';
 import { BASE_URL } from '@api/constants/base';
-import { getValidationResult, handleFileChange, handleToggleChange } from './update-task.utils';
+import {
+    getValidationResult,
+    handleFileChange,
+    handleToggleChange,
+    transformArray
+} from './update-task.utils';
 import { Toggle } from '@components/ui-kit/toggle/toggle.component';
 import { UpdateTaskModal } from './update-task-modal/update-task-modal.component';
+import { BestTaskParams } from '@components/user-profile-fields/best-task-params/best-task-params.component';
 
 export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskId }) => {
     const {
@@ -31,7 +37,9 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
         settings,
         setSettings,
         isOpen,
-        setIsOpen
+        setIsOpen,
+        rateTaskParams,
+        setRateTaskParams
     } = useUpdateTask(updateTaskId);
 
     return (
@@ -65,6 +73,19 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
                 }}
             />
 
+            <BestTaskParams
+                title="Оценка результата задачи"
+                subtitle="Опишите как результаты задачи должны быть оценены"
+                value={rateTaskParams}
+                onSave={data => {
+                    setRateTaskParams(data);
+                    updateTaskMutation({
+                        id: updateTaskId!,
+                        settings: { ...JSON.parse(settings), sortBestResults: transformArray(data ?? []) }
+                    });
+                }}
+            />
+
             <UserTextareaField
                 title="Настройки задачи"
                 subtitle="Введите настройки вашей задачи"
@@ -77,14 +98,6 @@ export const UpdateTask: React.FC<IUpdateTask> = ({ updateTaskId, setUpdateTaskI
                         settings: JSON.parse(data)
                     });
                 }}
-            />
-
-            <UserPreviewTaskField
-                title="Иконка вашей задачи"
-                subtitle="Иконку вашей задачи увидят другие пользователи"
-                mainText="Нажмите на картинку, чтобы сменить иконку"
-                img={preview ? BASE_URL + '/' + preview : preview}
-                handleFileChange={event => handleFileChange({ event, updateTaskMutation, updateTaskId })}
             />
 
             <UserUploadTaskSourceField

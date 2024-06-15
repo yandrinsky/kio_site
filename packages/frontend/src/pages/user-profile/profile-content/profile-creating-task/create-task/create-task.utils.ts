@@ -1,4 +1,11 @@
-import { IGetValidationResult, IHandleFileChange, IHandleOnSubmit } from './create-task';
+import {
+    IGetOrderAndType,
+    IGetValidationResult,
+    IHandleFileChange,
+    IHandleOnSubmit,
+    IRateTaskParams,
+    ISortBestResultConfig
+} from './create-task';
 
 export const getValidationResult: IGetValidationResult = ({ value, type }) => {
     if (type === 'taskName') {
@@ -49,4 +56,44 @@ export const handleOnSubmit: IHandleOnSubmit = ({
         preview: previewFile
     });
     setIsTaskCreated(true);
+};
+
+export const transformArray = (rateTaskParams: IRateTaskParams[]) => {
+    let outputArray: ISortBestResultConfig[] = [];
+
+    const getOrderAndType: IGetOrderAndType = ({ comparisonMethod, rate, equalItem }) => {
+        const order = rate;
+        const type = comparisonMethod;
+        const equals = equalItem;
+
+        return { type, order, equals };
+    };
+
+    rateTaskParams.forEach((item, index) => {
+        const { name, comparisonMethod, rate, equalItem } = item;
+        if (equalItem) {
+            const { type, order, equals } = getOrderAndType({
+                comparisonMethod: comparisonMethod!,
+                rate: rate!,
+                equalItem
+            });
+            outputArray.push({
+                [name!]: {
+                    type,
+                    order,
+                    equals
+                }
+            });
+        } else {
+            const { type, order } = getOrderAndType({ comparisonMethod: comparisonMethod!, rate: rate! });
+            outputArray.push({
+                [name!]: {
+                    type,
+                    order
+                }
+            });
+        }
+    });
+
+    return outputArray;
 };

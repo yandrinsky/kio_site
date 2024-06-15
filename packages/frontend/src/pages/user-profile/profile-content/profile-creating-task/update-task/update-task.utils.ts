@@ -1,4 +1,11 @@
-import { IGetValidationResult, IHandleFileChange, IHandleToggleChange } from './update-task';
+import {
+    IGetOrderAndType,
+    IGetValidationResult,
+    IHandleFileChange,
+    IHandleToggleChange,
+    IRateTaskParams,
+    ISortBestResultConfig
+} from './update-task';
 
 export const getValidationResult: IGetValidationResult = ({ value, type }) => {
     if (type === 'taskName') {
@@ -41,5 +48,59 @@ export const handleToggleChange: IHandleToggleChange = ({
     updateTaskMutation({
         id: updateTaskId,
         isAvailable: isAvailable
+    });
+};
+
+export const transformArray = (rateTaskParams: IRateTaskParams[]) => {
+    let outputArray: ISortBestResultConfig[] = [];
+
+    const getOrderAndType: IGetOrderAndType = ({ comparisonMethod, rate, equalItem }) => {
+        const order = rate;
+        const type = comparisonMethod;
+        const equals = equalItem;
+
+        return { type, order, equals };
+    };
+
+    rateTaskParams.forEach((item, index) => {
+        const { name, comparisonMethod, rate, equalItem } = item;
+        if (equalItem) {
+            const { type, order, equals } = getOrderAndType({
+                comparisonMethod: comparisonMethod!,
+                rate: rate!,
+                equalItem
+            });
+            outputArray.push({
+                [name!]: {
+                    type,
+                    order,
+                    equals
+                }
+            });
+        } else {
+            const { type, order } = getOrderAndType({ comparisonMethod: comparisonMethod!, rate: rate! });
+            outputArray.push({
+                [name!]: {
+                    type,
+                    order
+                }
+            });
+        }
+    });
+
+    return outputArray;
+};
+
+export const reverseTransformArray = (outputArray: ISortBestResultConfig[]) => {
+    return outputArray.map(item => {
+        const key = Object.keys(item)[0];
+        const value = item[key];
+
+        return {
+            name: key,
+            rate: value.order,
+            equalItem: value.equals,
+            comparisonMethod: value.type
+        };
     });
 };

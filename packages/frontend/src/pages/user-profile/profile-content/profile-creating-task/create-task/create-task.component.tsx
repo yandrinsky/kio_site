@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { UserInputField } from '@components/user-profile-fields/user-input-field/user-input-field.component';
 import css from './create-task.module.css';
 import { Button } from '@components/ui-kit/button/button.component';
@@ -6,7 +6,9 @@ import { UserPreviewTaskField } from '@components/user-profile-fields/user-previ
 import { UserTextareaField } from '@components/user-profile-fields/user-textarea-field/user-textarea-field.component';
 import { UserUploadTaskSourceField } from '@components/user-profile-fields/user-upload-task-source-field/user-upload-task-source-field.component';
 import { useCreateTask } from './create-task.hook';
-import { getValidationResult, handleFileChange, handleOnSubmit } from './create-task.utils';
+import { getValidationResult, handleFileChange, handleOnSubmit, transformArray } from './create-task.utils';
+import { BestTaskParams } from '@components/user-profile-fields/best-task-params/best-task-params.component';
+import { IRateTaskParams, ISortBestResultConfig } from './create-task';
 
 export const CreateTask: React.FC = () => {
     const {
@@ -27,7 +29,9 @@ export const CreateTask: React.FC = () => {
         isRequiredFieldsFilled,
         isUploadTaskSourceVisible,
         settings,
-        setSettings
+        setSettings,
+        rateTaskParams,
+        setRateTaskParams
     } = useCreateTask();
 
     return (
@@ -40,7 +44,7 @@ export const CreateTask: React.FC = () => {
                     setIsTaskCreated,
                     taskName,
                     description,
-                    settings,
+                    settings: { ...settings, sortBestResults: transformArray(rateTaskParams ?? []) },
                     previewFile
                 });
             }}
@@ -66,6 +70,15 @@ export const CreateTask: React.FC = () => {
                         ? setDescription(data)
                         : setDescription('')
                 }
+            />
+
+            <BestTaskParams
+                title="Оценка результата задачи"
+                subtitle="Опишите как результаты задачи должны быть оценены"
+                value={rateTaskParams}
+                onSave={data => {
+                    setRateTaskParams(data);
+                }}
             />
 
             <UserTextareaField

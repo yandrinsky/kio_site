@@ -1,8 +1,8 @@
 import { useCreateTaskMutation } from '@api/routes/create-task';
 import { useGetCreatedTasksListRequest } from '@api/routes/get-created-tasks-list';
 import { useUploadTaskSourceMutation } from '@api/routes/upload-task-source';
-import { useState } from 'react';
-import { IUseCreateTask } from './create-task';
+import { useEffect, useState } from 'react';
+import { IRateTaskParams, IUseCreateTask } from './create-task';
 
 export const useCreateTask: IUseCreateTask = () => {
     const {
@@ -21,6 +21,7 @@ export const useCreateTask: IUseCreateTask = () => {
     const [description, setDescription] = useState('');
     const [preview, setPreview] = useState('');
     const [settings, setSettings] = useState('');
+    const [rateTaskParams, setRateTaskParams] = useState<undefined | IRateTaskParams[]>();
     const [previewFile, setPreviewFile] = useState<File>();
 
     const isRequiredFieldsFilled = Boolean(taskName && description && settings);
@@ -45,6 +46,8 @@ export const useCreateTask: IUseCreateTask = () => {
         isRequiredFieldsFilled,
         isUploadTaskSourceVisible,
         settings,
-        setSettings
+        setSettings,
+        rateTaskParams,
+        setRateTaskParams
     };
 };

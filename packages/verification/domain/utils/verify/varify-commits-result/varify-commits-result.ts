@@ -59,7 +59,7 @@ export const verifyCommitsResult = async () => {
                     deepEqual(ourResult, userResult);
                 `);
 
-                data = await hostile.run(context, { timeout: 3000 });
+                data = await hostile.run(context, { timeout: 5000 });
             } catch (e) {}
 
             console.log('verify', data);

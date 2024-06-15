@@ -1,0 +1,29 @@
+.best-task-params__container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+}
+
+.best-task-params__error-message {
+    color: var(--error-color);
+}
+
+.rate-task__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    height: 300px;
+    width: 100%;
+
+    overflow: auto;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
