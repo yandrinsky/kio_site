@@ -67,33 +67,38 @@ export const Results: React.FC = () => {
 
                             <span>Пройдена автоматическая проверка: {el.isResultVerify ? 'Да' : 'Нет'}</span>
                         </div>
-                        <div className={css['buttons']}>
-                            <Button
-                                size="default"
-                                className={css['show-result-button']}
-                                onClick={async () => {
-                                    const data = await startTaskMutate({
-                                        taskId: currentTaskId ?? '',
-                                        loggedAs: el.userId
-                                    });
-
-                                    window.location.href =
-                                        BASE_HOSTNAME + ':' + data?.url + '?token=' + data?.token;
-                                }}
-                            >
-                                Посмотреть решение
-                            </Button>
-                            {!el.isResultVerify && me?.role === 'Admin' && (
+                        {me?.role === 'Admin' && (
+                            <div className={css['buttons']}>
                                 <Button
-                                    onClick={() =>
-                                        mutateBanSolution({ taskId: currentTaskId ?? '', userId: el.userId })
-                                    }
-                                    theme="colored-red"
+                                    size="default"
+                                    className={css['show-result-button']}
+                                    onClick={async () => {
+                                        const data = await startTaskMutate({
+                                            taskId: currentTaskId ?? '',
+                                            loggedAs: el.userId
+                                        });
+
+                                        window.location.href =
+                                            BASE_HOSTNAME + ':' + data?.url + '?token=' + data?.token;
+                                    }}
                                 >
-                                    Заблокировать решение
+                                    Посмотреть решение
                                 </Button>
-                            )}
-                        </div>
+                                {!el.isResultVerify && (
+                                    <Button
+                                        onClick={() =>
+                                            mutateBanSolution({
+                                                taskId: currentTaskId ?? '',
+                                                userId: el.userId
+                                            })
+                                        }
+                                        theme="colored-red"
+                                    >
+                                        Заблокировать решение
+                                    </Button>
+                                )}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>

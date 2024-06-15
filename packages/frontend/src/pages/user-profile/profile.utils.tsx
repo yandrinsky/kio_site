@@ -13,12 +13,30 @@ export const userNavbarItems = [
     // 'Социальные сети',
     // 'Оплата',
     'Задачи',
-    'Создание задачи',
     // 'Конструкторы',
     'Уведомления и интеграции'
 ];
 
 export const userProfileTabs = [
+    { name: 'Общие', children: <ProfileCommon /> },
+    // { name: 'Социальные сети', children: <ProfileSocialMedia /> },
+    // { name: 'Оплата', children: <ProfilePayment /> },
+    { name: 'Задачи', children: <ProfileTasks /> }
+    // { name: 'Конструкторы', children: <ProfileConstructors /> },
+    // { name: 'Уведомления и интеграции', children: <ProfileNotificationsIntegrations /> }
+];
+
+export const creatorNavbarItems = [
+    'Общие',
+    // 'Социальные сети',
+    // 'Оплата',
+    'Задачи',
+    'Создание задачи',
+    // 'Конструкторы',
+    'Уведомления и интеграции'
+];
+
+export const creatorProfileTabs = [
     { name: 'Общие', children: <ProfileCommon /> },
     // { name: 'Социальные сети', children: <ProfileSocialMedia /> },
     // { name: 'Оплата', children: <ProfilePayment /> },

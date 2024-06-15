@@ -4,7 +4,14 @@ import { Fragment, useState } from 'react';
 import { VerticalNavbar } from '@components/ui-kit/vertical-navbar/vertical-navbar.component';
 import { Layout } from '@components/layout/layout.component';
 import { ProfileHeader } from './profile-header/profile-header.component';
-import { userProfileTabs, userNavbarItems, adminProfileTabs, adminNavbarItems } from './profile.utils';
+import {
+    userProfileTabs,
+    userNavbarItems,
+    adminProfileTabs,
+    adminNavbarItems,
+    creatorProfileTabs,
+    creatorNavbarItems
+} from './profile.utils';
 import { useQueryParams } from '../../history/use-query/use-query-params';
 import { useMeRequest } from '@api/index';
 
@@ -12,8 +19,18 @@ export const UserProfile: React.FC = () => {
     const [profileTab, _] = useQueryParams();
 
     const { data } = useMeRequest();
-    const profileTabs = data?.role === 'Admin' ? adminProfileTabs : userProfileTabs;
-    const navbarItems = data?.role === 'Admin' ? adminNavbarItems : userNavbarItems;
+    const profileTabs =
+        data?.role === 'Admin'
+            ? adminProfileTabs
+            : data?.role === 'Creator'
+            ? creatorProfileTabs
+            : userProfileTabs;
+    const navbarItems =
+        data?.role === 'Admin'
+            ? adminNavbarItems
+            : data?.role === 'Creator'
+            ? creatorNavbarItems
+            : userNavbarItems;
 
     const [activeTab, setActiveTab] = useState(
         profileTab.profileTab ? profileTab.profileTab : profileTabs[0].name
