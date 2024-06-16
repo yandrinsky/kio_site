@@ -11,7 +11,17 @@ const app = express();
 const port = process.env.PORT ?? 3001;
 const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOSTNAME}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}?authSource=admin`;
 
-app.use(cors({ origin: process.env.FRONT_DEV_URL, credentials: true }));
+const corsOptions: cors.CorsOptions = {
+    origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+        console.log('origin', origin);
+        callback(null, origin === process.env.FRONT_DEV_URL || origin === process.env.FRONT_PROD_URL);
+    },
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 app.use(fileUpload({}));
 app.use(express.static('public'));
 app.use(express.json());
