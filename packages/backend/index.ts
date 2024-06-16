@@ -14,7 +14,8 @@ const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWOR
 const corsOptions: cors.CorsOptions = {
     origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
         console.log('origin', origin);
-        callback(null, origin === process.env.FRONT_DEV_URL || origin === process.env.FRONT_PROD_URL);
+        // callback(null, origin === process.env.FRONT_DEV_URL || origin === process.env.FRONT_PROD_URL);
+        callback(null, true);
     },
     credentials: true,
     optionsSuccessStatus: 200
