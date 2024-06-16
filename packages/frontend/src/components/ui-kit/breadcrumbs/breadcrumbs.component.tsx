@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 
-import css from './Breadcrumbs.module.css';
+import css from './breadcrumbs.module.css';
 import { Link } from 'react-router-dom';
 import { ICON_HEIGHT, ICON_WIDTH } from '@constants/sizes';
 import { IBreadcrumbs } from './breadcrumbs';
