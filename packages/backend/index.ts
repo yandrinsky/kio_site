@@ -40,7 +40,7 @@ app.use(errorBoundingMiddleware);
 app.listen(port, async () => {
     await mongoose.connect(url);
 
-    console.log(`App listening on port ${port}`);
+    console.log(`!!!App listening on port ${port}`);
 
     if (!process.env.KEY) {
         console.error('В .env нет KEY. Установите в KEY значение crypto.randomBytes(32)');
